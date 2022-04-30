@@ -50,21 +50,6 @@ class _HomePageState extends State<HomePage> {
         print(value.toString());
       }
     });
-
-
-
-    /*var data = {"email": login};
-    var url =
-        Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/UserInfo.php');
-    final response = await http.post(url, body: data);
-
-    if (response.statusCode == 200) {
-      // Si la llamada al servidor fue exitosa, analiza el JSON
-      return FreeLan.fromJson(json.decode(response.body));
-    } else {
-      // Si la llamada no fue exitosa, lanza un error.
-      throw Exception('Failed to load post');
-    }*/
   }
 
 
