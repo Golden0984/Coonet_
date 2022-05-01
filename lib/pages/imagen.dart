@@ -1,4 +1,3 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -34,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
     String filename = _image!.path.split('/').last;
 
-    FormData formData = new FormData.fromMap({
+    FormData formData = FormData.fromMap({
       'file' : await MultipartFile.fromFile(
         _image!.path,filename: filename
       )
