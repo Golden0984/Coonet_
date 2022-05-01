@@ -8,6 +8,7 @@ class FreeLan {
   final String user;
   final String correo;
   late final String telefono;
+  final String foto;
 
   FreeLan({
     required this.id,
@@ -16,6 +17,7 @@ class FreeLan {
     required this.user,
     required this.correo,
     required this.telefono,
+    required this.foto,
   });
 
   factory FreeLan.fromJson(Map json) {
@@ -26,6 +28,7 @@ class FreeLan {
       user: json['usuario_freelancer'] as String,
       correo: json['correo_electronico'] as String,
       telefono: json['numero_telefono'] as String,
+      foto: json['foto_pefil'] as String,
     );
   }
 }

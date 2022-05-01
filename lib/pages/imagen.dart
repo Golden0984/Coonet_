@@ -34,9 +34,7 @@ class _HomePageState extends State<HomePage> {
     String filename = _image!.path.split('/').last;
 
     FormData formData = FormData.fromMap({
-      'file' : await MultipartFile.fromFile(
-        _image!.path,filename: filename
-      )
+      'file' : await MultipartFile.fromFile(_image!.path,filename: filename)
     }
     );
 

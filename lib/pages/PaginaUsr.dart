@@ -66,13 +66,23 @@ class PaginaUsr extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: CircleAvatar(
                     radius: 80.0,
-                    child: ClipOval(
-                      child: Image.network(
-                        'https://phpninjahosting.com/manish/Coonet/Img/perfil.jpg',
-                        fit: BoxFit.cover,
-                        width: 120.0,
-                        height: 120.0,
+                    child: ClipOval(child: FutureBuilder<FreeLan>(
+                        future: free,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Image.network(
+                            snapshot.data!.foto,
+                            fit: BoxFit.cover,
+                            width: 120.0,
+                            height: 120.0,
+                          );
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          }
+                          return const CircularProgressIndicator();
+                        },
                       ),
+                      
                     ),
                   ),
                 ),

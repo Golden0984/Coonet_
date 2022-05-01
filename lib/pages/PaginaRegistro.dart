@@ -9,6 +9,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import 'Users/FreeLancer.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart';
 
 class PaginaRegistro extends StatefulWidget {
   static String id = 'Register_page';
@@ -18,6 +21,7 @@ class PaginaRegistro extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<PaginaRegistro> {
+
   late TextEditingController nombrectrl = TextEditingController();
   late TextEditingController apellidosctrl = TextEditingController();
   late TextEditingController userctrl = TextEditingController();
@@ -25,6 +29,67 @@ class _RegisterPageState extends State<PaginaRegistro> {
   late TextEditingController emailctrl = TextEditingController();
   late TextEditingController passctrl = TextEditingController();
   late TextEditingController repeatpassctrl = TextEditingController();
+
+  File? _image;
+
+  final _picker = ImagePicker();
+  // Implementing the image picker
+  Future<void> _openImagePicker() async {
+    final XFile? pickedImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        print(File(pickedImage.path));
+        _image = File(pickedImage.path);
+        print(_image);
+      });
+    }
+  }
+
+  Dio dio = new Dio();
+
+  Future<void> _Subir() async {
+
+    String filename = _image!.path.split('/').last;
+
+    FormData formData = FormData.fromMap({
+      "nombre": nombrectrl.text,
+      "apellidos": apellidosctrl.text,
+      "usuario": userctrl.text,
+      "email": emailctrl.text,
+      "tel": telefonoctrl.text,
+      "pass": passctrl.text,
+      "pass_valid": repeatpassctrl.text,
+      'file' : await MultipartFile.fromFile(_image!.path,filename: filename)
+    }
+    );
+
+    await dio.post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+    data: formData).then((value){
+      if(value.toString()=='si'){
+        login = emailctrl.text;
+        Fluttertoast.showToast(
+            msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
+        //Ir a otra pagina
+        {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Menu()));
+        }
+      }else if(value.toString()=='Usuario Registrado'){
+        Fluttertoast.showToast(
+          msg: "El Usuario ya esta Registrado",
+          toastLength: Toast.LENGTH_SHORT);
+      }else if(value.toString()=='Contra no coincide'){
+        Fluttertoast.showToast(
+          msg: "la contraseña no coinciden.", toastLength: Toast.LENGTH_SHORT);
+      }else if(value.toString()=='no'){
+        Fluttertoast.showToast(
+          msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
+      }else{
+        print(value.toString());
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +143,10 @@ class _RegisterPageState extends State<PaginaRegistro> {
             const SizedBox(
               height: 25.0,
             ),
+            _SubirImagen(),
+            const SizedBox(
+              height: 30.0,
+            ),
             _buttonRegister(),
             const SizedBox(
               height: 25.0,
@@ -90,43 +159,6 @@ class _RegisterPageState extends State<PaginaRegistro> {
         ),
       ),
     );
-  }
-
-  Future<void> registeruser() async {
-    var client = http.Client();
-    var data = {
-      "nombre": nombrectrl.text,
-      "apellidos": apellidosctrl.text,
-      "usuario": userctrl.text,
-      "email": emailctrl.text,
-      "tel": telefonoctrl.text,
-      "pass": passctrl.text,
-      "pass_valid": repeatpassctrl.text,
-    };
-
-    var url =
-        Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/register.php');
-    var Response = await client.post(url, body: data);
-
-    if (jsonDecode(Response.body) == "creado correctamnete") {
-      login = emailctrl.text;
-      Fluttertoast.showToast(
-          msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
-      //Ir a otra pagina
-      {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Menu()));
-      }
-    } else if (jsonDecode(Response.body) == "Usuario Registrado") {
-      Fluttertoast.showToast(
-          msg: "El Usuario ya esta Registrado",
-          toastLength: Toast.LENGTH_SHORT);
-    } else if (jsonDecode(Response.body) == "Contra no coincide") {
-      Fluttertoast.showToast(
-          msg: "la contraseña no coinciden.", toastLength: Toast.LENGTH_SHORT);
-    } else {
-      Fluttertoast.showToast(msg: "Error", toastLength: Toast.LENGTH_SHORT);
-    }
   }
 
   Widget _nombreTextField() {
@@ -352,7 +384,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () => registeruser());
+          onPressed: () => _Subir());
     });
   }
 
@@ -378,5 +410,37 @@ class _RegisterPageState extends State<PaginaRegistro> {
             context, MaterialPageRoute(builder: (context) => PaginaLogin())),
       );
     });
+  }
+   Widget _SubirImagen() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: Colors.black45,
+      ),
+      margin: const EdgeInsets.all(10),
+          child: Padding(
+            padding: const EdgeInsets.all(35),
+            child: Row(children: [
+              Container(
+                alignment: Alignment.center,
+                width: 150,
+                height: 150,
+                color: Colors.grey[300],
+                child: _image != null
+                    ? Image.file(_image!, fit: BoxFit.cover)
+                    : const Text('Please select an image'),
+              ),
+              const SizedBox(width: 10),
+              Center(
+                child: ElevatedButton(
+                  child: const Text('Select An Image'),
+                  onPressed: _openImagePicker,
+                ),
+              ),
+              
+              
+            ]),
+          ),
+        );
   }
 }
