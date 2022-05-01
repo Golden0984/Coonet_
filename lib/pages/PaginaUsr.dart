@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Pagos.dart';
 import 'Users/FreeLancer.dart';
 
 void main() => runApp(PaginaUsr(free: fetchPost()));
@@ -60,8 +61,8 @@ class PaginaUsr extends StatelessWidget {
           Column(
             children: <Widget>[
               SizedBox(
-                width: 120,
-                height: 120,
+                width: 100,
+                height: 100,
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: CircleAvatar(
@@ -73,8 +74,8 @@ class PaginaUsr extends StatelessWidget {
                             return Image.network(
                             snapshot.data!.foto,
                             fit: BoxFit.cover,
-                            width: 120.0,
-                            height: 120.0,
+                            width: 100.0,
+                            height: 100.0,
                           );
                           } else if (snapshot.hasError) {
                             return Text("${snapshot.error}");
@@ -115,8 +116,7 @@ class PaginaUsr extends StatelessWidget {
             width: 30,
           ),
           SizedBox(
-            width: 180.0,
-            height: 110,
+            width: 190.0,
             child: Align(
               alignment: Alignment.center,
               child: Column(
@@ -316,7 +316,8 @@ class PaginaUsr extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () {});
+          onPressed: () {Navigator.push(
+            context, MaterialPageRoute(builder: (context) => PagoWidget()));});
     });
   }
 

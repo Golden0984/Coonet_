@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaLogin.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class PaginaNuevaOferta extends StatefulWidget{
   static String id = 'Register_page';
@@ -18,6 +20,24 @@ class PaginaNuevaOferta extends StatefulWidget{
 class _OfertaPageState extends State<PaginaNuevaOferta>{
   String texto = "ningun valor selecionado";
   String vactu = "app";
+  File? _image;
+
+  final _picker = ImagePicker();
+  // Implementing the image picker
+  Future<void> _openImagePicker() async {
+    final XFile? pickedImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        print(File(pickedImage.path));
+        _image = File(pickedImage.path);
+        print(_image);
+      });
+    }
+  }
+
+
+  
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -41,7 +61,9 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
             const SizedBox(height: 10,),
             _precioTextField(),
             const SizedBox(height: 25.0,),
-            _buttonRegister(),
+            _SubirImagen(),
+            const SizedBox(height: 30.0,),
+            _buttonCreate(),
             const SizedBox(height: 25.0, ),
           ],
         ),
@@ -171,7 +193,40 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
     );
   }
 
-  Widget _buttonRegister(){
+   Widget _SubirImagen() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: Colors.black45,
+      ),
+      margin: const EdgeInsets.all(10),
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: Row(children: [
+              Container(
+                alignment: Alignment.center,
+                width: 150,
+                height: 150,
+                color: Colors.grey[300],
+                child: _image != null
+                    ? Image.file(_image!, fit: BoxFit.cover)
+                    : const Text('Please select an image'),
+              ),
+              const SizedBox(width: 10),
+              Center(
+                child: ElevatedButton(
+                  child: const Text('Select An Image'),
+                  onPressed: _openImagePicker,
+                ),
+              ),
+              
+              
+            ]),
+          ),
+        );
+  }
+
+  Widget _buttonCreate(){
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: StreamBuilder(
