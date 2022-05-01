@@ -2,9 +2,8 @@ import 'package:coonet/pages/PaginaChat.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:coonet/pages/PaginaTienda.dart';
 import 'package:flutter/material.dart';
-import './PaginaHome.dart';
+import 'PaginaHome.dart';
 import 'ServicioWidget.dart';
-import 'Test.dart';
 import 'Users/FreeLancer.dart';
 import 'PaginaUsr.dart';
 import 'imagen.dart';
@@ -19,10 +18,10 @@ class _MenuBare extends State<Menu> {
   int _paginaActual = 0;
 
   final List<Widget> _paginas = [
-    TestWidget(),
+    PaginaHome(),
     PaginaChat(),
     PaginaNuevaOferta(),
-    HomePage(),
+    ServicioWidget(),
     PaginaUsr(free: fetchPost()),
   ];
 
