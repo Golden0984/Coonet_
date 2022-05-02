@@ -21,8 +21,9 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
   String texto = "ningun valor selecionado";
   String vactu = "app";
   File? _image;
-
+  var index = 0;
   final _picker = ImagePicker();
+  List<XFile>_imageList = [];
   // Implementing the image picker
   Future<void> _openImagePicker() async {
     final XFile? pickedImage =
@@ -31,6 +32,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
       setState(() {
         print(File(pickedImage.path));
         _image = File(pickedImage.path);
+        _imageList.add(pickedImage);
         print(_image);
       });
     }
