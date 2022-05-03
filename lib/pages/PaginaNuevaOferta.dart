@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:numberpicker/numberpicker.dart';
+
 import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaLogin.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +10,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:multi_image_picker/multi_image_picker.dart';
 class PaginaNuevaOferta extends StatefulWidget{
   static String id = 'Register_page';
 
@@ -26,10 +23,9 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
   File? _image, _image2, _image3, _image4;
   int index = 0;
   final _picker = ImagePicker();
-  List<Asset> images = <Asset>[];
   List<XFile>_imageList = [];
   // Implementing the image picker
-  /*Future<void> _openImagePicker() async {
+  Future<void> _openImagePicker() async {
     final XFile? pickedImage =
         await _picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
@@ -72,7 +68,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
        // print(_image);
       });
     }
-  }*/
+  }
 
 
   
@@ -99,13 +95,9 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
             const SizedBox(height: 10,),
             _precioTextField(),
             const SizedBox(height: 25.0,),
-            _SubirImagen(_image),
+            _buttonSelect(),
             const SizedBox(height: 25.0,),
-            _SubirImagen(_image2),
-            const SizedBox(height: 25.0,),
-            _SubirImagen(_image3),
-            const SizedBox(height: 25.0,),
-            _botonSeleccionar(),
+            _SubirImagen(),
             const SizedBox(height: 25.0,),
             _buttonCreate(),
             const SizedBox(height: 25.0, ),
@@ -237,36 +229,62 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
     );
   }
 
-   Widget _SubirImagen(File? _image) {
-    return Container(
+   Widget _SubirImagen() {
+     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.black45,
       ),
       margin: const EdgeInsets.all(10),
           child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Row(children: [
+            padding: const EdgeInsets.all(10),
+            child: Column(children: [
+               
+              _buttonSelect(),
+              const SizedBox(height: 10.0,),
+                          Row(children: [
+            const SizedBox(width: 5.0,),
+              _selectimagen(),
+            const SizedBox(width:5.0,),
+              _selectimagen(),
+              const SizedBox(width: 5.0,),
+              _selectimagen(),
+            const SizedBox(width:5.0,),
+              _selectimagen(),
+      ]),
+       _buttonSelect(),
+              const SizedBox(height: 10.0,),
+
+            ],),
+
+
+      ),
+    );
+    
+  }
+  Widget _selectimagen() {
+    return Row(children: [
               Container(
                 alignment: Alignment.center,
-                width: 150,
-                height: 150,
+                width: 80,
+                height: 80,
                 color: Colors.grey[300],
                 child: _image != null
                     ? Image.file(_image!, fit: BoxFit.cover)
                     : const Text('Please select an image'),
               ),
-            ]),
-          ),
+            ]
         );
   }
-
-  Widget _botonSeleccionar(){
-      return ElevatedButton(
+  Widget _buttonSelect(){
+      return  Center(
+                child: ElevatedButton(
                   child: const Text('Select An Image'),
-                  onPressed: loadAssets(),
+                  onPressed: _openImagePicker,
+                ),
       );
   }
+
 
   Widget _buttonCreate(){
     return Container(
@@ -302,49 +320,4 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
   }
 
 
-  List<Asset> imagesk = <Asset>[];
-
-  Widget buildGridView() {
-    return GridView.count(
-      crossAxisCount: 3,
-      children: List.generate(images.length, (index) {
-        Asset asset = images[index];
-        return AssetThumb(
-          asset: asset,
-          width: 300,
-          height: 300,
-        );
-      }),
-    );
-  }
-
-  loadAssets() async {
-    List<Asset> resultList = <Asset>[];
-    String error = 'No Error Detected';
-
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 300,
-        enableCamera: true,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-        materialOptions: MaterialOptions(
-          actionBarColor: "#abcdef",
-          actionBarTitle: "Example App",
-          allViewTitle: "All Photos",
-          useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
-        ),
-      );
-    } on Exception catch (e) {
-      error = e.toString();
-    }
-
-    if (!mounted) return;
-
-    setState(() {
-      images = resultList;
-     // _error = error;
-    });
-  }
 }
