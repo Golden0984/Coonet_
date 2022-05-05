@@ -1,3 +1,4 @@
+import 'package:coonet/pages/PaginaChat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -50,13 +51,28 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext ctx) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Aqui nombre d con quien habla"),
-        elevation:
-          Theme.of(ctx).platform == TargetPlatform.iOS ? 0.0 : 6.0,
-      ),
-      body: new Column(children: <Widget>[
+    return  Scaffold(
+      body: new Column(
+        children: <Widget>[
+           SizedBox(height: 62.0 ),
+           Container(
+             color: Colors.green,
+             child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back, size: 35,),
+                              
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaChat()));
+                    },
+                ),
+              ),
+            const Padding(padding: EdgeInsets.only(left: 30), child: Text("MIS PROYECTOS", style: TextStyle(fontFamily: 'Arial', fontSize: 30, color: Colors.white),),),
+            ],
+          ),
+        ),
         new Flexible(
             child: new ListView.builder(
               itemBuilder: (_, int index) => _messages[index],
