@@ -3,6 +3,7 @@ import 'package:coonet/pages/PaginaTienda.dart';
 import 'package:flutter/material.dart';
 import 'package:glass/glass.dart';
 
+import 'PaginaChatPersonal.dart';
 import 'PaginaRegistro.dart';
 
 class PaginaChat extends StatelessWidget{
@@ -50,7 +51,7 @@ class PaginaChat extends StatelessWidget{
       //TODO cambiar card por container
       child: InkWell(
     onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>  PaginaTienda()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>  testChatInt()));
            
     },
   
