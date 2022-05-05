@@ -30,13 +30,16 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
         await _picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
+        if (index > 3){
+          index = 0;
+        }
         //print(File(pickedImage.path));
         switch(index) { 
           case 0: { 
             _image = File(pickedImage.path);
-        _imageList.add(pickedImage);
-        print(_imageList.toString());
-        index++;
+            _imageList.add(pickedImage);
+            print(_imageList.toString());
+            index++;
           } 
           break; 
           
@@ -94,8 +97,6 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
             _catTextField(),
             const SizedBox(height: 10,),
             _precioTextField(),
-            const SizedBox(height: 25.0,),
-            _buttonSelect(),
             const SizedBox(height: 25.0,),
             _SubirImagen(),
             const SizedBox(height: 25.0,),
@@ -244,16 +245,17 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
               const SizedBox(height: 10.0,),
                           Row(children: [
             const SizedBox(width: 5.0,),
-              _selectimagen(),
+              _selectimagen(_image),
             const SizedBox(width:5.0,),
-              _selectimagen(),
+              _selectimagen(_image2),
               const SizedBox(width: 5.0,),
-              _selectimagen(),
+              _selectimagen(_image3),
             const SizedBox(width:5.0,),
-              _selectimagen(),
+              _selectimagen(_image4),
       ]),
-       _buttonSelect(),
-              const SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
+            _buttonBorrar(),
+            const SizedBox(height: 10.0,),
 
             ],),
 
@@ -262,7 +264,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
     );
     
   }
-  Widget _selectimagen() {
+  Widget _selectimagen(File? _image) {
     return Row(children: [
               Container(
                 alignment: Alignment.center,
@@ -270,8 +272,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
                 height: 80,
                 color: Colors.grey[300],
                 child: _image != null
-                    ? Image.file(_image!, fit: BoxFit.cover)
-                    : const Text('Please select an image'),
+                    ? Image.file(_image, fit: BoxFit.fill)
+                    : Icon(Icons.no_photography),
               ),
             ]
         );
@@ -281,6 +283,23 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
                 child: ElevatedButton(
                   child: const Text('Select An Image'),
                   onPressed: _openImagePicker,
+                ),
+      );
+  }
+
+  Widget _buttonBorrar(){
+      return  Center(
+                child: ElevatedButton(
+                  child: const Text('Restablecer selección'),
+                  onPressed: (){
+                    setState(() {
+                      _image = null;
+                      _image2 = null;
+                      _image3 = null;
+                      _image4 = null;
+                      index = 0;
+                    });
+                  },
                 ),
       );
   }
