@@ -1,3 +1,4 @@
+import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaChat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,9 +55,9 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     return  Scaffold(
       body: new Column(
         children: <Widget>[
-           SizedBox(height: 62.0 ),
+           const SizedBox(height: 62.0 ),
            Container(
-             color: Colors.green,
+             color: Color.fromARGB(255, 120, 190, 255),
              child: Row(
             children: [
               Padding(
@@ -65,11 +66,18 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
                   icon: Icon(Icons.arrow_back, size: 35,),
                               
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaChat()));
+                      paginaActual = 1;
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()));
                     },
                 ),
               ),
-            const Padding(padding: EdgeInsets.only(left: 30), child: Text("MIS PROYECTOS", style: TextStyle(fontFamily: 'Arial', fontSize: 30, color: Colors.white),),),
+              const Padding(
+                    padding: EdgeInsets.only(left: 30),
+                    child: Text(
+                      "MIS PROYECTOS",
+                      style: TextStyle(fontSize: 30, color: Color.fromARGB(255, 0, 0, 0)),
+                    ),
+                  ),
             ],
           ),
         ),
