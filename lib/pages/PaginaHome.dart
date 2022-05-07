@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'ServicioWidget.dart';
+import 'Users/Anuncios.dart';
 
 class PaginaHome extends StatefulWidget {
 
@@ -11,10 +14,38 @@ class PaginaHome extends StatefulWidget {
 class _PaginaHomeState extends State<PaginaHome> {
   late TextEditingController searchFieldController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  
+List<Anuncios> data  = <Anuncios>[];
+
+Future<List<Anuncios>> get_anuncios() async {
+
+  var url =
+      Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/Anuncio.php');
+  final response = await http.post(url);
+  var datos = jsonDecode(response.body);
+  var registros = <Anuncios>[];
+  for(datos in datos){
+    registros.add(Anuncios.fromJson(datos));
+  }
+
+  return registros;
+  /*if (response.statusCode == 200) {
+    // Si la llamada al servidor fue exitosa, analiza el JSON
+    
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }*/
+}
 
   @override
   void initState() {
     super.initState();
+    get_anuncios().then((value){
+      setState(() {
+        data.addAll(value);
+      });
+    });
     searchFieldController = TextEditingController();
   }
 
@@ -22,18 +53,24 @@ class _PaginaHomeState extends State<PaginaHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(0, 241, 244, 248),
-      body: Container(
+      body:Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('images/fondo.png'),
             fit: BoxFit.cover,
           ),
         ),
-        child: ListView(
-        children: 
-          [Column(
+        
+        child: Column(children: 
+          [
+            const SizedBox(
+              height: 60.0,
+            ),
+            Column(
+              
             mainAxisSize: MainAxisSize.max,
             children: [
+              
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -313,7 +350,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
+                padding: const EdgeInsetsDirectional.fromSTEB(2, 8, 2, 8),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -323,9 +360,35 @@ class _PaginaHomeState extends State<PaginaHome> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
-                child: ListView(
+              
+             
+            ],
+            
+          ),
+        Expanded (child: _Anuncio(),),
+        ],
+          
+        )
+        
+        
+        
+        
+        
+         
+      ),);
+  }
+
+  Widget _Anuncio() {
+    return ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context,index){
+          return Container( 
+            child: Column(
+            children: 
+          [Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+                ListView(
                   padding: EdgeInsets.zero,
                   primary: false,
                   shrinkWrap: true,
@@ -339,13 +402,13 @@ class _PaginaHomeState extends State<PaginaHome> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           image: DecorationImage(
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.fill,
                             image: Image.network(
-                              'https://www.devsdna.com/wp-content/uploads/2021/01/Graphic_Designer1920x1080.jpg',
+                              data[index].foto1,
                             ).image,
                           ),
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const [
+                            BoxShadow(
                               blurRadius: 3,
                               color: Color(0x33000000),
                               offset: Offset(0, 2),
@@ -359,9 +422,9 @@ class _PaginaHomeState extends State<PaginaHome> {
                             width: 100,
                             height: 100,
                             decoration: const BoxDecoration(
-                              color: const Color(0x80FFFFFF),
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: const Radius.circular(8),
+                              color: Color(0x80FFFFFF),
+                              borderRadius:  BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
                                 bottomRight: Radius.circular(8),
                                 topLeft: Radius.circular(0),
                                 topRight: Radius.circular(0),
@@ -380,11 +443,11 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          'Logo Maker',
+                                        Text(
+                                          data[index].titulo,
                                         ),
-                                        const Text(
-                                          'Cris Smith',
+                                        Text(
+                                          data[index].email,
                                         ),
                                       ],
                                     ),
@@ -395,161 +458,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                     children: [
                                       ElevatedButton(
                                         onPressed: () {Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ServicioWidget()));},
-                                        child: const Text('Reserve'),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          image: DecorationImage(
-                            fit: BoxFit.fitWidth,
-                            image: Image.network(
-                              'https://www.simplybusiness.co.uk/static/88706991538cf5915633e9f598eb7721/fd9f6/how-to-become-a-freelance-graphic-designer.jpg',
-                            ).image,
-                          ),
-                          boxShadow: [
-                            const BoxShadow(
-                              blurRadius: 3,
-                              color: Color(0x33000000),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            decoration: const BoxDecoration(
-                              color: const Color(0x80FFFFFF),
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: const Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                                topLeft: Radius.circular(0),
-                                topRight: const Radius.circular(0),
-                              ),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          'Low Cost Logos',
-                                        ),
-                                        const Text(
-                                          'Jaden Cooper',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          print('Button-Reserve pressed ...');
-                                        },
-                                        child: const Text('Reserve'),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          image: DecorationImage(
-                            fit: BoxFit.fitWidth,
-                            image: Image.network(
-                              'https://www.mbt2you.com/wp-content/uploads/2021/12/how-to-make-money-as-a-graphic-designer.jpg',
-                            ).image,
-                          ),
-                          boxShadow: [
-                            const BoxShadow(
-                              blurRadius: 3,
-                              color: const Color(0x33000000),
-                              offset: const Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            decoration: const BoxDecoration(
-                              color: const Color(0x80FFFFFF),
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8),
-                                topLeft: Radius.circular(0),
-                                topRight: const Radius.circular(0),
-                              ),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          'Minimalist Logos',
-                                        ),
-                                        const Text(
-                                          'Caitlyn Wager',
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          print('Button-Reserve pressed ...');
-                                        },
+                                        context, MaterialPageRoute(builder: (context) => const ServicioWidget()));},
                                         child: const Text('Reserve'),
                                       ),
                                     ],
@@ -563,12 +472,11 @@ class _PaginaHomeState extends State<PaginaHome> {
                     ),
                   ],
                 ),
-              ),
             ],
           ),
-        ],
-      ),)
-      
-    );
+        ],),
+      );
+      }
+      );
   }
 }

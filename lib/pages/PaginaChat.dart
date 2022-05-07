@@ -75,8 +75,8 @@ class PaginaChat extends StatelessWidget{
                   ),
                   ),
               ),
-              SizedBox(width: 20),
-                Text("Sahil", style: TextStyle(
+              const SizedBox(width: 20),
+                const Text("Sahil", style: TextStyle(
                     fontSize: 20.0,
                   )
                 ),

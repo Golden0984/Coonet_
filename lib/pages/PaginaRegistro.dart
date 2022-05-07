@@ -45,7 +45,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
       });
     }
   }
-
+  
   Dio dio = new Dio();
 
   Future<void> _Subir() async {
@@ -370,7 +370,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 15.0),
               alignment: Alignment.center,
               child: const Text(
-                'Reistrarse',
+                'Registrarse',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16.0,

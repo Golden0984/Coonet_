@@ -20,18 +20,55 @@ class PaginaNuevaOferta extends StatefulWidget{
 class _OfertaPageState extends State<PaginaNuevaOferta>{
   String texto = "ningun valor selecionado";
   String vactu = "app";
-  File? _image;
-
+  File? _image, _image2, _image3, _image4;
+  int index = 0;
   final _picker = ImagePicker();
+  List<XFile>_imageList = [];
   // Implementing the image picker
   Future<void> _openImagePicker() async {
     final XFile? pickedImage =
         await _picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
-        print(File(pickedImage.path));
-        _image = File(pickedImage.path);
-        print(_image);
+        if (index > 3){
+          index = 0;
+        }
+        //print(File(pickedImage.path));
+        switch(index) { 
+          case 0: { 
+            _image = File(pickedImage.path);
+            _imageList.add(pickedImage);
+            print(_imageList.toString());
+            index++;
+          } 
+          break; 
+          
+          case 1: { 
+            _image2 = File(pickedImage.path);
+            _imageList.add(pickedImage);
+            print(_imageList.toString());
+            index++;
+          } 
+          break; 
+              
+          case 2: { 
+            _image3 = File(pickedImage.path);
+            _imageList.add(pickedImage);
+            print(_imageList.toString());
+            index++;
+          } 
+          break; 
+
+          case 3: { 
+            _image4 = File(pickedImage.path);
+            _imageList.add(pickedImage);
+            print(_imageList.toString());
+            index++;
+          } 
+          break; 
+        }
+        
+       // print(_image);
       });
     }
   }
@@ -62,7 +99,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
             _precioTextField(),
             const SizedBox(height: 25.0,),
             _SubirImagen(),
-            const SizedBox(height: 30.0,),
+            const SizedBox(height: 25.0,),
             _buttonCreate(),
             const SizedBox(height: 25.0, ),
           ],
@@ -194,37 +231,79 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
   }
 
    Widget _SubirImagen() {
-    return Container(
+     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.black45,
       ),
       margin: const EdgeInsets.all(10),
           child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Row(children: [
+            padding: const EdgeInsets.all(10),
+            child: Column(children: [
+               
+              _buttonSelect(),
+              const SizedBox(height: 10.0,),
+                          Row(children: [
+            const SizedBox(width: 5.0,),
+              _selectimagen(_image),
+            const SizedBox(width:5.0,),
+              _selectimagen(_image2),
+              const SizedBox(width: 5.0,),
+              _selectimagen(_image3),
+            const SizedBox(width:5.0,),
+              _selectimagen(_image4),
+      ]),
+            const SizedBox(height: 10.0,),
+            _buttonBorrar(),
+            const SizedBox(height: 10.0,),
+
+            ],),
+
+
+      ),
+    );
+    
+  }
+  Widget _selectimagen(File? _image) {
+    return Row(children: [
               Container(
                 alignment: Alignment.center,
-                width: 150,
-                height: 150,
+                width: 80,
+                height: 80,
                 color: Colors.grey[300],
                 child: _image != null
-                    ? Image.file(_image!, fit: BoxFit.cover)
-                    : const Text('Please select an image'),
+                    ? Image.file(_image, fit: BoxFit.fill)
+                    : Icon(Icons.no_photography),
               ),
-              const SizedBox(width: 10),
-              Center(
+            ]
+        );
+  }
+  Widget _buttonSelect(){
+      return  Center(
                 child: ElevatedButton(
                   child: const Text('Select An Image'),
                   onPressed: _openImagePicker,
                 ),
-              ),
-              
-              
-            ]),
-          ),
-        );
+      );
   }
+
+  Widget _buttonBorrar(){
+      return  Center(
+                child: ElevatedButton(
+                  child: const Text('Restablecer selección'),
+                  onPressed: (){
+                    setState(() {
+                      _image = null;
+                      _image2 = null;
+                      _image3 = null;
+                      _image4 = null;
+                      index = 0;
+                    });
+                  },
+                ),
+      );
+  }
+
 
   Widget _buttonCreate(){
     return Container(
