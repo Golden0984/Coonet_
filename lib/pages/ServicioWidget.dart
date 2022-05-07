@@ -21,6 +21,7 @@ class Servicios extends State<ServicioWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            appbartt(),
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -214,6 +215,18 @@ class Servicios extends State<ServicioWidget> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget appbartt() {
+    return AppBar(
+      title: Text('nomprodicto'),
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(Icons.arrow_back),
       ),
     );
   }
