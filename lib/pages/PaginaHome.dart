@@ -382,7 +382,7 @@ Future<List<Anuncios>> get_anuncios() async {
                   scrollDirection: Axis.vertical,
                   children: [
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(30, 16, 30, 0),
                       child: Container(
                         width: double.infinity,
                         height: 200,

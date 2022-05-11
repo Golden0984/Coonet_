@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:coonet/pages/Users/Anuncios.dart';
+import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'PaginaChatPersonal.dart';
 import 'ServicioWidget.dart';
@@ -17,14 +19,25 @@ class _PaginaHomeState extends State<MisProyectos> {
 List<Anuncios> data  = <Anuncios>[];
 
 Future<List<Anuncios>> get_anuncios() async {
-
+  var data = {"email": login};
   var url =
-      Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/Anuncio.php');
-  final response = await http.post(url);
+      Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/Misproyectos.php');
+  final response = await http.post(url, body: data);
   var datos = jsonDecode(response.body);
   var registros = <Anuncios>[];
-  for(datos in datos){
-    registros.add(Anuncios.fromJson(datos));
+  if (response.statusCode == 200) {
+    if(datos=='no'){
+      Fluttertoast.showToast(
+          msg: "No hay anuncios creados",
+          toastLength: Toast.LENGTH_SHORT);
+    }else{
+      for(datos in datos){
+        registros.add(Anuncios.fromJson(datos));
+      }
+    }
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
   }
 
   return registros;
@@ -180,7 +193,7 @@ Future<List<Anuncios>> get_anuncios() async {
                                       ElevatedButton(
                                         onPressed: () {Navigator.push(
                                         context, MaterialPageRoute(builder: (context) => const ServicioWidget()));},
-                                        child: const Text('Reserve'),
+                                        child: const Text('Editar'),
                                       ),
                                     ],
                                   ),
