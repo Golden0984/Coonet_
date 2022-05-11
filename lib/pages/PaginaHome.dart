@@ -447,7 +447,7 @@ Future<List<Anuncios>> get_anuncios() async {
                                           data[index].titulo,
                                         ),
                                         Text(
-                                          data[index].email,
+                                          data[index].nombre,
                                         ),
                                       ],
                                     ),
