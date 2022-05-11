@@ -193,7 +193,7 @@ class Msg extends StatelessWidget {
       child: new Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         child: new Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             new Container(
               margin: const EdgeInsets.only(right: 18.0),
@@ -201,7 +201,7 @@ class Msg extends StatelessWidget {
             ),
             new Expanded(
               child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   new Text(defaultUserName, style: Theme.of(ctx).textTheme.subtitle1),
                   new Container(

@@ -61,7 +61,8 @@ Future<List<Anuncios>> get_anuncios() async {
           ),
         ),
         
-        child: Column(children: 
+        child: 
+        Column(children: 
           [
             const SizedBox(
               height: 70.0,
