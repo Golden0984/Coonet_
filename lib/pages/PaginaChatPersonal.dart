@@ -63,7 +63,11 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back, size: 35,),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 35,
+                  ),
                               
                     onPressed: (){
                       paginaActual = 1;
@@ -75,7 +79,10 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(left: 30),
                     child: Text(
                       "MIS PROYECTOS",
-                      style: TextStyle(fontSize: 30, color: Color.fromARGB(255, 0, 0, 0)),
+                      style: TextStyle(
+                        fontSize: 30, 
+                        color: Colors.white
+                    ),
                     ),
                   ),
             ],
@@ -197,7 +204,11 @@ class Msg extends StatelessWidget {
           children: <Widget>[
             new Container(
               margin: const EdgeInsets.only(right: 18.0),
-              child: new CircleAvatar(child: new Text(defaultUserName[0])),
+              child: new CircleAvatar(
+                child: new Text(
+                  defaultUserName[0],
+                ),
+              ),
             ),
             new Expanded(
               child: new Column(

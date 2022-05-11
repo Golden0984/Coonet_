@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:coonet/pages/Users/Anuncios.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'PaginaChatPersonal.dart';
 import 'ServicioWidget.dart';
 
@@ -11,10 +14,37 @@ class MisProyectos extends StatefulWidget {
 class _PaginaHomeState extends State<MisProyectos> {
   late TextEditingController searchFieldController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+List<Anuncios> data  = <Anuncios>[];
+
+Future<List<Anuncios>> get_anuncios() async {
+
+  var url =
+      Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/Anuncio.php');
+  final response = await http.post(url);
+  var datos = jsonDecode(response.body);
+  var registros = <Anuncios>[];
+  for(datos in datos){
+    registros.add(Anuncios.fromJson(datos));
+  }
+
+  return registros;
+  /*if (response.statusCode == 200) {
+    // Si la llamada al servidor fue exitosa, analiza el JSON
+    
+  } else {
+    // Si la llamada no fue exitosa, lanza un error.
+    throw Exception('Failed to load post');
+  }*/
+}
 
   @override
   void initState() {
     super.initState();
+    get_anuncios().then((value){
+      setState(() {
+        data.addAll(value);
+      });
+    });
     searchFieldController = TextEditingController();
   }
 
@@ -30,11 +60,10 @@ class _PaginaHomeState extends State<MisProyectos> {
               fit: BoxFit.cover,
             ),
           ),
-          child: ListView(
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
+          child: Column(children: [
+            const SizedBox(
+              height: 60.0,
+            ),
                   Row(
                     children: [
                       Padding(
@@ -43,6 +72,7 @@ class _PaginaHomeState extends State<MisProyectos> {
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_back,
+                            color: Colors.white,
                             size: 35,
                           ),
                           onPressed: () {
@@ -62,352 +92,112 @@ class _PaginaHomeState extends State<MisProyectos> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16, 8, 16, 0),
+
+            Expanded (child: _Anuncio(),),
+          ],)
+            
+        ));
+  }
+
+  Widget _Anuncio() {
+    return ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context,index){
+          return Container( 
+            child: Column(
+            children: 
+          [Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+                ListView(
+                  padding: EdgeInsets.zero,
+                  primary: false,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: Image.network(
+                              data[index].foto1,
+                            ).image,
+                          ),
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 3,
+                              color: Color(0x33000000),
+                              offset: Offset(0, 2),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
                           child: Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(
-                                fit: BoxFit.fitHeight,
-                                image: Image.network(
-                                  'https://www.devsdna.com/wp-content/uploads/2021/01/Graphic_Designer1920x1080.jpg',
-                                ).image,
+                            width: 100,
+                            height: 100,
+                            decoration: const BoxDecoration(
+                              color: Color(0x80FFFFFF),
+                              borderRadius:  BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
                               ),
-                              boxShadow: [
-                                const BoxShadow(
-                                  blurRadius: 3,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, 120, 0, 0),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: const BoxDecoration(
-                                  color: const Color(0x80FFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: const Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    topLeft: Radius.circular(0),
-                                    topRight: Radius.circular(0),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 16, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              'Logo Maker',
-                                            ),
-                                            const Text(
-                                              'Cris Smith',
-                                            ),
-                                          ],
+                              padding:
+                                  const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          data[index].titulo,
                                         ),
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ServicioWidget()));
-                                            },
-                                            child: const Text('Reserve'),
-                                          ),
-                                        ],
+                                        Text(
+                                          data[index].nombre,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {Navigator.push(
+                                        context, MaterialPageRoute(builder: (context) => const ServicioWidget()));},
+                                        child: const Text('Reserve'),
                                       ),
                                     ],
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16, 8, 16, 0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: Image.network(
-                                  'https://www.simplybusiness.co.uk/static/88706991538cf5915633e9f598eb7721/fd9f6/how-to-become-a-freelance-graphic-designer.jpg',
-                                ).image,
-                              ),
-                              boxShadow: [
-                                const BoxShadow(
-                                  blurRadius: 3,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, 120, 0, 0),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: const BoxDecoration(
-                                  color: const Color(0x80FFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: const Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    topLeft: Radius.circular(0),
-                                    topRight: const Radius.circular(0),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 16, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              'Low Cost Logos',
-                                            ),
-                                            const Text(
-                                              'Jaden Cooper',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              print(
-                                                  'Button-Reserve pressed ...');
-                                            },
-                                            child: const Text('Reserve'),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16, 8, 16, 0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: Image.network(
-                                  'https://www.mbt2you.com/wp-content/uploads/2021/12/how-to-make-money-as-a-graphic-designer.jpg',
-                                ).image,
-                              ),
-                              boxShadow: [
-                                const BoxShadow(
-                                  blurRadius: 3,
-                                  color: const Color(0x33000000),
-                                  offset: const Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, 120, 0, 0),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: const BoxDecoration(
-                                  color: const Color(0x80FFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    topLeft: Radius.circular(0),
-                                    topRight: const Radius.circular(0),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 16, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              'Minimalist Logos',
-                                            ),
-                                            const Text(
-                                              'Caitlyn Wager',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              print(
-                                                  'Button-Reserve pressed ...');
-                                            },
-                                            child: const Text('Reserve'),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16, 8, 16, 0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: Image.network(
-                                  'https://www.mbt2you.com/wp-content/uploads/2021/12/how-to-make-money-as-a-graphic-designer.jpg',
-                                ).image,
-                              ),
-                              boxShadow: [
-                                const BoxShadow(
-                                  blurRadius: 3,
-                                  color: const Color(0x33000000),
-                                  offset: const Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, 120, 0, 0),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: const BoxDecoration(
-                                  color: const Color(0x80FFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(8),
-                                    bottomRight: Radius.circular(8),
-                                    topLeft: Radius.circular(0),
-                                    topRight: const Radius.circular(0),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 16, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              'Minimalist Logos',
-                                            ),
-                                            const Text(
-                                              'Caitlyn Wager',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              print(
-                                                  'Button-Reserve pressed ...');
-                                            },
-                                            child: const Text('Reserve'),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
             ],
           ),
-        ));
+        ],),
+      );
+      }
+      );
   }
 }
