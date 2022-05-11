@@ -63,7 +63,11 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: IconButton(
-                  icon: Icon(Icons.arrow_back, size: 35,),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 35,
+                  ),
                               
                     onPressed: (){
                       paginaActual = 1;
@@ -75,7 +79,10 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(left: 30),
                     child: Text(
                       "MIS PROYECTOS",
-                      style: TextStyle(fontSize: 30, color: Color.fromARGB(255, 0, 0, 0)),
+                      style: TextStyle(
+                        fontSize: 30, 
+                        color: Colors.white
+                    ),
                     ),
                   ),
             ],
@@ -193,15 +200,19 @@ class Msg extends StatelessWidget {
       child: new Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         child: new Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             new Container(
               margin: const EdgeInsets.only(right: 18.0),
-              child: new CircleAvatar(child: new Text(defaultUserName[0])),
+              child: new CircleAvatar(
+                child: new Text(
+                  defaultUserName[0],
+                ),
+              ),
             ),
             new Expanded(
               child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   new Text(defaultUserName, style: Theme.of(ctx).textTheme.subtitle1),
                   new Container(

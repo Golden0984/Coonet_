@@ -72,6 +72,7 @@ Future<List<Anuncios>> get_anuncios() async {
                         child: IconButton(
                           icon: Icon(
                             Icons.arrow_back,
+                            color: Colors.white,
                             size: 35,
                           ),
                           onPressed: () {
