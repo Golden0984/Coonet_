@@ -446,7 +446,7 @@ Future<List<Anuncios>> get_anuncios() async {
                                       ElevatedButton(
                                         onPressed: () {Navigator.push(
                                         context, MaterialPageRoute(builder: (context) => const ServicioWidget()));},
-                                        child: const Text('CONTACTAR'),
+                                        child: const Text('CONTACTAR FREE'),
                                       ),
                                     ],
                                   ),
