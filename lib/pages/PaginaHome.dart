@@ -61,10 +61,11 @@ Future<List<Anuncios>> get_anuncios() async {
           ),
         ),
         
-        child: Column(children: 
+        child: 
+        Column(children: 
           [
             const SizedBox(
-              height: 60.0,
+              height: 70.0,
             ),
             Column(
               
@@ -79,7 +80,8 @@ Future<List<Anuncios>> get_anuncios() async {
                       width: MediaQuery.of(context).size.width,
                       height: 60,
                       decoration: const BoxDecoration(
-                        color: Color.fromARGB(0, 177, 22, 156),
+                        color: Color.fromARGB(250, 255, 255, 255),
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
                       ),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(20, 4, 20, 0),
@@ -88,13 +90,6 @@ Future<List<Anuncios>> get_anuncios() async {
                           obscureText: false,
                           decoration: InputDecoration(
                             hintText: 'Buscar la categoria aqui...',
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: const Color(0xFFF1F4F8),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
                             prefixIcon: const Icon(
                               Icons.search_rounded,
                               color: const Color(0xFF95A1AC),
@@ -113,7 +108,7 @@ Future<List<Anuncios>> get_anuncios() async {
                   mainAxisSize: MainAxisSize.max,
                   children: const [
                     Text(
-                      'Categorias',
+                      'CATEGORÍAS',
                     ),
                   ],
                 ),
@@ -350,31 +345,23 @@ Future<List<Anuncios>> get_anuncios() async {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(2, 8, 2, 8),
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 12, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const Text(
-                      'Todas las ofertas',
+                  children: const [
+                    Text(
+                      'TODAS LAS OFERTAS',
+                      style: TextStyle( fontFamily: 'Jura'),
                     ),
                   ],
                 ),
               ),
-              
-             
             ],
-            
           ),
         Expanded (child: _Anuncio(),),
         ],
           
         )
-        
-        
-        
-        
-        
-         
       ),);
   }
 
@@ -459,7 +446,7 @@ Future<List<Anuncios>> get_anuncios() async {
                                       ElevatedButton(
                                         onPressed: () {Navigator.push(
                                         context, MaterialPageRoute(builder: (context) => const ServicioWidget()));},
-                                        child: const Text('Reserve'),
+                                        child: const Text('CONTACTAR'),
                                       ),
                                     ],
                                   ),

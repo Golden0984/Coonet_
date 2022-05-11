@@ -22,7 +22,7 @@ class _MenuBare extends State<Menu> {
     PaginaHome(),
     PaginaChat(),
     PaginaNuevaOferta(),
-    ServicioWidget(),
+    PaginaTienda(),
     PaginaUsr(free: fetchPost()),
   ];
 
