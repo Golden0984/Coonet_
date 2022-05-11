@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaLogin.dart';
+import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -20,7 +22,13 @@ class PaginaNuevaOferta extends StatefulWidget{
 class _OfertaPageState extends State<PaginaNuevaOferta>{
   String texto = "ningun valor selecionado";
   String vactu = "app";
+
+  late TextEditingController tituloctrl = TextEditingController();
+  late TextEditingController descripcionctrl = TextEditingController();
+  late TextEditingController precioctrl = TextEditingController();
+
   File? _image, _image2, _image3, _image4;
+
   int index = 0;
   final _picker = ImagePicker();
   List<XFile>_imageList = [];
@@ -73,6 +81,49 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
     }
   }
 
+   Dio dio = new Dio();
+
+  Future<void> _Subir() async {
+
+    String filename = _image!.path.split('/').last;
+
+    FormData formData = FormData.fromMap({
+      "email": login,
+      "titulo": tituloctrl.text,
+      "descripcion": descripcionctrl.text,
+      "categoria": vactu,
+      "precio": precioctrl.text,
+      'foto1' : await MultipartFile.fromFile(_image!.path,filename: filename),
+      'foto2' : await MultipartFile.fromFile(_image2!.path,filename: filename),
+      'foto3' : await MultipartFile.fromFile(_image3!.path,filename: filename),
+      'foto4' : await MultipartFile.fromFile(_image4!.path,filename: filename)
+    }
+    );
+
+    await dio.post('https://phpninjahosting.com/manish/Coonet/Php/CrearOferta.php',
+    data: formData).then((value){
+      if(value.toString()=='si'){
+        Fluttertoast.showToast(
+            msg: "Oferta Creada Correctamente", toastLength: Toast.LENGTH_SHORT);
+        //Ir a otra pagina
+        {
+          paginaActual = 0;
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Menu()));
+        }
+      }else if(value.toString()=='no'){
+        Fluttertoast.showToast(
+          msg: "Error Imagen",
+          toastLength: Toast.LENGTH_SHORT);
+      }else if(value.toString()=='Error User'){
+        Fluttertoast.showToast(
+          msg: "Error User", toastLength: Toast.LENGTH_SHORT);
+      }else{
+        print(value.toString());
+      }
+    });
+  }
+
 
   
   @override
@@ -115,8 +166,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               style: const TextStyle(color: Colors.white),
-              //controller: tituloctrl,
-              keyboardType: TextInputType.emailAddress,
+              controller: tituloctrl,
+              keyboardType: TextInputType.text,
               decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)
@@ -144,7 +195,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               style: const TextStyle(color: Colors.white),
-              //controller: apellidosctrl,
+              controller: descripcionctrl,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
@@ -210,7 +261,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               style: const TextStyle(color: Colors.white),
-              //controller: telefonoctrl,
+              controller: precioctrl,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 enabledBorder: UnderlineInputBorder(
@@ -331,7 +382,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            onPressed: () {}
+            onPressed: () => _Subir()
           );
         }
       ),

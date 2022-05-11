@@ -1,12 +1,12 @@
 import 'package:coonet/pages/Menu.dart';
 import 'package:flutter/material.dart';
 
-class PagoWidget extends StatefulWidget {
+class ValoWidget extends StatefulWidget {
   @override
   _PagoWidgetState createState() => _PagoWidgetState();
 }
 
-class _PagoWidgetState extends State<PagoWidget> {
+class _PagoWidgetState extends State<ValoWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -49,7 +49,7 @@ class _PagoWidgetState extends State<PagoWidget> {
                       left: 20,
                     ),
                     child: Text(
-                      "PAGOS",
+                      "VALORAR",
                       style: TextStyle(
                           fontFamily: 'Arial',
                           fontSize: 30,
@@ -64,10 +64,6 @@ class _PagoWidgetState extends State<PagoWidget> {
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               children: [
-                _Pagos(),
-                const SizedBox(
-                  height: 10,
-                ),
                 _Pagos(),
                 const SizedBox(
                   height: 10,
