@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaLogin.dart';
+import 'package:coonet/pages/PaginaUsr.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -13,9 +15,10 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
 
+import 'Users/InfoAnuncio.dart';
+
 class EditarPerfil extends StatefulWidget {
   static String id = 'editarperfil_page';
-
   @override
   _EditarPerfilState createState() => _EditarPerfilState();
 }
@@ -106,16 +109,31 @@ class _EditarPerfilState extends State<EditarPerfil> {
             const SizedBox(
               height: 40.0,
             ),
-            const Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                    child: Text('EDITAR PERFIL',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        )
-                      )
-                    ),
+            Row(
+              children: [
+              Padding(
+                padding: EdgeInsets.only(left: 20,right: 20),
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  color: Colors.white, onPressed: () {
+                    showDialog();
+                  },
+                ),
+              ),
+              Text('EDITAR PERFIL',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                )
+              )
+              ],
+            ),
+              const Divider(
+              indent: 20,
+              endIndent: 130,
+              color: Color.fromARGB(49, 255, 255, 255),
+            ),
             const SizedBox(
               height: 20.0,
             ),
@@ -139,13 +157,34 @@ class _EditarPerfilState extends State<EditarPerfil> {
             const SizedBox(
               height: 10,
             ),
+            const Divider(
+              indent: 40,
+              endIndent: 40,
+              color: Color.fromARGB(135, 255, 255, 255),
+            ),
+            const Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 10, 0, 15),
+                    child: Text('CAMBIAR CONTRASEÑA',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 12,
+                        decoration: TextDecoration.underline,
+                        color: Colors.white,
+                        )
+                      )
+                    ),
             _passwordTextField(),
             const SizedBox(
               height: 10,
             ),
             _repeatpasswordTextField(),
             const SizedBox(
-              height: 25.0,
+              height: 10,
+            ),
+            const Divider(
+              indent: 40,
+              endIndent: 40,
+              color: Color.fromARGB(135, 255, 255, 255),
             ),
             _SubirImagen(),
             const SizedBox(
@@ -162,6 +201,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _nombreTextField() {
+    var aux = "Sahil";
+    nombrectrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -171,8 +212,15 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: nombrectrl,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
+            
+              border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
               icon: Icon(
                 Icons.abc,
                 color: Colors.white,
@@ -200,8 +248,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: apellidosctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
+              border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
               icon: Icon(
                 Icons.abc,
                 color: Colors.white,
@@ -218,6 +272,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _UserTextField() {
+    var aux = "Krzy";
+    userctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -227,8 +283,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: userctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
+              border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
@@ -245,6 +307,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _telefonTextField() {
+    var aux = "Krzy";
+    telefonoctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -252,10 +316,17 @@ class _EditarPerfilState extends State<EditarPerfil> {
         child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: telefonoctrl,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.number,
           decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
+              border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                  focusColor: Colors.white,
               icon: Icon(
                 Icons.phone,
                 color: Colors.white,
@@ -271,6 +342,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _emailTextField() {
+    var aux = "Krzy";
+    emailctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -280,8 +353,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: emailctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
+              border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
               icon: Icon(
                 Icons.email,
                 color: Colors.white,
@@ -301,6 +380,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _passwordTextField() {
+    var aux = "Krzy";
+    passctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -311,8 +392,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
+              border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
               icon: Icon(
                 Icons.lock,
                 color: Colors.white,
@@ -332,6 +419,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _repeatpasswordTextField() {
+    var aux = "Krzy";
+    repeatpassctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -342,8 +431,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
+              border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
               icon: Icon(
                 Icons.lock,
                 color: Colors.white,
@@ -421,4 +516,33 @@ class _EditarPerfilState extends State<EditarPerfil> {
           ),
         );
   }
+
+void showDialog()
+ {
+   showCupertinoDialog(
+     context: context,
+     builder: (context) {
+       return CupertinoAlertDialog(
+        title: Text("Descartar cambios"),
+        content: Text("¿Estas seguro de salir sin guardar los cambios?"), 
+        actions: [
+         CupertinoDialogAction(
+            child: Text("SI"),
+            onPressed: ()
+            {
+              //Navigator.push(context,MaterialPageRoute(builder: (context) => PaginaUsr(free: id,)));
+              Navigator.of(context).pop();
+            }
+         ),
+         CupertinoDialogAction(
+            child: Text("NO"),
+            onPressed: (){
+                Navigator.of(context).pop();
+            }
+         )
+        ],   
+      );
+     },
+   );
+ }
 }

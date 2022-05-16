@@ -70,7 +70,10 @@ class _PaginaHomeState extends State<PaginaHome> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Material(
-                        color: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        color: Color.fromARGB(255, 255, 255, 255),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: 60,
@@ -102,9 +105,15 @@ class _PaginaHomeState extends State<PaginaHome> {
                       children: const [
                         Text(
                           'CATEGORÍAS',
+                          style: TextStyle(color: Colors.white,),
                         ),
                       ],
                     ),
+                  ),
+                  const Divider(
+                    indent: 18,
+                    endIndent: 285,
+                    color: Color.fromARGB(135, 255, 255, 255),
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 1, 0),
@@ -143,7 +152,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                         ),
                                         child: const Icon(
                                           Icons.app_settings_alt,
-                                          color: Color(0xFF95A1AC),
+                                          color: Color.fromARGB(255, 140, 48, 183),
                                           size: 32,
                                         ),
                                       ),
@@ -193,7 +202,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.web,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -239,7 +248,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.design_services,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -285,7 +294,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.video_settings,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -330,7 +339,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.photo,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -375,7 +384,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.video_call,
-                                        color: Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -402,13 +411,19 @@ class _PaginaHomeState extends State<PaginaHome> {
                       children: const [
                         Text(
                           'TODAS LAS OFERTAS',
-                          style: TextStyle(fontFamily: 'Jura'),
+                          style: TextStyle(color: Colors.white,),
                         ),
                       ],
                     ),
-                  ),
+                  ), 
+                  const Divider(
+                    indent: 18,
+                    endIndent: 230,
+                    color: Color.fromARGB(135, 255, 255, 255),
+                ),
                 ],
               ),
+             
               Flexible(
                 child: _Anuncio(),
               ),

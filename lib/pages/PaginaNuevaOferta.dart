@@ -169,10 +169,15 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
               controller: tituloctrl,
               keyboardType: TextInputType.text,
               decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
+                border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)
                 ),
-                
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
                 icon: Icon(Icons.abc, color: Colors.white,),
                 //hintText: 'Alex',
                 labelText: 'Titulo',
@@ -198,8 +203,14 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
               controller: descripcionctrl,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
                 ),
                 icon: Icon(Icons.abc, color: Colors.white,),
                 //hintText: 'ejemplo@email.com',
@@ -289,8 +300,14 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
               controller: precioctrl,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
                 ),
                 icon: Icon(Icons.euro, color: Colors.white,),
                 labelText: 'Precio',
