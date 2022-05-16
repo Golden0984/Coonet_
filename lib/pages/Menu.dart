@@ -1,3 +1,4 @@
+import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaChat.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:coonet/pages/PaginaTienda.dart';
@@ -22,7 +23,7 @@ class _MenuBare extends State<Menu> {
     PaginaHome(),
     PaginaChat(),
     PaginaNuevaOferta(),
-    PaginaTienda(),
+    EditarPerfil(),
     PaginaUsr(free: fetchPost()),
   ];
 
