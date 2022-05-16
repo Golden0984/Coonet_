@@ -227,23 +227,48 @@ class _OfertaPageState extends State<PaginaNuevaOferta>{
         value: vactu,
         items: const [
           DropdownMenuItem(
-            child: Text('Apps', style: TextStyle( 
+            child: Text('Creación apps', style: TextStyle( 
               color: Colors.white,
               ),
             ),
-            value: "app",),
-            DropdownMenuItem(
-              child: Text('Web', style: TextStyle(
+            value: "app",
+          ),
+          DropdownMenuItem(
+              child: Text('Programación', style: TextStyle(
                 color: Colors.white,
               ),
             ),
-            value: "web",),
-            DropdownMenuItem(
-              child: Text('Edición', style: TextStyle(
+            value: "programacion",
+          ),
+          DropdownMenuItem(
+              child: Text('Diseño web', style: TextStyle(
                 color: Colors.white,
                 ),
               ),
-            value: "edicion",),
+            value: "diseñoweb",
+          ),
+          DropdownMenuItem(
+              child: Text('Edición de video', style: TextStyle(
+                color: Colors.white,
+                ),
+              ),
+            value: "videoEditig",
+          ),
+          DropdownMenuItem(
+              child: Text('Edición Fotos', style: TextStyle(
+                color: Colors.white,
+                ),
+              ),
+            value: "editfotos",
+          ),
+          DropdownMenuItem(
+              child: Text('Producción Video', style: TextStyle(
+                color: Colors.white,
+                ),
+              ),
+            value: "produvideo",
+          ),
+           
         ],
         onChanged: (valor){
           setState((){
