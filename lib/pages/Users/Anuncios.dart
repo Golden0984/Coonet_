@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 class Anuncios {
-  final String id_anuncio;
+  late final String id_anuncio;
   final String nombre;
   final String email;
   final String titulo;

@@ -7,7 +7,7 @@ void main() => runApp(PaginaUsr(free: fetchPost()));
 
 class PaginaUsr extends StatelessWidget {
   final Future<FreeLan> free;
-  PaginaUsr({Key? key, required this.free}) : super(key: key);
+  const PaginaUsr({Key? key, required this.free}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,23 +68,23 @@ class PaginaUsr extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: CircleAvatar(
                     radius: 80.0,
-                    child: ClipOval(child: FutureBuilder<FreeLan>(
+                    child: ClipOval(
+                      child: FutureBuilder<FreeLan>(
                         future: free,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Image.network(
-                            snapshot.data!.foto,
-                            fit: BoxFit.cover,
-                            width: 100.0,
-                            height: 100.0,
-                          );
+                              snapshot.data!.foto,
+                              fit: BoxFit.cover,
+                              width: 100.0,
+                              height: 100.0,
+                            );
                           } else if (snapshot.hasError) {
                             return Text("${snapshot.error}");
                           }
                           return const CircularProgressIndicator();
                         },
                       ),
-                      
                     ),
                   ),
                 ),
@@ -262,8 +262,8 @@ class PaginaUsr extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>  MisProyectos()));
-        
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MisProyectos()));
           });
     });
   }
@@ -320,8 +320,10 @@ class PaginaUsr extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () {Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PagoWidget()));});
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => PagoWidget()));
+          });
     });
   }
 
@@ -353,4 +355,3 @@ class PaginaUsr extends StatelessWidget {
     });
   }
 }
-
