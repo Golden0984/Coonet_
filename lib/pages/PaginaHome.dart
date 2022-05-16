@@ -84,7 +84,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 hintText: 'Buscar la categoria aqui...',
                                 prefixIcon: const Icon(
                                   Icons.search_rounded,
-                                  color: const Color(0xFF95A1AC),
+                                  color: Color.fromARGB(255, 59, 57, 57),
                                   size: 24,
                                 ),
                               ),
@@ -150,7 +150,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 8, 0, 0),
                                       child: Text(
-                                        'Apps',
+                                        'Creación apps',
                                       ),
                                     ),
                                   ],
@@ -196,7 +196,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           const EdgeInsetsDirectional.fromSTEB(
                                               0, 8, 0, 0),
                                       child: const Text(
-                                        'Web',
+                                        'Programación',
                                       ),
                                     ),
                                   ],
@@ -242,7 +242,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           const EdgeInsetsDirectional.fromSTEB(
                                               0, 8, 0, 0),
                                       child: Text(
-                                        'Logo Design',
+                                        'Diseño web',
                                       ),
                                     ),
                                   ],
@@ -287,7 +287,52 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 8, 0, 0),
                                       child: Text(
-                                        'Video Editing',
+                                        'Edición video',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8, 0, 0, 0),
+                            child: Material(
+                              color: Colors.transparent,
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 48,
+                                      height: 48,
+                                      decoration: const BoxDecoration(
+                                        color: const Color(0xFFF1F4F8),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.photo,
+                                        color: const Color(0xFF95A1AC),
+                                        size: 32,
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 8, 0, 0),
+                                      child: Text(
+                                        'Edición Fotos',
                                       ),
                                     ),
                                   ],
@@ -323,7 +368,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                         shape: BoxShape.circle,
                                       ),
                                       child: const Icon(
-                                        Icons.directions_run_rounded,
+                                        Icons.video_call,
                                         color: Color(0xFF95A1AC),
                                         size: 32,
                                       ),
@@ -332,7 +377,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 8, 0, 0),
                                       child: Text(
-                                        'Running',
+                                        'Video Maker',
                                       ),
                                     ),
                                   ],
@@ -340,6 +385,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                               ),
                             ),
                           ),
+                          
                         ],
                       ),
                     ),
