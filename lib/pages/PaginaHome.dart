@@ -113,50 +113,56 @@ class _PaginaHomeState extends State<PaginaHome> {
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16, 8, 0, 8),
-                            child: Material(
-                              color: Colors.transparent,
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
+                          InkWell(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16, 8, 0, 8),
+                              child: Material(
+                                color: Colors.transparent,
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 48,
-                                      height: 48,
-                                      decoration: const BoxDecoration(
-                                        color: const Color(0xFFF1F4F8),
-                                        shape: BoxShape.circle,
+                                child: Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 48,
+                                        height: 48,
+                                        decoration: const BoxDecoration(
+                                          color: const Color(0xFFF1F4F8),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(
+                                          Icons.app_settings_alt,
+                                          color: Color(0xFF95A1AC),
+                                          size: 32,
+                                        ),
                                       ),
-                                      child: const Icon(
-                                        Icons.app_settings_alt,
-                                        color: Color(0xFF95A1AC),
-                                        size: 32,
+                                      const Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 8, 0, 0),
+                                        child: Text(
+                                          'Creación apps',
+                                        ),
                                       ),
-                                    ),
-                                    const Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 0, 0),
-                                      child: Text(
-                                        'Creación apps',
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
+                            onTap: () {
+                              String valor = "app";
+                              print("tapped on container");
+                            },
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -385,7 +391,6 @@ class _PaginaHomeState extends State<PaginaHome> {
                               ),
                             ),
                           ),
-                          
                         ],
                       ),
                     ),
