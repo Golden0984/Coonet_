@@ -1,3 +1,4 @@
+import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
 import '../Pagos.dart';
 import 'MisProyectos.dart';
@@ -351,7 +352,9 @@ class PaginaUsr extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () {});
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
+          });
     });
   }
 }

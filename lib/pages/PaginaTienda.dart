@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class PaginaTienda extends StatelessWidget{
@@ -14,13 +16,12 @@ class PaginaTienda extends StatelessWidget{
         ),
         child: Column(
           children: <Widget> [
-            AppBar(
-            title: Text('TIENDA'),),
+            Text('TIENDA', style: TextStyle(fontWeight: FontWeight.bold)),
             Expanded(
               child: ListView(children: [
                  menusalPack(),
-                 menusalPack(),
-                 menusalPack(),
+                 trimestralPack(),
+                 anualPack(),
               ]),
             ),
           ]
@@ -52,10 +53,12 @@ class PaginaTienda extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Good Morning,',
+            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
+            style: TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
           ),
           Text(
-            'Below are your daily lessons',
+            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+            style: TextStyle(fontSize: 13),
           ),
           Divider(
             height: 24,
@@ -72,42 +75,34 @@ class PaginaTienda extends StatelessWidget{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Daily Coffees',
-                    ),
-                    Text(
-                      '3',
+                      '9,99€/mes',
+                      style: TextStyle(fontSize:  25,fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                child: Column(
+              Row(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Avg. Rating',
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    ElevatedButton(onPressed: (){
+
+                    }, 
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 147, 34, 200)),),
+                    child: Row(
                       children: [
-                        Text(
-                          '4.6',
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                          child: Icon(
-                            Icons.star_rounded,
-                            color: Color(0xFF57636C),
-                            size: 24,
+                         Icon(
+                            Icons.add_shopping_cart,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
                           ),
-                        ),
+                          SizedBox(width: 10,),
+                        Text('COMPRAR'),
+                      ],
+                    )),
                       ],
                     ),
-                  ],
-                ),
-              ),
             ],
           ),
         ],
@@ -117,4 +112,170 @@ class PaginaTienda extends StatelessWidget{
 );
 
   }
+
+  Widget trimestralPack(){
+    return Padding(
+  padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+  child: Container(
+    width: double.infinity,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          blurRadius: 4,
+          color: Color(0x25090F13),
+          offset: Offset(0, 2),
+        )
+      ],
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'SUSCRIPCIÓN PREMIUM (TRIMESTRAL)\n',
+            style: TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+            style: TextStyle(fontSize: 13),
+          ),
+          Divider(
+            height: 24,
+            thickness: 2,
+            color: Color(0xFFF1F4F8),
+          ),
+          
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '25,99€/mes',
+                      style: TextStyle(fontSize:  25,fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ElevatedButton(onPressed: (){
+
+                    }, 
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 147, 34, 200)),),
+                    child: Row(
+                      children: [
+                         Icon(
+                            Icons.add_shopping_cart,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          SizedBox(width: 10,),
+                        Text('COMPRAR'),
+                      ],
+                    )),
+                      ],
+                    ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  ),
+);
+}
+
+  Widget anualPack(){
+    return Padding(
+  padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+  child: Container(
+    width: double.infinity,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          blurRadius: 4,
+          color: Color(0x25090F13),
+          offset: Offset(0, 2),
+        )
+      ],
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'SUSCRIPCIÓN PREMIUM (ANUAL)\n',
+            style: TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+            style: TextStyle(fontSize: 13),
+          ),
+          Divider(
+            height: 24,
+            thickness: 2,
+            color: Color(0xFFF1F4F8),
+          ),
+          
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '89,99€/mes',
+                      style: TextStyle(fontSize:  25,fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ElevatedButton(onPressed: (){
+
+                    }, 
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 147, 34, 200)),),
+                    child: Row(
+                      children: [
+                         Icon(
+                            Icons.add_shopping_cart,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          SizedBox(width: 10,),
+                        Text('COMPRAR'),
+                      ],
+                    )),
+                      ],
+                    ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  ),
+);
+}
 }
