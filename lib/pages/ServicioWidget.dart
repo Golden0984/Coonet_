@@ -1,7 +1,7 @@
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'Users/InfoAnuncio.dart';
 
 class ServicioWidget extends StatefulWidget {
@@ -194,10 +194,10 @@ class Servicios extends State<ServicioWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
+                      children: const [
                         Expanded(
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
@@ -246,6 +246,51 @@ class Servicios extends State<ServicioWidget> {
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 30),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            snapshot.data!.descripcion.toString(),
+                            style: TextStyle(
+                              fontSize: 15.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 30),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            "Valoracion General",
+                            style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          ),
+                        ),
+                        RatingBarIndicator(
+                    rating: 3,
+                    itemBuilder: (context, index) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    itemCount: 5,
+                    itemSize: 25.0,
+                    direction: Axis.horizontal,
+                  ),
+
+                      ],
+                    ),
+                  ),
+                  
                 ],
               );
             } else if (snapshot.hasError) {
