@@ -106,12 +106,16 @@ class _EditarPerfilState extends State<EditarPerfil> {
             const SizedBox(
               height: 40.0,
             ),
-            const Text('EDITAR PERFIL',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.white,
-                )),
+            const Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                    child: Text('EDITAR PERFIL',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        )
+                      )
+                    ),
             const SizedBox(
               height: 20.0,
             ),
@@ -151,10 +155,6 @@ class _EditarPerfilState extends State<EditarPerfil> {
             const SizedBox(
               height: 25.0,
             ),
-            _logearAhora(),
-            const SizedBox(
-              height: 30.0,
-            ),
           ],
         ),
       ),
@@ -189,6 +189,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _apellidosTextField() {
+    var aux = "Krzy";
+    apellidosctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -370,7 +372,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 15.0),
               alignment: Alignment.center,
               child: const Text(
-                'Registrarse',
+                'Guardar Cambios',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16.0,
@@ -385,30 +387,6 @@ class _EditarPerfilState extends State<EditarPerfil> {
             ),
           ),
           onPressed: () => _Subir());
-    });
-  }
-
-  Widget _logearAhora() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return InkWell(
-        child: Row(
-          children: const [
-            Spacer(),
-            Text(
-              'Ya tienes cuenta? ',
-              style: TextStyle(color: Colors.white),
-            ),
-            Text(
-              'Inicar Sesion',
-              style: TextStyle(color: Color.fromARGB(255, 175, 82, 206)),
-            ),
-            Spacer(),
-          ],
-        ),
-        onTap: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PaginaLogin())),
-      );
     });
   }
    Widget _SubirImagen() {
