@@ -120,7 +120,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
                   },
                 ),
               ),
-              Text('EDITAR PERFIL',
+              const Text('EDITAR PERFIL',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                   fontSize: 30,

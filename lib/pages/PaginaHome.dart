@@ -63,32 +63,58 @@ class _PaginaHomeState extends State<PaginaHome> {
               const SizedBox(
                 height: 70.0,
               ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child:  Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text('INICIO',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    )
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10,),
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Material(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: 60,
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                20, 4, 20, 0),
-                            child: TextFormField(
-                              controller: searchFieldController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                hintText: 'Buscar la categoria aqui...',
-                                prefixIcon: const Icon(
-                                  Icons.search_rounded,
-                                  color: Color.fromARGB(255, 59, 57, 57),
-                                  size: 24,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Container(
+                          width: 350,
+                          height: 40,
+                          child: Material(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 60,
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10, 4, 20, 0),
+                                child: TextFormField(
+                                  controller: searchFieldController,
+                                  obscureText: false,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    hintText: 'Buscar la categoria aqui...',
+                                    prefixIcon: Icon(
+                                      Icons.search_rounded,
+                                      color: Color.fromARGB(255, 59, 57, 57),
+                                      size: 24,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
