@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+
 class PaginaTienda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,7 @@ class PaginaTienda extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+
         child: ListView(children: <Widget>[
           Padding(
             padding: EdgeInsets.only(left: 20), 
@@ -55,6 +58,7 @@ class PaginaTienda extends StatelessWidget {
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
           child: Column(
+
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -202,7 +206,30 @@ class PaginaTienda extends StatelessWidget {
                     ],
                   ),
                 ],
+
               ),
+              Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ElevatedButton(onPressed: (){
+
+                    }, 
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 147, 34, 200)),),
+                    child: Row(
+                      children: [
+                         Icon(
+                            Icons.add_shopping_cart,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          SizedBox(width: 10,),
+                        Text('COMPRAR'),
+                      ],
+                    )),
+                      ],
+                    ),
             ],
           ),
         ),
@@ -297,3 +324,4 @@ class PaginaTienda extends StatelessWidget {
     );
   }
 }
+

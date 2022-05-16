@@ -1,3 +1,4 @@
+import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
 import '../Pagos.dart';
 import 'MisProyectos.dart';
@@ -19,71 +20,71 @@ class PaginaUsr extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: ListView(children: [
-          _Perfil(),
-          Align(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 50,
+        child: FutureBuilder<FreeLan>(
+          future: free,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView(children: [
+                _Perfil(snapshot),
+                Align(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      _buttonMisProyectos(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _buttonValorar(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _buttonPagos(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _buttonNuevaOferta()
+                    ],
+                  ),
                 ),
-                _buttonMisProyectos(),
-                const SizedBox(
-                  height: 20,
-                ),
-                _buttonValorar(),
-                const SizedBox(
-                  height: 20,
-                ),
-                _buttonPagos(),
-                const SizedBox(
-                  height: 20,
-                ),
-                _buttonNuevaOferta()
-              ],
-            ),
-          ),
-        ]),
+              ]);
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return const CircularProgressIndicator();
+          },
+        ),
       ),
     );
   }
 
-  Widget _Perfil() {
+  Widget _Perfil(AsyncSnapshot<FreeLan> snapshot) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.black45,
       ),
       margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             children: <Widget>[
               SizedBox(
-                width: 100,
-                height: 100,
+                width: 80,
+                height: 80,
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: CircleAvatar(
                     radius: 80.0,
                     child: ClipOval(
-                      child: FutureBuilder<FreeLan>(
-                        future: free,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Image.network(
-                              snapshot.data!.foto,
-                              fit: BoxFit.cover,
-                              width: 100.0,
-                              height: 100.0,
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text("${snapshot.error}");
-                          }
-                          return const CircularProgressIndicator();
-                        },
+                      child: Image.network(
+                        snapshot.data!.foto,
+                        fit: BoxFit.cover,
+                        width: 80.0,
+                        height: 80.0,
                       ),
                     ),
                   ),
@@ -91,7 +92,7 @@ class PaginaUsr extends StatelessWidget {
               ),
               ElevatedButton(
                   child: Container(
-                      width: 80,
+                      width: 70,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5.0),
                       alignment: Alignment.center,
@@ -114,10 +115,10 @@ class PaginaUsr extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            width: 30,
+            width: 15,
           ),
           SizedBox(
-            width: 190.0,
+            width: 200.0,
             child: Align(
               alignment: Alignment.center,
               child: Column(
@@ -125,26 +126,16 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: FutureBuilder<FreeLan>(
-                        future: free,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                              "Nombre: " +
-                                  snapshot.data!.nombre +
-                                  " " +
-                                  snapshot.data!.apellido,
-                              style: const TextStyle(
-                                color: Color.fromRGBO(245, 243, 243, 1),
-                                fontSize: 16.0,
-                              ),
-                              textAlign: TextAlign.justify,
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text("${snapshot.error}");
-                          }
-                          return const CircularProgressIndicator();
-                        },
+                      child: Text(
+                        "Nombre: " +
+                            snapshot.data!.nombre +
+                            " " +
+                            snapshot.data!.apellido,
+                        style: const TextStyle(
+                          color: Color.fromRGBO(245, 243, 243, 1),
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ),
@@ -154,23 +145,13 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: FutureBuilder<FreeLan>(
-                        future: free,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                              "Usuario: " + snapshot.data!.user,
-                              style: const TextStyle(
-                                color: Color.fromRGBO(245, 243, 243, 1),
-                                fontSize: 16.0,
-                              ),
-                              textAlign: TextAlign.justify,
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text("${snapshot.error}");
-                          }
-                          return const CircularProgressIndicator();
-                        },
+                      child: Text(
+                        "Usuario: " + snapshot.data!.user,
+                        style: const TextStyle(
+                          color: Color.fromRGBO(245, 243, 243, 1),
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ),
@@ -180,24 +161,13 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: FutureBuilder<FreeLan>(
-                        future: free,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                              "Email: " + snapshot.data!.correo,
-                              style: const TextStyle(
-                                color: Color.fromRGBO(245, 243, 243, 1),
-                                fontSize: 16.0,
-                              ),
-                              textAlign: TextAlign.justify,
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text("${snapshot.error}");
-                          }
-                          // Por defecto, muestra un loading spinner
-                          return const CircularProgressIndicator();
-                        },
+                      child: Text(
+                        "Email: " + snapshot.data!.correo,
+                        style: const TextStyle(
+                          color: Color.fromRGBO(245, 243, 243, 1),
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ),
@@ -207,24 +177,13 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: FutureBuilder<FreeLan>(
-                        future: free,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                              "Tel: " + snapshot.data!.telefono,
-                              style: const TextStyle(
-                                color: Color.fromRGBO(245, 243, 243, 1),
-                                fontSize: 16.0,
-                              ),
-                              textAlign: TextAlign.justify,
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text("${snapshot.error}");
-                          }
-                          // Por defecto, muestra un loading spinner
-                          return const CircularProgressIndicator();
-                        },
+                      child: Text(
+                        "Tel: " + snapshot.data!.telefono,
+                        style: const TextStyle(
+                          color: Color.fromRGBO(245, 243, 243, 1),
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ),
@@ -351,7 +310,9 @@ class PaginaUsr extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () {});
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
+          });
     });
   }
 }
