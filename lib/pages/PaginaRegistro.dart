@@ -29,6 +29,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
   late TextEditingController emailctrl = TextEditingController();
   late TextEditingController passctrl = TextEditingController();
   late TextEditingController repeatpassctrl = TextEditingController();
+  late TextEditingController preguntactrl = TextEditingController();
+  late TextEditingController respuestactrl = TextEditingController();
 
   File? _image;
 
@@ -141,6 +143,14 @@ class _RegisterPageState extends State<PaginaRegistro> {
             ),
             _repeatpasswordTextField(),
             const SizedBox(
+              height: 10,
+            ),
+            _preguntaTextField(),
+            const SizedBox(
+              height: 10,
+            ),
+            _respuestaTextField(),
+            const SizedBox(
               height: 25.0,
             ),
             _SubirImagen(),
@@ -169,7 +179,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: nombrectrl,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
@@ -196,7 +206,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: apellidosctrl,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
@@ -223,7 +233,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: userctrl,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
@@ -250,7 +260,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: telefonoctrl,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
@@ -306,7 +316,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: passctrl,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           obscureText: true,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
@@ -337,7 +347,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         child: TextField(
           style: const TextStyle(color: Colors.white),
           controller: repeatpassctrl,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           obscureText: true,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
@@ -351,6 +361,66 @@ class _RegisterPageState extends State<PaginaRegistro> {
                 color: Colors.white54,
               ),
               labelText: 'Repetir Contraseña',
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+          onChanged: (value) {},
+        ),
+      );
+    });
+  }
+
+  Widget _preguntaTextField() {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: TextField(
+          style: const TextStyle(color: Colors.white),
+          controller: preguntactrl,
+          keyboardType: TextInputType.text,
+          decoration: const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white)),
+              icon: Icon(
+                Icons.question_mark_outlined,
+                color: Colors.white,
+              ),
+              hintText: '¿Color favorito?',
+              hintStyle: TextStyle(
+                color: Colors.white54,
+              ),
+              labelText: 'Pregunta de Seguridad',
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+          onChanged: (value) {},
+        ),
+      );
+    });
+  }
+
+  Widget _respuestaTextField() {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: TextField(
+          style: const TextStyle(color: Colors.white),
+          controller: repeatpassctrl,
+          keyboardType: TextInputType.text,
+          decoration: const InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white)),
+              icon: Icon(
+                Icons.question_answer_outlined,
+                color: Colors.white,
+              ),
+              hintText: 'Escribir respuesta',
+              hintStyle: TextStyle(
+                color: Colors.white54,
+              ),
+              labelText: 'Respuesta',
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
