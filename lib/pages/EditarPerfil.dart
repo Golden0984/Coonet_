@@ -19,8 +19,10 @@ import 'Users/InfoAnuncio.dart';
 
 class EditarPerfil extends StatefulWidget {
   static String id = 'editarperfil_page';
+  final Future<FreeLan> free;
+  EditarPerfil({required this.free});
   @override
-  _EditarPerfilState createState() => _EditarPerfilState();
+  _EditarPerfilState createState() => _EditarPerfilState(free);
 }
 
 class _EditarPerfilState extends State<EditarPerfil> {
@@ -35,6 +37,9 @@ class _EditarPerfilState extends State<EditarPerfil> {
   File? _image;
 
   final _picker = ImagePicker();
+  final Future<FreeLan> free;
+  _EditarPerfilState(this.free);
+
   // Implementing the image picker
   Future<void> _openImagePicker() async {
     final XFile? pickedImage =
@@ -94,6 +99,20 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
+  set() {
+    FutureBuilder<FreeLan>(
+      future: free,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+           nombrectrl.text = "aux";
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,103 +123,113 @@ class _EditarPerfilState extends State<EditarPerfil> {
             fit: BoxFit.cover,
           ),
         ),
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 40.0,
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    color: Colors.white,
-                    onPressed: () {
-                      showDialog();
-                    },
+        child: FutureBuilder<FreeLan>(
+          future: free,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView(
+                children: [
+                  const SizedBox(
+                    height: 40.0,
                   ),
-                ),
-                const Text('EDITAR PERFIL',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                    ))
-              ],
-            ),
-            const Divider(
-              indent: 20,
-              endIndent: 130,
-              color: Color.fromARGB(49, 255, 255, 255),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            _nombreTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            _apellidosTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            _UserTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            _telefonTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            _emailTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            const Divider(
-              indent: 40,
-              endIndent: 40,
-              color: Color.fromARGB(135, 255, 255, 255),
-            ),
-            const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 10, 0, 15),
-                child: Text('CAMBIAR CONTRASEÑA',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 12,
-                      decoration: TextDecoration.underline,
-                      color: Colors.white,
-                    ))),
-            _passwordTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            _repeatpasswordTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            const Divider(
-              indent: 40,
-              endIndent: 40,
-              color: Color.fromARGB(135, 255, 255, 255),
-            ),
-            _SubirImagen(),
-            const SizedBox(
-              height: 30.0,
-            ),
-            _buttonRegister(),
-            const SizedBox(
-              height: 25.0,
-            ),
-          ],
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_back),
+                          color: Colors.white,
+                          onPressed: () {
+                            showDialog();
+                          },
+                        ),
+                      ),
+                      const Text('EDITAR PERFIL',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
+                  const Divider(
+                    indent: 20,
+                    endIndent: 130,
+                    color: Color.fromARGB(49, 255, 255, 255),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _nombreTextField(snapshot),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _apellidosTextField(snapshot),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _UserTextField(snapshot),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _telefonTextField(snapshot),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _emailTextField(snapshot),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Divider(
+                    indent: 40,
+                    endIndent: 40,
+                    color: Color.fromARGB(135, 255, 255, 255),
+                  ),
+                  const Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 0, 15),
+                      child: Text('CAMBIAR CONTRASEÑA',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 12,
+                            decoration: TextDecoration.underline,
+                            color: Colors.white,
+                          ))),
+                  _passwordTextField(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _repeatpasswordTextField(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Divider(
+                    indent: 40,
+                    endIndent: 40,
+                    color: Color.fromARGB(135, 255, 255, 255),
+                  ),
+                  _SubirImagen(),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  _buttonRegister(),
+                  const SizedBox(
+                    height: 25.0,
+                  ),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return const CircularProgressIndicator();
+          },
         ),
       ),
     );
   }
 
-  Widget _nombreTextField() {
-    var aux = "Sahil";
-    nombrectrl.text = aux;
+  Widget _nombreTextField(AsyncSnapshot<FreeLan> snapshot) {
+    /*var aux = snapshot.data!.nombre;
+    nombrectrl.text = aux;*/
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -222,7 +251,9 @@ class _EditarPerfilState extends State<EditarPerfil> {
                 Icons.abc,
                 color: Colors.white,
               ),
-              //hintText: 'Alex',
+              hintStyle: TextStyle(
+                color: Colors.white54,
+              ),
               labelText: 'Nombre',
               labelStyle: TextStyle(
                 color: Colors.white,
@@ -233,8 +264,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _apellidosTextField() {
-    var aux = "Krzy";
+  Widget _apellidosTextField(AsyncSnapshot<FreeLan> snapshot) {
+    var aux = snapshot.data!.apellido;
     apellidosctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -268,8 +299,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _UserTextField() {
-    var aux = "Krzy";
+  Widget _UserTextField(AsyncSnapshot<FreeLan> snapshot) {
+    var aux = snapshot.data!.user;
     userctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -303,8 +334,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _telefonTextField() {
-    var aux = "Krzy";
+  Widget _telefonTextField(AsyncSnapshot<FreeLan> snapshot) {
+    var aux = snapshot.data!.telefono;
     telefonoctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -338,8 +369,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _emailTextField() {
-    var aux = "Krzy";
+  Widget _emailTextField(AsyncSnapshot<FreeLan> snapshot) {
+    var aux = snapshot.data!.correo;
     emailctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {

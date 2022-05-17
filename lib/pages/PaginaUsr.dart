@@ -101,30 +101,6 @@ class PaginaUsr extends StatelessWidget {
                   ),
                 ),
               ),
-              /*ElevatedButton(
-                  child: Container(
-                      width: 70,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5.0),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Editar',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 245, 245, 244),
-                    elevation: 10.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onPressed: () {
-
-                  }),*/
                   _editar()
             ],
           ),
@@ -265,7 +241,7 @@ class PaginaUsr extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => EditarPerfil()));
+                MaterialPageRoute(builder: (context) => EditarPerfil(free: fetchPost())));
           });
     });
   }
