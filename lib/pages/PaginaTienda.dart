@@ -208,28 +208,6 @@ class PaginaTienda extends StatelessWidget {
                 ],
 
               ),
-              Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ElevatedButton(onPressed: (){
-
-                    }, 
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 147, 34, 200)),),
-                    child: Row(
-                      children: [
-                         Icon(
-                            Icons.add_shopping_cart,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            size: 20,
-                          ),
-                          SizedBox(width: 10,),
-                        Text('COMPRAR'),
-                      ],
-                    )),
-                      ],
-                    ),
             ],
           ),
         ),
