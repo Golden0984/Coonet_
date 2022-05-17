@@ -555,8 +555,9 @@ class _EditarPerfilState extends State<EditarPerfil> {
             CupertinoDialogAction(
                 child: Text("SI"),
                 onPressed: () {
-                  //Navigator.push(context,MaterialPageRoute(builder: (context) => PaginaUsr(free: id,)));
-                  Navigator.of(context).pop();
+                  paginaActual = 4;
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()));
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
