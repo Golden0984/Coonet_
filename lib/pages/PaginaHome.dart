@@ -63,29 +63,58 @@ class _PaginaHomeState extends State<PaginaHome> {
               const SizedBox(
                 height: 70.0,
               ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child:  Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text('INICIO',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    )
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10,),
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Material(
-                        color: Colors.transparent,
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: 60,
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                20, 4, 20, 0),
-                            child: TextFormField(
-                              controller: searchFieldController,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                hintText: 'Buscar la categoria aqui...',
-                                prefixIcon: const Icon(
-                                  Icons.search_rounded,
-                                  color: Color.fromARGB(255, 59, 57, 57),
-                                  size: 24,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Container(
+                          width: 350,
+                          height: 40,
+                          child: Material(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 60,
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10, 4, 20, 0),
+                                child: TextFormField(
+                                  controller: searchFieldController,
+                                  obscureText: false,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    hintText: 'Buscar la categoria aqui...',
+                                    prefixIcon: Icon(
+                                      Icons.search_rounded,
+                                      color: Color.fromARGB(255, 59, 57, 57),
+                                      size: 24,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -102,9 +131,15 @@ class _PaginaHomeState extends State<PaginaHome> {
                       children: const [
                         Text(
                           'CATEGORÍAS',
+                          style: TextStyle(color: Colors.white,),
                         ),
                       ],
                     ),
+                  ),
+                  const Divider(
+                    indent: 18,
+                    endIndent: 285,
+                    color: Color.fromARGB(135, 255, 255, 255),
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 1, 0),
@@ -143,7 +178,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                         ),
                                         child: const Icon(
                                           Icons.app_settings_alt,
-                                          color: Color(0xFF95A1AC),
+                                          color: Color.fromARGB(255, 140, 48, 183),
                                           size: 32,
                                         ),
                                       ),
@@ -193,7 +228,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.web,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -239,7 +274,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.design_services,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -285,7 +320,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.video_settings,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -330,7 +365,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.photo,
-                                        color: const Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -375,7 +410,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                       ),
                                       child: const Icon(
                                         Icons.video_call,
-                                        color: Color(0xFF95A1AC),
+                                        color: Color.fromARGB(255, 140, 48, 183),
                                         size: 32,
                                       ),
                                     ),
@@ -402,13 +437,19 @@ class _PaginaHomeState extends State<PaginaHome> {
                       children: const [
                         Text(
                           'TODAS LAS OFERTAS',
-                          style: TextStyle(fontFamily: 'Jura'),
+                          style: TextStyle(color: Colors.white,),
                         ),
                       ],
                     ),
-                  ),
+                  ), 
+                  const Divider(
+                    indent: 18,
+                    endIndent: 230,
+                    color: Color.fromARGB(135, 255, 255, 255),
+                ),
                 ],
               ),
+             
               Flexible(
                 child: _Anuncio(),
               ),
