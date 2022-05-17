@@ -1,3 +1,4 @@
+import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
 import '../Pagos.dart';
@@ -25,6 +26,16 @@ class PaginaUsr extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: const Text('PERFIL',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    )
+                  ),
+                ),
                 _Perfil(snapshot),
                 Align(
                   child: Column(
@@ -90,7 +101,7 @@ class PaginaUsr extends StatelessWidget {
                   ),
                 ),
               ),
-              ElevatedButton(
+              /*ElevatedButton(
                   child: Container(
                       width: 70,
                       padding: const EdgeInsets.symmetric(
@@ -111,7 +122,10 @@ class PaginaUsr extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+
+                  }),*/
+                  _editar()
             ],
           ),
           const SizedBox(
@@ -223,6 +237,35 @@ class PaginaUsr extends StatelessWidget {
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => MisProyectos()));
+          });
+    });
+  }
+
+  Widget _editar() {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return ElevatedButton(
+          child: Container(
+              width: 90,
+              alignment: Alignment.center,
+              child: const Text(
+                'EDITAR',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 255, 255, 255),
+            elevation: 10.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EditarPerfil()));
           });
     });
   }
