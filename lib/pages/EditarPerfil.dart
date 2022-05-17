@@ -24,7 +24,6 @@ class EditarPerfil extends StatefulWidget {
 }
 
 class _EditarPerfilState extends State<EditarPerfil> {
-
   late TextEditingController nombrectrl = TextEditingController();
   late TextEditingController apellidosctrl = TextEditingController();
   late TextEditingController userctrl = TextEditingController();
@@ -48,11 +47,10 @@ class _EditarPerfilState extends State<EditarPerfil> {
       });
     }
   }
-  
+
   Dio dio = new Dio();
 
   Future<void> _Subir() async {
-
     String filename = _image!.path.split('/').last;
 
     FormData formData = FormData.fromMap({
@@ -63,13 +61,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
       "tel": telefonoctrl.text,
       "pass": passctrl.text,
       "pass_valid": repeatpassctrl.text,
-      'file' : await MultipartFile.fromFile(_image!.path,filename: filename)
-    }
-    );
+      'file': await MultipartFile.fromFile(_image!.path, filename: filename)
+    });
 
-    await dio.post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
-    data: formData).then((value){
-      if(value.toString()=='si'){
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'si') {
         login = emailctrl.text;
         Fluttertoast.showToast(
             msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
@@ -78,17 +77,18 @@ class _EditarPerfilState extends State<EditarPerfil> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Menu()));
         }
-      }else if(value.toString()=='Usuario Registrado'){
+      } else if (value.toString() == 'Usuario Registrado') {
         Fluttertoast.showToast(
-          msg: "El Usuario ya esta Registrado",
-          toastLength: Toast.LENGTH_SHORT);
-      }else if(value.toString()=='Contra no coincide'){
+            msg: "El Usuario ya esta Registrado",
+            toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'Contra no coincide') {
         Fluttertoast.showToast(
-          msg: "la contraseña no coinciden.", toastLength: Toast.LENGTH_SHORT);
-      }else if(value.toString()=='no'){
+            msg: "la contraseña no coinciden.",
+            toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'no') {
         Fluttertoast.showToast(
-          msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
-      }else{
+            msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
+      } else {
         print(value.toString());
       }
     });
@@ -111,25 +111,25 @@ class _EditarPerfilState extends State<EditarPerfil> {
             ),
             Row(
               children: [
-              Padding(
-                padding: EdgeInsets.only(left: 20,right: 20),
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  color: Colors.white, onPressed: () {
-                    showDialog();
-                  },
+                Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    color: Colors.white,
+                    onPressed: () {
+                      showDialog();
+                    },
+                  ),
                 ),
-              ),
-              const Text('EDITAR PERFIL',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                )
-              )
+                const Text('EDITAR PERFIL',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    ))
               ],
             ),
-              const Divider(
+            const Divider(
               indent: 20,
               endIndent: 130,
               color: Color.fromARGB(49, 255, 255, 255),
@@ -163,16 +163,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
               color: Color.fromARGB(135, 255, 255, 255),
             ),
             const Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 10, 0, 15),
-                    child: Text('CAMBIAR CONTRASEÑA',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 12,
-                        decoration: TextDecoration.underline,
-                        color: Colors.white,
-                        )
-                      )
-                    ),
+                padding: EdgeInsetsDirectional.fromSTEB(20, 10, 0, 15),
+                child: Text('CAMBIAR CONTRASEÑA',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 12,
+                      decoration: TextDecoration.underline,
+                      color: Colors.white,
+                    ))),
             _passwordTextField(),
             const SizedBox(
               height: 10,
@@ -212,15 +210,14 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: nombrectrl,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-            
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               icon: Icon(
                 Icons.abc,
                 color: Colors.white,
@@ -250,12 +247,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
           decoration: const InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               icon: Icon(
                 Icons.abc,
                 color: Colors.white,
@@ -285,12 +282,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
           decoration: const InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
@@ -320,13 +317,13 @@ class _EditarPerfilState extends State<EditarPerfil> {
           decoration: const InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                  focusColor: Colors.white,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusColor: Colors.white,
               icon: Icon(
                 Icons.phone,
                 color: Colors.white,
@@ -355,12 +352,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
           decoration: const InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               icon: Icon(
                 Icons.email,
                 color: Colors.white,
@@ -394,12 +391,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
           decoration: const InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               icon: Icon(
                 Icons.lock,
                 color: Colors.white,
@@ -433,12 +430,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
           decoration: const InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               icon: Icon(
                 Icons.lock,
                 color: Colors.white,
@@ -484,65 +481,61 @@ class _EditarPerfilState extends State<EditarPerfil> {
           onPressed: () => _Subir());
     });
   }
-   Widget _SubirImagen() {
+
+  Widget _SubirImagen() {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.black45,
       ),
       margin: const EdgeInsets.all(10),
-          child: Padding(
-            padding: const EdgeInsets.all(35),
-            child: Row(children: [
-              Container(
-                alignment: Alignment.center,
-                width: 150,
-                height: 150,
-                color: Colors.grey[300],
-                child: _image != null
-                    ? Image.file(_image!, fit: BoxFit.cover)
-                    : const Text('Please select an image'),
-              ),
-              const SizedBox(width: 10),
-              Center(
-                child: ElevatedButton(
-                  child: const Text('Select An Image'),
-                  onPressed: _openImagePicker,
-                ),
-              ),
-              
-              
-            ]),
+      child: Padding(
+        padding: const EdgeInsets.all(35),
+        child: Row(children: [
+          Container(
+            alignment: Alignment.center,
+            width: 150,
+            height: 150,
+            color: Colors.grey[300],
+            child: _image != null
+                ? Image.file(_image!, fit: BoxFit.cover)
+                : const Text('Please select an image'),
           ),
-        );
+          const SizedBox(width: 10),
+          Center(
+            child: ElevatedButton(
+              child: const Text('Select An Image'),
+              onPressed: _openImagePicker,
+            ),
+          ),
+        ]),
+      ),
+    );
   }
 
-void showDialog()
- {
-   showCupertinoDialog(
-     context: context,
-     builder: (context) {
-       return CupertinoAlertDialog(
-        title: Text("Descartar cambios"),
-        content: Text("¿Estas seguro de salir sin guardar los cambios?"), 
-        actions: [
-         CupertinoDialogAction(
-            child: Text("SI"),
-            onPressed: ()
-            {
-              //Navigator.push(context,MaterialPageRoute(builder: (context) => PaginaUsr(free: id,)));
-              Navigator.of(context).pop();
-            }
-         ),
-         CupertinoDialogAction(
-            child: Text("NO"),
-            onPressed: (){
-                Navigator.of(context).pop();
-            }
-         )
-        ],   
-      );
-     },
-   );
- }
+  void showDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text("Descartar cambios"),
+          content: Text("¿Estas seguro de salir sin guardar los cambios?"),
+          actions: [
+            CupertinoDialogAction(
+                child: Text("SI"),
+                onPressed: () {
+                  paginaActual = 4;
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()));
+                }),
+            CupertinoDialogAction(
+                child: Text("NO"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                })
+          ],
+        );
+      },
+    );
+  }
 }
