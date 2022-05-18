@@ -198,7 +198,7 @@ class Servicios extends State<ServicioWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
+                        const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -214,36 +214,14 @@ class Servicios extends State<ServicioWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [],
-                    ),
-                  ),
-                  Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          'Product Description',
+                          'DESCRIPCIÓN',
                           style: TextStyle(
-                            fontSize: 19.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -261,6 +239,21 @@ class Servicios extends State<ServicioWidget> {
                             style: TextStyle(
                               fontSize: 15.0,
                             ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 20),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'PLANES',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -354,12 +347,13 @@ class Servicios extends State<ServicioWidget> {
                   Container(
                     width: 360,
                     decoration: BoxDecoration(
+                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
                           color: Color(0x25090F13),
-                          offset: Offset(0, 4),
+                          offset: Offset(10, 10),
                         )
                       ],
                       borderRadius: BorderRadius.circular(12),
@@ -438,12 +432,13 @@ class Servicios extends State<ServicioWidget> {
                   Container(
                     width: 360,
                     decoration: BoxDecoration(
+                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
                           color: Color(0x25090F13),
-                          offset: Offset(0, 4),
+                          offset: Offset(10, 10),
                         )
                       ],
                       borderRadius: BorderRadius.circular(12),
@@ -526,9 +521,9 @@ class Servicios extends State<ServicioWidget> {
                       children: [
                         const Expanded(
                           child: Text(
-                            "Valoracion General",
+                            "VALORACIÓN GENERAL",
                             style: TextStyle(
-                            fontSize: 15.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                           ),
@@ -551,6 +546,7 @@ class Servicios extends State<ServicioWidget> {
 
   Widget appbartt(String string) {
     return AppBar(
+      backgroundColor: Color.fromARGB(255, 147, 34, 200),
       title: Text(string),
       leading: IconButton(
         onPressed: () {
