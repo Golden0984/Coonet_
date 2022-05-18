@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'Users/InfoAnuncio.dart';
 
-class ServicioWidget extends StatefulWidget {
+
+//https://programmerclick.com/article/30011048702/
+
+
+class ComentarioValo extends StatefulWidget {
   final Future<InfoAnuncio> free;
-  const ServicioWidget({Key? key, required this.free}) : super(key: key);
+  const ComentarioValo({Key? key, required this.free}) : super(key: key);
   @override
   Servicios createState() => Servicios(free);
 }
 
-class Servicios extends State<ServicioWidget> {
+class Servicios extends State<ComentarioValo> {
   late PageController pageViewController = PageController();
   late String dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -40,11 +44,11 @@ class Servicios extends State<ServicioWidget> {
                           alignment: AlignmentDirectional(0, -1),
                           children: [
                             Container(
-                              height: 540,
+                              height: 320,
                               decoration: BoxDecoration(),
                               child: Container(
                                 width: double.infinity,
-                                height: 530,
+                                height: 320,
                                 child: Stack(
                                   children: [
                                     Padding(
@@ -101,7 +105,7 @@ class Servicios extends State<ServicioWidget> {
                               alignment: AlignmentDirectional(0, 0.85),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 470, 0, 0),
+                                    0, 250, 0, 0),
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,
@@ -198,7 +202,7 @@ class Servicios extends State<ServicioWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                        const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -214,49 +218,25 @@ class Servicios extends State<ServicioWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          'DESCRIPCIÓN',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 30),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
                         Expanded(
-                          child: Text(
-                            snapshot.data!.descripcion.toString(),
-                            style: TextStyle(
-                              fontSize: 15.0,
-                            ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                           ),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 20),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          'PLANES',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [],
                     ),
                   ),
                   Container(
@@ -347,190 +327,19 @@ class Servicios extends State<ServicioWidget> {
                   Container(
                     width: 360,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
                           color: Color(0x25090F13),
-                          offset: Offset(10, 10),
+                          offset: Offset(0, 4),
                         )
                       ],
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
-                      child: Column(
-
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
-                            style: TextStyle(fontSize: 13),
-                          ),
-                          Divider(
-                            height: 24,
-                            thickness: 2,
-                            color: Color(0xFFF1F4F8),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '9,99€',
-                                      style: TextStyle(
-                                          fontSize: 25, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Color.fromARGB(255, 147, 34, 200)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Color.fromARGB(255, 255, 255, 255),
-                                            size: 20,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('COMPRAR'),
-                                        ],
-                                      )
-                                    ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
                   SizedBox(height: 20,),
-                  Container(
-                    width: 360,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x25090F13),
-                          offset: Offset(10, 10),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
-                      child: Column(
-
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
-                            style: TextStyle(fontSize: 13),
-                          ),
-                          Divider(
-                            height: 24,
-                            thickness: 2,
-                            color: Color(0xFFF1F4F8),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '9,99€',
-                                      style: TextStyle(
-                                          fontSize: 25, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Color.fromARGB(255, 147, 34, 200)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Color.fromARGB(255, 255, 255, 255),
-                                            size: 20,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('COMPRAR'),
-                                        ],
-                                      )
-                                    ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 30),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const Expanded(
-                          child: Text(
-                            "VALORACIÓN GENERAL",
-                            style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  
                   
                 ],
               );
@@ -546,7 +355,6 @@ class Servicios extends State<ServicioWidget> {
 
   Widget appbartt(String string) {
     return AppBar(
-      backgroundColor: Color.fromARGB(255, 147, 34, 200),
       title: Text(string),
       leading: IconButton(
         onPressed: () {
