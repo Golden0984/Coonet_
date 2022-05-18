@@ -541,7 +541,7 @@ class Servicios extends State<ServicioWidget> {
           },
         ),
       ),
-    );
+    ); 
   }
 
   Widget appbartt(String string) {
