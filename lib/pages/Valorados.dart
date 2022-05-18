@@ -70,12 +70,7 @@ class _PaginaHomeState extends State<Valorados> {
             
             child: Column(
               children: [
-                const SizedBox(
-                  height: 60.0,
-                ),
-                Row(
-                  
-                ),
+                
                 Expanded(
                   child: _Anuncio(),
                 ),
