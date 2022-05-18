@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'MisProyectos.dart';
+import 'PendientesValorar.dart';
 import 'ServicioWidget.dart';
 import 'Users/Anuncios.dart';
 import 'Users/FreeLancer.dart';
@@ -15,6 +16,7 @@ import 'package:http/http.dart' as http;
 import 'ServicioWidget.dart';
 import 'Users/Anuncios.dart';
 import 'Users/InfoAnuncio.dart';
+import 'Valorados.dart';
 
 class ValoWidget extends StatefulWidget {
   @override
@@ -111,8 +113,8 @@ class _PagoWidgetState extends State<ValoWidget> {
             ),
             child: TabBarView(
               children: [
-                MisProyectos(),
-                Tab(icon: Text("Valorados")),
+                PendienteValorar(),
+                Valorados(),
               ],
             ),
           ),
