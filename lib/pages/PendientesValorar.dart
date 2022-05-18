@@ -5,6 +5,7 @@ import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'Comentario.dart';
 import 'PaginaChatPersonal.dart';
 import 'ServicioWidget.dart';
 import 'Users/InfoAnuncio.dart';
@@ -95,7 +96,7 @@ class _PaginaHomeState extends State<PendienteValorar> {
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              16, 5, 16, 0),
+                              16, 8, 16, 0),
                           child: Container(
                             width: double.infinity,
                             height: 200,
@@ -168,11 +169,11 @@ class _PaginaHomeState extends State<PendienteValorar> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          ServicioWidget(
+                                                          ComentarioValo(
                                                               free: fetchINFO(
                                                                   id))));
                                             },
-                                            child: const Text('Editar'),
+                                            child: const Text('Valorar'),
                                           ),
                                         ],
                                       ),
