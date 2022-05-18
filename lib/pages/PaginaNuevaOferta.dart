@@ -166,7 +166,23 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
             const SizedBox(
               height: 10,
             ),
+            const Divider(
+                    indent: 60,
+                    endIndent: 60,
+                    color: Color.fromARGB(110, 255, 255, 255),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             _precioTextField(),
+            const SizedBox(
+              height: 25.0,
+            ),
+            _precio2TextField(),
+            const SizedBox(
+              height: 25.0,
+            ),
+            _precio3TextField(),
             const SizedBox(
               height: 25.0,
             ),
@@ -203,7 +219,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                 borderSide: BorderSide(color: Colors.white),
               ),
               icon: Icon(
-                Icons.abc,
+                Icons.title_rounded,
                 color: Colors.white,
               ),
               //hintText: 'Alex',
@@ -237,7 +253,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                 borderSide: BorderSide(color: Colors.white),
               ),
               icon: Icon(
-                Icons.abc,
+                Icons.description,
                 color: Colors.white,
               ),
               //hintText: 'ejemplo@email.com',
@@ -253,7 +269,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
 
   Widget _catTextField() {
     return Container(
-      padding: const EdgeInsets.only(left: 60, right: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       alignment: Alignment.center,
       child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
@@ -266,6 +282,10 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
             ),
+            icon: Icon(
+                Icons.category,
+                color: Colors.white,
+              ),
           ),
           icon: Icon(
             Icons.arrow_drop_down,
@@ -372,7 +392,73 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                 Icons.euro,
                 color: Colors.white,
               ),
-              labelText: 'Precio',
+              labelText: 'Precio 1',
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+          onChanged: (value) {},
+        ),
+      );
+    });
+  }
+
+  Widget _precio2TextField() {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: TextField(
+          style: const TextStyle(color: Colors.white),
+          controller: precioctrl,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              icon: Icon(
+                Icons.euro,
+                color: Colors.white,
+              ),
+              labelText: 'Precio 2',
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+          onChanged: (value) {},
+        ),
+      );
+    });
+  }
+
+  Widget _precio3TextField() {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: TextField(
+          style: const TextStyle(color: Colors.white),
+          controller: precioctrl,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              icon: Icon(
+                Icons.euro,
+                color: Colors.white,
+              ),
+              labelText: 'Precio 3',
               labelStyle: TextStyle(
                 color: Colors.white,
               )),

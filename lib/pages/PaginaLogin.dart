@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:coonet/pages/PaginaHome.dart';
 import 'package:coonet/pages/PaginaRegistro.dart';
+import 'package:coonet/pages/PreguntaSeguridad.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 import 'Menu.dart';
+import 'RecuperarContra.dart';
 import 'Users/FreeLancer.dart';
 
 class PaginaLogin extends StatefulWidget {
@@ -129,7 +131,7 @@ class _LoginPageState extends State<PaginaLogin> {
                 color: Colors.white,
               ),
               hintStyle: TextStyle(
-                color: Colors.white,
+                color: Colors.white54,
               )),
           onChanged: (value) {},
         ),
@@ -187,7 +189,7 @@ class _LoginPageState extends State<PaginaLogin> {
           ],
         ),
         onTap: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PaginaRegistro())),
+            context, MaterialPageRoute(builder: (context) => PreguntaSeguridad())),
       );
     });
   }
