@@ -70,12 +70,6 @@ class _PaginaHomeState extends State<PendienteValorar> {
             
             child: Column(
               children: [
-                const SizedBox(
-                  height: 60.0,
-                ),
-                Row(
-                  
-                ),
                 Expanded(
                   child: _Anuncio(),
                 ),
@@ -101,7 +95,7 @@ class _PaginaHomeState extends State<PendienteValorar> {
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              16, 8, 16, 0),
+                              16, 5, 16, 0),
                           child: Container(
                             width: double.infinity,
                             height: 200,
