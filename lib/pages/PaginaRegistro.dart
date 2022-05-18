@@ -407,7 +407,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: repeatpassctrl,
+          controller: respuestactrl,
           keyboardType: TextInputType.text,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
