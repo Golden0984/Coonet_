@@ -111,11 +111,7 @@ class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
             const SizedBox(
               height: 20.0,
             ),
-            _preguntaTextField(),
-            const SizedBox(
-              height: 10,
-            ),
-            _respuestaTextField(),
+            _emailTextField(),
             const SizedBox(
               height: 30.0,
             ),
@@ -153,66 +149,7 @@ class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
       );
     });
   }
-
-  Widget _preguntaTextField() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: TextField(
-          style: const TextStyle(color: Colors.white),
-          controller: preguntactrl,
-          obscureText: true,
-          keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              icon: Icon(
-                Icons.question_mark,
-                color: Colors.white,
-              ),
-              hintText: 'No es necesario introducir "¿" y "?"',
-              hintStyle: TextStyle(color: Color.fromARGB(151, 255, 255, 255)),
-              labelText: 'Pregunta de Seguridad',
-              labelStyle: TextStyle(
-                color: Colors.white,
-              )),
-          onChanged: (value) {},
-        ),
-      );
-    });
-  }
-
-  Widget _respuestaTextField() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: TextField(
-          style: const TextStyle(color: Colors.white),
-          controller: respuestactrl,
-          obscureText: true,
-          keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              icon: Icon(
-                Icons.question_answer_outlined,
-                color: Colors.white,
-              ),
-              //hintText: 'ejemplo@email.com',
-              labelText: 'Respuesta',
-              labelStyle: TextStyle(
-                color: Colors.white,
-              )),
-          onChanged: (value) {},
-        ),
-      );
-    });
-  }
-
- 
-
+  
   Widget _cambiarAhora() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
