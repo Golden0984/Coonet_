@@ -14,36 +14,38 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
 
-class PreguntaSeguridad extends StatefulWidget {
+class CorrreoRecuperacion extends StatefulWidget {
   static String id = 'Register_page';
 
   @override
-  _PreguntaSeguridadState createState() => _PreguntaSeguridadState();
+  _CorrreoRecuperacionState createState() => _CorrreoRecuperacionState();
 }
 
-class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
-
+class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
   late TextEditingController emailctrl = TextEditingController();
   late TextEditingController preguntactrl = TextEditingController();
   late TextEditingController respuestactrl = TextEditingController();
+
+  bool visibility_email = true;
+  bool visibility_Pregunta = false;
+  bool visibility_contra = false;
 
   File? _image;
 
   final _picker = ImagePicker();
   // Implementing the image picker
   verificacion() {
-    if (emailctrl.text == ""){
-      if(preguntactrl.text == "" && respuestactrl.text == ""){
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => RecuperarContra()));
+    if (emailctrl.text == "") {
+      if (preguntactrl.text == "" && respuestactrl.text == "") {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => RecuperarContra()));
       }
     }
   }
-  
+
   Dio dio = new Dio();
 
   Future<void> _Subir() async {
-
     /*String filename = _image!.path.split('/').last;
 
     await dio.post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
@@ -72,7 +74,7 @@ class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
       }
     });*/
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,16 +93,16 @@ class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
             Row(
               children: [
                 IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                          size: 25,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                 const Text('Pregunta de seguridad',
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 25,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const Text('Recuperar Contraseña',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
@@ -111,11 +113,11 @@ class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
             const SizedBox(
               height: 20.0,
             ),
-            _emailTextField(),
+            visibility_email ? _emailTextField() : new Container(),
             const SizedBox(
               height: 30.0,
             ),
-            _cambiarAhora(),
+            visibility_email ? _cambiarAhora() : new Container(),
           ],
         ),
       ),
@@ -149,7 +151,7 @@ class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
       );
     });
   }
-  
+
   Widget _cambiarAhora() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -174,7 +176,18 @@ class _PreguntaSeguridadState extends State<PreguntaSeguridad> {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () => _Subir());
+          onPressed: () {
+            if (emailctrl.text.isEmpty) {
+              Fluttertoast.showToast(
+                  msg: "Rellena el campo antes de continuar",
+                  toastLength: Toast.LENGTH_SHORT);
+            } else {
+              setState(() {
+                visibility_email = false;
+                visibility_Pregunta = true;
+              });
+            }
+          });
     });
   }
 }
