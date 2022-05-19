@@ -2,15 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:coonet/pages/Menu.dart';
-import 'package:coonet/pages/PaginaLogin.dart';
+
 import 'package:coonet/pages/Users/FreeLancer.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class PaginaNuevaOferta extends StatefulWidget {
@@ -167,9 +166,9 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               height: 10,
             ),
             const Divider(
-                    indent: 60,
-                    endIndent: 60,
-                    color: Color.fromARGB(110, 255, 255, 255),
+              indent: 60,
+              endIndent: 60,
+              color: Color.fromARGB(110, 255, 255, 255),
             ),
             const SizedBox(
               height: 10,
@@ -272,7 +271,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       alignment: Alignment.center,
       child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
             ),
@@ -283,11 +282,11 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               borderSide: BorderSide(color: Colors.white),
             ),
             icon: Icon(
-                Icons.category,
-                color: Colors.white,
-              ),
+              Icons.category,
+              color: Colors.white,
+            ),
           ),
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_drop_down,
             color: Colors.white,
           ),
@@ -330,7 +329,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                   color: Colors.white,
                 ),
               ),
-              value: "diseñoweb",
+              value: "disenoweb",
             ),
             DropdownMenuItem(
               child: Text(
