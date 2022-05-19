@@ -99,18 +99,13 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  set() {
-    FutureBuilder<FreeLan>(
-      future: free,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-           nombrectrl.text = "aux";
-        } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
-        }
-        return const CircularProgressIndicator();
-      },
-    );
+  @override
+  void initState() {
+    nombrectrl.text = nombre;
+    apellidosctrl.text = apellido;
+    userctrl.text = user;
+    telefonoctrl.text = telefono;
+    emailctrl.text = correo;
   }
 
   @override
@@ -160,23 +155,23 @@ class _EditarPerfilState extends State<EditarPerfil> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  _nombreTextField(snapshot),
+                  _nombreTextField(),
                   const SizedBox(
                     height: 10,
                   ),
-                  _apellidosTextField(snapshot),
+                  _apellidosTextField(),
                   const SizedBox(
                     height: 10,
                   ),
-                  _UserTextField(snapshot),
+                  _UserTextField(),
                   const SizedBox(
                     height: 10,
                   ),
-                  _telefonTextField(snapshot),
+                  _telefonTextField(),
                   const SizedBox(
                     height: 10,
                   ),
-                  _emailTextField(snapshot),
+                  _emailTextField(),
                   const SizedBox(
                     height: 10,
                   ),
@@ -227,9 +222,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
     );
   }
 
-  Widget _nombreTextField(AsyncSnapshot<FreeLan> snapshot) {
-    /*var aux = snapshot.data!.nombre;
-    nombrectrl.text = aux;*/
+  Widget _nombreTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -264,9 +257,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _apellidosTextField(AsyncSnapshot<FreeLan> snapshot) {
-    var aux = snapshot.data!.apellido;
-    apellidosctrl.text = aux;
+  Widget _apellidosTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -299,9 +290,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _UserTextField(AsyncSnapshot<FreeLan> snapshot) {
-    var aux = snapshot.data!.user;
-    userctrl.text = aux;
+  Widget _UserTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -334,9 +323,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _telefonTextField(AsyncSnapshot<FreeLan> snapshot) {
-    var aux = snapshot.data!.telefono;
-    telefonoctrl.text = aux;
+  Widget _telefonTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -369,9 +356,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
-  Widget _emailTextField(AsyncSnapshot<FreeLan> snapshot) {
-    var aux = snapshot.data!.correo;
-    emailctrl.text = aux;
+  Widget _emailTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -408,8 +393,6 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _passwordTextField() {
-    var aux = "Krzy";
-    passctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -447,8 +430,6 @@ class _EditarPerfilState extends State<EditarPerfil> {
   }
 
   Widget _repeatpasswordTextField() {
-    var aux = "Krzy";
-    repeatpassctrl.text = aux;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
@@ -521,26 +502,40 @@ class _EditarPerfilState extends State<EditarPerfil> {
       ),
       margin: const EdgeInsets.all(10),
       child: Padding(
-        padding: const EdgeInsets.all(35),
-        child: Row(children: [
-          Container(
-            alignment: Alignment.center,
-            width: 150,
-            height: 150,
-            color: Colors.grey[300],
-            child: _image != null
-                ? Image.file(_image!, fit: BoxFit.cover)
-                : const Text('Please select an image'),
-          ),
-          const SizedBox(width: 10),
-          Center(
-            child: ElevatedButton(
-              child: const Text('Select An Image'),
-              onPressed: _openImagePicker,
-            ),
-          ),
-        ]),
-      ),
+          padding:
+              const EdgeInsets.only(bottom: 35, left: 35, right: 35, top: 20),
+          child: Column(
+            children: [
+              const Text(
+                "FOTO PEFIL",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Row(children: [
+                CircleAvatar(
+                  radius: 60.0,
+                  child: ClipOval(
+                    child: _image != null
+                        ? Image.file(_image!, fit: BoxFit.cover)
+                        : Image.network(
+                            foto,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Center(
+                  child: ElevatedButton(
+                    child: const Text('Select An Image'),
+                    onPressed: _openImagePicker,
+                  ),
+                ),
+              ]),
+            ],
+          )),
     );
   }
 
