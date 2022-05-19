@@ -21,7 +21,6 @@ class PaginaRegistro extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<PaginaRegistro> {
-
   late TextEditingController nombrectrl = TextEditingController();
   late TextEditingController apellidosctrl = TextEditingController();
   late TextEditingController userctrl = TextEditingController();
@@ -50,11 +49,10 @@ class _RegisterPageState extends State<PaginaRegistro> {
       });
     }
   }
-  
+
   Dio dio = new Dio();
 
   Future<void> _Subir() async {
-
     String filename = _image!.path.split('/').last;
 
     FormData formData = FormData.fromMap({
@@ -65,13 +63,16 @@ class _RegisterPageState extends State<PaginaRegistro> {
       "tel": telefonoctrl.text,
       "pass": passctrl.text,
       "pass_valid": repeatpassctrl.text,
-      'file' : await MultipartFile.fromFile(_image!.path,filename: filename)
-    }
-    );
+      "pregunta": vactu,
+      "respuesta": respuestactrl.text,
+      'file': await MultipartFile.fromFile(_image!.path, filename: filename)
+    });
 
-    await dio.post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
-    data: formData).then((value){
-      if(value.toString()=='si'){
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'si') {
         login = emailctrl.text;
         Fluttertoast.showToast(
             msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
@@ -80,17 +81,21 @@ class _RegisterPageState extends State<PaginaRegistro> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Menu()));
         }
-      }else if(value.toString()=='Usuario Registrado'){
+      } else if (value.toString() == 'Usuario Registrado') {
         Fluttertoast.showToast(
-          msg: "El Usuario ya esta Registrado",
-          toastLength: Toast.LENGTH_SHORT);
-      }else if(value.toString()=='Contra no coincide'){
+            msg: "El Usuario ya esta Registrado",
+            toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'Contra no coincide') {
         Fluttertoast.showToast(
-          msg: "la contraseña no coinciden.", toastLength: Toast.LENGTH_SHORT);
-      }else if(value.toString()=='no'){
+            msg: "la contraseña no coinciden.",
+            toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'no') {
         Fluttertoast.showToast(
-          msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
-      }else{
+            msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'SELECIONA PREGUNTA') {
+        Fluttertoast.showToast(
+            msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
+      } else {
         print(value.toString());
       }
     });
@@ -378,7 +383,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       alignment: Alignment.center,
       child: DropdownButtonFormField<String>(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
             ),
@@ -389,11 +394,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
               borderSide: BorderSide(color: Colors.white),
             ),
             icon: Icon(
-                Icons.question_mark,
-                color: Colors.white,
-              ),
+              Icons.question_mark,
+              color: Colors.white,
+            ),
           ),
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_drop_down,
             color: Colors.white,
           ),
@@ -556,36 +561,35 @@ class _RegisterPageState extends State<PaginaRegistro> {
       );
     });
   }
-   Widget _SubirImagen() {
+
+  Widget _SubirImagen() {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.black45,
       ),
       margin: const EdgeInsets.all(10),
-          child: Padding(
-            padding: const EdgeInsets.all(35),
-            child: Row(children: [
-              Container(
-                alignment: Alignment.center,
-                width: 150,
-                height: 150,
-                color: Colors.grey[300],
-                child: _image != null
-                    ? Image.file(_image!, fit: BoxFit.cover)
-                    : const Text('Please select an image'),
-              ),
-              const SizedBox(width: 10),
-              Center(
-                child: ElevatedButton(
-                  child: const Text('Select An Image'),
-                  onPressed: _openImagePicker,
-                ),
-              ),
-              
-              
-            ]),
+      child: Padding(
+        padding: const EdgeInsets.all(35),
+        child: Row(children: [
+          Container(
+            alignment: Alignment.center,
+            width: 150,
+            height: 150,
+            color: Colors.grey[300],
+            child: _image != null
+                ? Image.file(_image!, fit: BoxFit.cover)
+                : const Text('Please select an image'),
           ),
-        );
+          const SizedBox(width: 10),
+          Center(
+            child: ElevatedButton(
+              child: const Text('Select An Image'),
+              onPressed: _openImagePicker,
+            ),
+          ),
+        ]),
+      ),
+    );
   }
 }
