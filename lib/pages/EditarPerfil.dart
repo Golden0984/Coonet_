@@ -515,18 +515,24 @@ class _EditarPerfilState extends State<EditarPerfil> {
                 ),
               ),
               Row(children: [
-                CircleAvatar(
-                  radius: 60.0,
-                  child: ClipOval(
-                    child: _image != null
-                        ? Image.file(_image!, fit: BoxFit.cover)
-                        : Image.network(
-                            foto,
-                            fit: BoxFit.cover,
-                          ),
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: CircleAvatar(
+                    radius: 100.0,
+                    child: ClipOval(
+                      child: _image != null
+                          ? Image.file(_image!, fit: BoxFit.cover)
+                          : Image.network(
+                              foto,
+                              fit: BoxFit.cover,
+                              width: 100.0,
+                              height: 100.0,
+                            ),
+                    ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 30),
                 Center(
                   child: ElevatedButton(
                     child: const Text('Select An Image'),

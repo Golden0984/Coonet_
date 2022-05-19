@@ -33,28 +33,30 @@ class _PagoWidgetState extends State<ValoWidget> {
     ValoWidget(),
     ValoWidget(),
   ];
-  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        tabBarTheme: TabBarTheme(
-          indicator: UnderlineTabIndicator(
-            borderSide: BorderSide(
-              color: Color.fromARGB(255, 255, 255, 255),
-            )
-          )
-        )
-      ),
+          tabBarTheme: TabBarTheme(
+              indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(
+        color: Color.fromARGB(255, 255, 255, 255),
+      )))),
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 138, 3, 228),
             elevation: 0,
-            bottom: const TabBar(
-              
+            bottom: TabBar(
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10.0),
+                  topLeft: Radius.circular(10.0),
+                ),
+                color: Color.fromARGB(255, 106, 13, 168),
+              ),
               tabs: [
                 Tab(icon: Text("Pendientes de Valorar")),
                 Tab(icon: Text("Valorados")),
@@ -88,6 +90,4 @@ class _PagoWidgetState extends State<ValoWidget> {
       ),
     );
   }
-
-  
 }
