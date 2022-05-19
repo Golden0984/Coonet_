@@ -233,15 +233,20 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
   }
 
   Widget _DesTextField() {
+    final maxLines = 5;
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
+        margin: EdgeInsets.all(0),
+        height: maxLines * 24.0,
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
+          maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
           controller: descripcionctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
+              filled: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
