@@ -244,22 +244,27 @@ class Servicios extends State<ComentarioValo> {
                                 padding: const EdgeInsets.only(
                                     left: 65.0, bottom: 20.0),
                                 child: Flexible(
-                                  child: RatingBarIndicator(
-                                    rating: 3,
-                                    itemBuilder: (context, index) => const Icon(
+                                  child: RatingBar.builder(
+                                    initialRating: 5,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemSize: 25,
+                                    itemBuilder: (context, _) => const Icon(
                                       Icons.star,
                                       color: Colors.amber,
                                     ),
-                                    itemCount: 5,
-                                    itemSize: 25.0,
-                                    direction: Axis.horizontal,
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
                                   ),
                                 ),
                               ),
                             ],
                           ),
                           textheg(),
-                          Divider(
+                          const Divider(
                             height: 24,
                             thickness: 2,
                             color: Color(0xFFF1F4F8),
