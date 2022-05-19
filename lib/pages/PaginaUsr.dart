@@ -32,10 +32,9 @@ class PaginaUsr extends StatelessWidget {
                   child: const Text('PERFIL',
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                    )
-                  ),
+                        fontSize: 30,
+                        color: Colors.white,
+                      )),
                 ),
                 _Perfil(snapshot),
                 Align(
@@ -72,6 +71,12 @@ class PaginaUsr extends StatelessWidget {
   }
 
   Widget _Perfil(AsyncSnapshot<FreeLan> snapshot) {
+    nombre = snapshot.data!.nombre;
+    apellido = snapshot.data!.apellido;
+    user = snapshot.data!.user;
+    telefono = snapshot.data!.telefono;
+    correo = snapshot.data!.correo;
+    foto = snapshot.data!.foto;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
@@ -102,7 +107,7 @@ class PaginaUsr extends StatelessWidget {
                   ),
                 ),
               ),
-                  _editar()
+              _editar()
             ],
           ),
           const SizedBox(
@@ -241,8 +246,10 @@ class PaginaUsr extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => EditarPerfil(free: fetchPost())));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditarPerfil(free: fetchPost())));
           });
     });
   }
@@ -272,8 +279,8 @@ class PaginaUsr extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ValoWidget()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => ValoWidget()));
           });
     });
   }
@@ -334,7 +341,8 @@ class PaginaUsr extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
           });
     });
   }
