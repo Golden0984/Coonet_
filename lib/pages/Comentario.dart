@@ -282,12 +282,6 @@ class Servicios extends State<ComentarioValo> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            size: 20,
-                                          ),
                                           SizedBox(
                                             width: 10,
                                           ),
