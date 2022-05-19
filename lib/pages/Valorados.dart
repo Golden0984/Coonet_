@@ -63,19 +63,16 @@ class _PaginaHomeState extends State<Valorados> {
 
   @override
   Widget build(BuildContext context) {
-    bool _boolea = false;
     return Scaffold(
         backgroundColor: const Color.fromARGB(0, 241, 244, 248),
         body: Container(
-            
             child: Column(
-              children: [
-                
-                Expanded(
-                  child: _Anuncio(),
-                ),
-              ],
-            )));
+          children: [
+            Expanded(
+              child: _Anuncio(),
+            ),
+          ],
+        )));
   }
 
   Widget _Anuncio() {
