@@ -34,6 +34,9 @@ class _RegisterPageState extends State<PaginaRegistro> {
 
   File? _image;
 
+  String texto = "ninguna pregunta selecionado";
+  String vactu = " ";
+
   final _picker = ImagePicker();
   // Implementing the image picker
   Future<void> _openImagePicker() async {
@@ -371,33 +374,105 @@ class _RegisterPageState extends State<PaginaRegistro> {
   }
 
   Widget _preguntaTextField() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: TextField(
-          style: const TextStyle(color: Colors.white),
-          controller: preguntactrl,
-          keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white)),
-              icon: Icon(
-                Icons.question_mark_outlined,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      alignment: Alignment.center,
+      child: DropdownButtonFormField<String>(
+          decoration: InputDecoration(
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            icon: Icon(
+                Icons.question_mark,
                 color: Colors.white,
               ),
-              hintText: '¿Color favorito?',
-              hintStyle: TextStyle(
-                color: Colors.white54,
+          ),
+          icon: Icon(
+            Icons.arrow_drop_down,
+            color: Colors.white,
+          ),
+          isExpanded: true,
+          hint: Text(texto),
+          dropdownColor: Color.fromARGB(255, 44, 44, 44),
+          value: vactu,
+          items: const [
+            DropdownMenuItem(
+              child: Text(
+                'Seleccionar Pregunta',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-              labelText: 'Pregunta de Seguridad',
-              labelStyle: TextStyle(
-                color: Colors.white,
-              )),
-          onChanged: (value) {},
-        ),
-      );
-    });
+              value: " ",
+            ),
+            DropdownMenuItem(
+              child: Text(
+                '¿Color favorito?',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              value: "color",
+            ),
+            DropdownMenuItem(
+              child: Text(
+                '¿El nombre de tu mascota?',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              value: "mascota",
+            ),
+            DropdownMenuItem(
+              child: Text(
+                '¿Donde nacieron tus padres?',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              value: "padres",
+            ),
+            DropdownMenuItem(
+              child: Text(
+                '¿Cual es tu mote de pequeño?',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              value: "mote",
+            ),
+            DropdownMenuItem(
+              child: Text(
+                '¿En que ciudad naciste?',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              value: "ciudad",
+            ),
+            DropdownMenuItem(
+              child: Text(
+                '¿Como se llama tu colegio de primaria?',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              value: "cole",
+            ),
+          ],
+          onChanged: (valor) {
+            setState(() {
+              texto = valor!;
+              vactu = valor;
+            });
+          }),
+    );
   }
 
   Widget _respuestaTextField() {
