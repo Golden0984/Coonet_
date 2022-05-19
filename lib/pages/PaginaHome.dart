@@ -94,7 +94,7 @@ class _PaginaHomeState extends State<PaginaHome> {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Row(
+                /*Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
@@ -136,7 +136,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                       ),
                     ),
                   ],
-                ),
+                ),*/
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(20, 12, 20, 0),
                   child: Row(

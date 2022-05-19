@@ -41,11 +41,11 @@ class Servicios extends State<ComentarioValo> {
                           alignment: AlignmentDirectional(0, -1),
                           children: [
                             Container(
-                              height: 320,
+                              height: 540,
                               decoration: BoxDecoration(),
                               child: Container(
                                 width: double.infinity,
-                                height: 320,
+                                height: 530,
                                 child: Stack(
                                   children: [
                                     Padding(
@@ -102,7 +102,7 @@ class Servicios extends State<ComentarioValo> {
                               alignment: AlignmentDirectional(0, 0.85),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 250, 0, 0),
+                                    0, 470, 0, 0),
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,
@@ -282,12 +282,6 @@ class Servicios extends State<ComentarioValo> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            size: 20,
-                                          ),
                                           SizedBox(
                                             width: 10,
                                           ),
