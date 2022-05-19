@@ -33,6 +33,13 @@ class FreeLan {
   }
 }
 
+String id = "";
+String nombre = "";
+String apellido = "";
+String user = "";
+String correo = "";
+String telefono = "";
+String foto = "";
 String login = "";
 Future<FreeLan> fetchPost() async {
   var data = {"email": login};
