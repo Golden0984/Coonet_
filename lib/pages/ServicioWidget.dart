@@ -152,12 +152,15 @@ class Servicios extends State<ServicioWidget> {
                                                           ),
                                                         ),
                                                       ),
-                                                      const SizedBox(width: 10,),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
                                                       Text(
                                                         snapshot.data!.nombre
                                                             .toString(),
                                                         style: const TextStyle(
-                                                          overflow: TextOverflow.ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           fontSize: 25.0,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -168,11 +171,14 @@ class Servicios extends State<ServicioWidget> {
                                                 ],
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 170.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 170.0),
                                                 child: Flexible(
                                                   child: RatingBarIndicator(
                                                     rating: 3,
-                                                    itemBuilder: (context, index) => const Icon(
+                                                    itemBuilder:
+                                                        (context, index) =>
+                                                            const Icon(
                                                       Icons.star,
                                                       color: Colors.amber,
                                                     ),
@@ -202,14 +208,14 @@ class Servicios extends State<ServicioWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                          Expanded(
-                            child: Text(
-                              snapshot.data!.titulo.toString(),
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                              ),
+                        Expanded(
+                          child: Text(
+                            snapshot.data!.titulo.toString(),
+                            style: const TextStyle(
+                              fontSize: 15.0,
                             ),
                           ),
+                        ),
                       ],
                     ),
                   ),
@@ -262,7 +268,8 @@ class Servicios extends State<ServicioWidget> {
                   Container(
                     width: 360,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 104, 61, 134)),
                       color: Color.fromARGB(255, 255, 255, 255),
                       boxShadow: [
                         BoxShadow(
@@ -276,14 +283,14 @@ class Servicios extends State<ServicioWidget> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
                       child: Column(
-
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
                             style: TextStyle(
-                                fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
@@ -306,7 +313,8 @@ class Servicios extends State<ServicioWidget> {
                                     Text(
                                       '9,99€',
                                       style: TextStyle(
-                                          fontSize: 25, fontWeight: FontWeight.bold),
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -318,14 +326,17 @@ class Servicios extends State<ServicioWidget> {
                                   ElevatedButton(
                                       onPressed: () {},
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Color.fromARGB(255, 147, 34, 200)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color.fromARGB(
+                                                    255, 147, 34, 200)),
                                       ),
                                       child: Row(
                                         children: [
                                           Icon(
                                             Icons.add_shopping_cart,
-                                            color: Color.fromARGB(255, 255, 255, 255),
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255),
                                             size: 20,
                                           ),
                                           SizedBox(
@@ -333,8 +344,7 @@ class Servicios extends State<ServicioWidget> {
                                           ),
                                           Text('COMPRAR'),
                                         ],
-                                      )
-                                    ),
+                                      )),
                                 ],
                               ),
                             ],
@@ -343,11 +353,14 @@ class Servicios extends State<ServicioWidget> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     width: 360,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 104, 61, 134)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -361,14 +374,14 @@ class Servicios extends State<ServicioWidget> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
                       child: Column(
-
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
                             style: TextStyle(
-                                fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
@@ -391,7 +404,8 @@ class Servicios extends State<ServicioWidget> {
                                     Text(
                                       '9,99€',
                                       style: TextStyle(
-                                          fontSize: 25, fontWeight: FontWeight.bold),
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -403,14 +417,17 @@ class Servicios extends State<ServicioWidget> {
                                   ElevatedButton(
                                       onPressed: () {},
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Color.fromARGB(255, 147, 34, 200)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color.fromARGB(
+                                                    255, 147, 34, 200)),
                                       ),
                                       child: Row(
                                         children: [
                                           Icon(
                                             Icons.add_shopping_cart,
-                                            color: Color.fromARGB(255, 255, 255, 255),
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255),
                                             size: 20,
                                           ),
                                           SizedBox(
@@ -418,8 +435,7 @@ class Servicios extends State<ServicioWidget> {
                                           ),
                                           Text('COMPRAR'),
                                         ],
-                                      )
-                                    ),
+                                      )),
                                 ],
                               ),
                             ],
@@ -428,11 +444,14 @@ class Servicios extends State<ServicioWidget> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     width: 360,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 104, 61, 134)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -446,14 +465,14 @@ class Servicios extends State<ServicioWidget> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
                       child: Column(
-
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
                             style: TextStyle(
-                                fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
@@ -476,7 +495,8 @@ class Servicios extends State<ServicioWidget> {
                                     Text(
                                       '9,99€',
                                       style: TextStyle(
-                                          fontSize: 25, fontWeight: FontWeight.bold),
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -488,14 +508,17 @@ class Servicios extends State<ServicioWidget> {
                                   ElevatedButton(
                                       onPressed: () {},
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Color.fromARGB(255, 147, 34, 200)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color.fromARGB(
+                                                    255, 147, 34, 200)),
                                       ),
                                       child: Row(
                                         children: [
                                           Icon(
                                             Icons.add_shopping_cart,
-                                            color: Color.fromARGB(255, 255, 255, 255),
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255),
                                             size: 20,
                                           ),
                                           SizedBox(
@@ -503,8 +526,7 @@ class Servicios extends State<ServicioWidget> {
                                           ),
                                           Text('COMPRAR'),
                                         ],
-                                      )
-                                    ),
+                                      )),
                                 ],
                               ),
                             ],
@@ -513,7 +535,9 @@ class Servicios extends State<ServicioWidget> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 30),
                     child: Row(
@@ -523,15 +547,14 @@ class Servicios extends State<ServicioWidget> {
                           child: Text(
                             "VALORACIÓN GENERAL",
                             style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  
                 ],
               );
             } else if (snapshot.hasError) {
@@ -541,7 +564,7 @@ class Servicios extends State<ServicioWidget> {
           },
         ),
       ),
-    ); 
+    );
   }
 
   Widget appbartt(String string) {
