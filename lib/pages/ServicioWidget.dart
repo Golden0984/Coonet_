@@ -155,16 +155,19 @@ class Servicios extends State<ServicioWidget> {
                                                       const SizedBox(
                                                         width: 10,
                                                       ),
-                                                      Text(
-                                                        snapshot.data!.nombre
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          fontSize: 25.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                      SizedBox(
+                                                        child: Text(
+                                                          snapshot.data!.nombre
+                                                              .toString(),
+                                                          style: const TextStyle(
+                                                            overflow: TextOverflow
+                                                                .ellipsis,
+                                                            fontSize: 25.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
                                                         ),
+                                                        width: 180,
                                                       ),
                                                     ],
                                                   ),
@@ -172,7 +175,7 @@ class Servicios extends State<ServicioWidget> {
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 170.0),
+                                                    left: 0.0),
                                                 child: Flexible(
                                                   child: RatingBarIndicator(
                                                     rating: 3,
