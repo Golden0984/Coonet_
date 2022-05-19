@@ -2,6 +2,7 @@ import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
 import '../Pagos.dart';
+import 'Menu.dart';
 import 'MisProyectos.dart';
 import 'Users/FreeLancer.dart';
 import 'Valorar.dart';
@@ -341,8 +342,9 @@ class PaginaUsr extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
+            paginaActual = 2;
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Menu()));
           });
     });
   }
