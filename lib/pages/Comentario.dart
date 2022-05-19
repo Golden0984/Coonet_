@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'Users/InfoAnuncio.dart';
 
-
 //https://programmerclick.com/article/30011048702/
-
 
 class ComentarioValo extends StatefulWidget {
   final Future<InfoAnuncio> free;
@@ -26,7 +24,6 @@ class Servicios extends State<ComentarioValo> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: FutureBuilder<InfoAnuncio>(
           future: free,
@@ -156,12 +153,15 @@ class Servicios extends State<ComentarioValo> {
                                                           ),
                                                         ),
                                                       ),
-                                                      const SizedBox(width: 10,),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
                                                       Text(
                                                         snapshot.data!.nombre
                                                             .toString(),
                                                         style: const TextStyle(
-                                                          overflow: TextOverflow.ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           fontSize: 25.0,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -170,21 +170,6 @@ class Servicios extends State<ComentarioValo> {
                                                     ],
                                                   ),
                                                 ],
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 170.0),
-                                                child: Flexible(
-                                                  child: RatingBarIndicator(
-                                                    rating: 3,
-                                                    itemBuilder: (context, index) => const Icon(
-                                                      Icons.star,
-                                                      color: Colors.amber,
-                                                    ),
-                                                    itemCount: 5,
-                                                    itemSize: 25.0,
-                                                    direction: Axis.horizontal,
-                                                  ),
-                                                ),
                                               ),
                                             ],
                                           ),
@@ -206,14 +191,14 @@ class Servicios extends State<ComentarioValo> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                          Expanded(
-                            child: Text(
-                              snapshot.data!.titulo.toString(),
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                              ),
+                        Expanded(
+                          child: Text(
+                            snapshot.data!.titulo.toString(),
+                            style: const TextStyle(
+                              fontSize: 15.0,
                             ),
                           ),
+                        ),
                       ],
                     ),
                   ),
@@ -231,7 +216,7 @@ class Servicios extends State<ComentarioValo> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -241,34 +226,39 @@ class Servicios extends State<ComentarioValo> {
                   ),
                   Container(
                     width: 360,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 104, 61, 134)),
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x25090F13),
-                          offset: Offset(10, 10),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 6, 12, 16),
                       child: Column(
-
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                'DEJA TU COMENTARIO\n',
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 65.0, bottom: 20.0),
+                                child: Flexible(
+                                  child: RatingBarIndicator(
+                                    rating: 3,
+                                    itemBuilder: (context, index) => const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 25.0,
+                                    direction: Axis.horizontal,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
-                            style: TextStyle(fontSize: 13),
-                          ),
+                          textheg(),
                           Divider(
                             height: 24,
                             thickness: 2,
@@ -276,21 +266,8 @@ class Servicios extends State<ComentarioValo> {
                           ),
                           Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '9,99€',
-                                      style: TextStyle(
-                                          fontSize: 25, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,23 +275,25 @@ class Servicios extends State<ComentarioValo> {
                                   ElevatedButton(
                                       onPressed: () {},
                                       style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(
-                                            Color.fromARGB(255, 147, 34, 200)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color.fromARGB(
+                                                    255, 147, 34, 200)),
                                       ),
                                       child: Row(
                                         children: [
                                           Icon(
                                             Icons.add_shopping_cart,
-                                            color: Color.fromARGB(255, 255, 255, 255),
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255),
                                             size: 20,
                                           ),
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          Text('COMPRAR'),
+                                          Text('VALORAR'),
                                         ],
-                                      )
-                                    ),
+                                      )),
                                 ],
                               ),
                             ],
@@ -323,7 +302,9 @@ class Servicios extends State<ComentarioValo> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     width: 360,
                     decoration: BoxDecoration(
@@ -338,9 +319,9 @@ class Servicios extends State<ComentarioValo> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  
-                  
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               );
             } else if (snapshot.hasError) {
@@ -355,12 +336,30 @@ class Servicios extends State<ComentarioValo> {
 
   Widget appbartt(String string) {
     return AppBar(
+      backgroundColor: Color.fromARGB(255, 138, 3, 228),
       title: Text(string),
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
         icon: Icon(Icons.arrow_back),
+      ),
+    );
+  }
+
+  Widget textheg() {
+    final maxLines = 5;
+
+    return Container(
+      margin: EdgeInsets.all(0),
+      height: maxLines * 24.0,
+      child: TextField(
+        maxLines: maxLines,
+        decoration: InputDecoration(
+          hintText: "Enter a message",
+          fillColor: Colors.grey[300],
+          filled: true,
+        ),
       ),
     );
   }
