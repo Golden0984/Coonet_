@@ -2,8 +2,8 @@ import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
 import '../Pagos.dart';
-import 'Menu.dart';
 import 'MisProyectos.dart';
+import 'PaginaLogin.dart';
 import 'Users/FreeLancer.dart';
 import 'Valorar.dart';
 
@@ -56,7 +56,11 @@ class PaginaUsr extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      _buttonNuevaOferta()
+                      _buttonNuevaOferta(),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      _botonOut()
                     ],
                   ),
                 ),
@@ -321,31 +325,54 @@ class PaginaUsr extends StatelessWidget {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return ElevatedButton(
-          child: Container(
-              width: 300,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 15.0),
-              alignment: Alignment.center,
-              child: const Text(
-                'CREAR OFERTA',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
-          style: ElevatedButton.styleFrom(
-            primary: const Color.fromARGB(255, 200, 255, 0),
-            elevation: 10.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+        child: Container(
+            width: 300,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15.0),
+            alignment: Alignment.center,
+            child: const Text(
+              'CREAR OFERTA',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            )),
+        style: ElevatedButton.styleFrom(
+          primary: const Color.fromARGB(255, 200, 255, 0),
+          elevation: 10.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-          onPressed: () {
-            paginaActual = 2;
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Menu()));
-          });
+        ),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
+        },
+      );
+    });
+  }
+
+  Widget _botonOut() {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return ElevatedButton(
+        child: Icon(
+          Icons.logout,
+          size: 30.0,
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: Color.fromARGB(255, 255, 0, 0),
+          elevation: 10.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PaginaLogin()));
+        },
+      );
     });
   }
 }
