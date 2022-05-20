@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 
 import 'Users/FreeLancer.dart';
 
-
 //https://www.youtube.com/watch?v=nGvPNG-f1-o
 
 final ThemeData iOSTheme = new ThemeData(
@@ -30,15 +29,12 @@ class testChatInt extends StatelessWidget {
   Widget build(BuildContext ctx) {
     return new MaterialApp(
       title: "Chat Application",
-      theme: defaultTargetPlatform == TargetPlatform.iOS
-        ? iOSTheme
-        : androidTheme,
+      theme:
+          defaultTargetPlatform == TargetPlatform.iOS ? iOSTheme : androidTheme,
       home: new Chat(),
     );
   }
 }
-
-
 
 class Chat extends StatefulWidget {
   @override
@@ -52,13 +48,12 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext ctx) {
-    return  Scaffold(
-      body: new Column(
-        children: <Widget>[
-           const SizedBox(height: 62.0 ),
-           Container(
-             color: Color.fromARGB(255, 120, 190, 255),
-             child: Row(
+    return Scaffold(
+      body: new Column(children: <Widget>[
+        const SizedBox(height: 62.0),
+        Container(
+          color: Color.fromARGB(255, 138, 3, 228),
+          child: Row(
             children: [
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
@@ -68,33 +63,30 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
                     color: Colors.white,
                     size: 35,
                   ),
-                              
-                    onPressed: (){
-                      paginaActual = 1;
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()));
-                    },
+                  onPressed: () {
+                    paginaActual = 1;
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Menu()));
+                  },
                 ),
               ),
               const Padding(
-                    padding: EdgeInsets.only(left: 30),
-                    child: Text(
-                      "MIS PROYECTOS",
-                      style: TextStyle(
-                        fontSize: 30, 
-                        color: Colors.white
-                    ),
-                    ),
-                  ),
+                padding: EdgeInsets.only(left: 30),
+                child: Text(
+                  "MIS PROYECTOS",
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                ),
+              ),
             ],
           ),
         ),
         new Flexible(
             child: new ListView.builder(
-              itemBuilder: (_, int index) => _messages[index],
-              itemCount: _messages.length,
-              reverse: true,
-              padding: new EdgeInsets.all(6.0),
-            )),
+          itemBuilder: (_, int index) => _messages[index],
+          itemCount: _messages.length,
+          reverse: true,
+          padding: new EdgeInsets.all(6.0),
+        )),
         new Divider(height: 1.0),
         new Container(
           child: _buildComposer(),
@@ -104,57 +96,46 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     );
   }
 
-
   Widget _buildComposer() {
     return new IconTheme(
-        data: new IconThemeData(color: Theme.of(context).accentColor),
-        child: new Container(
+      data: new IconThemeData(color: Theme.of(context).accentColor),
+      child: new Container(
           margin: const EdgeInsets.symmetric(horizontal: 9.0),
           child: new Row(
             children: <Widget>[
               new Flexible(
-                  child: new TextField(
-                    controller: _textController,
-                    onChanged: (String txt) {
-                      setState(() {
-                        _isWriting = txt.length > 0;
-                      });
-                    },
-                    onSubmitted: _submitMsg,
-                    decoration:
-                      new InputDecoration.collapsed(hintText: "Escribe tu mensaje "),
-                  ),
+                child: new TextField(
+                  controller: _textController,
+                  onChanged: (String txt) {
+                    setState(() {
+                      _isWriting = txt.length > 0;
+                    });
+                  },
+                  onSubmitted: _submitMsg,
+                  decoration: new InputDecoration.collapsed(
+                      hintText: "Escribe tu mensaje "),
+                ),
               ),
               new Container(
-                margin: new EdgeInsets.symmetric(horizontal: 3.0),
-                child: Theme.of(context).platform == TargetPlatform.iOS
-                  ? new CupertinoButton(
-                    child: new Text("Submit"),
-                    onPressed: _isWriting ? () => _submitMsg(_textController.text)
-                        : null
-                )
-                    : new IconButton(
-                    icon: new Icon(Icons.send),
-                    onPressed: 
-                    
-                        _isWriting
-                      ? () => _submitMsg(_textController.text)
-                        : null)
-              
-  
-                    
-                    
-                    
-                )
-              
+                  margin: new EdgeInsets.symmetric(horizontal: 3.0),
+                  child: Theme.of(context).platform == TargetPlatform.iOS
+                      ? new CupertinoButton(
+                          child: new Text("Submit"),
+                          onPressed: _isWriting
+                              ? () => _submitMsg(_textController.text)
+                              : null)
+                      : new IconButton(
+                          icon: new Icon(Icons.send),
+                          onPressed: _isWriting
+                              ? () => _submitMsg(_textController.text)
+                              : null))
             ],
           ),
           decoration: Theme.of(context).platform == TargetPlatform.iOS
-          ? new BoxDecoration(
-            border:
-              new Border(top: new BorderSide(color: Color.fromARGB(255, 0, 0, 0)))) :
-              null
-        ),
+              ? new BoxDecoration(
+                  border: new Border(
+                      top: new BorderSide(color: Color.fromARGB(255, 0, 0, 0))))
+              : null),
     );
   }
 
@@ -166,9 +147,7 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     Msg msg = new Msg(
       txt: txt,
       animationController: new AnimationController(
-          vsync: this,
-        duration: new Duration(milliseconds: 800)
-      ),
+          vsync: this, duration: new Duration(milliseconds: 800)),
     );
     setState(() {
       _messages.insert(0, msg);
@@ -183,7 +162,6 @@ class ChatWindow extends State<Chat> with TickerProviderStateMixin {
     }
     super.dispose();
   }
-
 }
 
 class Msg extends StatelessWidget {
@@ -214,7 +192,8 @@ class Msg extends StatelessWidget {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  new Text(defaultUserName, style: Theme.of(ctx).textTheme.subtitle1),
+                  new Text(defaultUserName,
+                      style: Theme.of(ctx).textTheme.subtitle1),
                   new Container(
                     margin: const EdgeInsets.only(top: 6.0),
                     child: new Text(txt),
