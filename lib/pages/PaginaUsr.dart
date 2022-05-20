@@ -2,6 +2,7 @@ import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
 import '../Pagos.dart';
+import 'Menu.dart';
 import 'MisProyectos.dart';
 import 'PaginaLogin.dart';
 import 'Users/FreeLancer.dart';
@@ -345,8 +346,9 @@ class PaginaUsr extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
+          paginaActual = 2;
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Menu()));
         },
       );
     });
@@ -354,25 +356,26 @@ class PaginaUsr extends StatelessWidget {
 
   Widget _botonOut() {
     return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return ElevatedButton(
-        child: Icon(
-          Icons.logout,
-          size: 30.0,
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-        style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 255, 0, 0),
-          elevation: 10.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return ElevatedButton(
+          child: Icon(
+            Icons.logout,
+            size: 30.0,
+            color: Color.fromARGB(255, 255, 255, 255),
           ),
-        ),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PaginaLogin()));
-        },
-      );
-    });
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 255, 0, 0),
+            elevation: 10.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaginaLogin()));
+          },
+        );
+      },
+    );
   }
 }
