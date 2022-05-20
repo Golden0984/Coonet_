@@ -56,45 +56,108 @@ class _EditarPerfilState extends State<EditarPerfil> {
   Dio dio = new Dio();
 
   Future<void> _Subir() async {
-    String filename = _image!.path.split('/').last;
+    if (passctrl.text.isEmpty || repeatpassctrl.text.isEmpty) {
+      if (passctrl.text == repeatpassctrl.text) {
+        if (_image != null) {
+          String filename = _image!.path.split('/').last;
 
-    FormData formData = FormData.fromMap({
-      "nombre": nombrectrl.text,
-      "apellidos": apellidosctrl.text,
-      "usuario": userctrl.text,
-      "email": emailctrl.text,
-      "tel": telefonoctrl.text,
-      "pass": passctrl.text,
-      "pass_valid": repeatpassctrl.text,
-      'file': await MultipartFile.fromFile(_image!.path, filename: filename)
-    });
+          FormData formData = FormData.fromMap({
+            "correo_actual": login,
+            "nombre": nombrectrl.text,
+            "apellidos": apellidosctrl.text,
+            "usuario": userctrl.text,
+            "tel": telefonoctrl.text,
+            "email": emailctrl.text,
+            "pass": "no",
+            "pass_valid": "no",
+            'file':
+                await MultipartFile.fromFile(_image!.path, filename: filename)
+          });
 
+          Update(formData);
+        } else {
+          FormData formData = FormData.fromMap({
+            "correo_actual": login,
+            "nombre": nombrectrl.text,
+            "apellidos": apellidosctrl.text,
+            "usuario": userctrl.text,
+            "tel": telefonoctrl.text,
+            "email": emailctrl.text,
+            "pass": "no",
+            "pass_valid": "no",
+            'file': "no"
+          });
+
+          Update(formData);
+        }
+      }
+    } else {
+      if (passctrl.text == repeatpassctrl.text) {
+        if (_image != null) {
+          String filename = _image!.path.split('/').last;
+
+          FormData formData = FormData.fromMap({
+            "correo_actual": login,
+            "nombre": nombrectrl.text,
+            "apellidos": apellidosctrl.text,
+            "usuario": userctrl.text,
+            "tel": telefonoctrl.text,
+            "email": emailctrl.text,
+            "pass": passctrl.text,
+            "pass_valid": repeatpassctrl.text,
+            'file':
+                await MultipartFile.fromFile(_image!.path, filename: filename)
+          });
+
+          Update(formData);
+        } else {
+          FormData formData = FormData.fromMap({
+            "correo_actual": login,
+            "nombre": nombrectrl.text,
+            "apellidos": apellidosctrl.text,
+            "usuario": userctrl.text,
+            "tel": telefonoctrl.text,
+            "email": emailctrl.text,
+            "pass": passctrl.text,
+            "pass_valid": repeatpassctrl.text,
+            'file': "no"
+          });
+
+          Update(formData);
+        }
+      } else {
+        Fluttertoast.showToast(
+            msg: "La contraseña no coincide", toastLength: Toast.LENGTH_SHORT);
+      }
+    }
+  }
+
+  Update(FormData formData) async {
     await dio
-        .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+        .post(
+            'https://phpninjahosting.com/manish/Coonet/Php/UpdateUserInfo.php',
             data: formData)
         .then((value) {
-      if (value.toString() == 'si') {
+      if (value.toString() == "hecho") {
         login = emailctrl.text;
         Fluttertoast.showToast(
-            msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
+            msg: "Se ha guardado correctamnete",
+            toastLength: Toast.LENGTH_SHORT);
         //Ir a otra pagina
         {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Menu()));
         }
-      } else if (value.toString() == 'Usuario Registrado') {
+      } else if (value.toString() == "Error") {
         Fluttertoast.showToast(
-            msg: "El Usuario ya esta Registrado",
+            msg: "ha sucedido un error al actualizar los datos",
             toastLength: Toast.LENGTH_SHORT);
-      } else if (value.toString() == 'Contra no coincide') {
+      } else if (value.toString() == "Error Contra") {
         Fluttertoast.showToast(
-            msg: "la contraseña no coinciden.",
+            msg: "La contraseña no son iguales",
             toastLength: Toast.LENGTH_SHORT);
-      } else if (value.toString() == 'no') {
-        Fluttertoast.showToast(
-            msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
       } else {
-        print(value.toString());
+        print(value.toString() + "safdas");
       }
     });
   }

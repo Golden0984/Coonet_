@@ -2,6 +2,7 @@ import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
 import '../Pagos.dart';
+import 'Menu.dart';
 import 'MisProyectos.dart';
 import 'PaginaLogin.dart';
 import 'Users/FreeLancer.dart';
@@ -16,58 +17,63 @@ class PaginaUsr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/fondo.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: Center(
         child: FutureBuilder<FreeLan>(
           future: free,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView(children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: const Text('PERFIL',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                      )),
-                ),
-                _Perfil(snapshot),
-                Align(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      _buttonMisProyectos(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _buttonValorar(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _buttonPagos(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _buttonNuevaOferta(),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      _botonOut()
-                    ],
+              return Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/fondo.png'),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ]);
+                child: ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: const Text('PERFIL',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          )),
+                    ),
+                    _Perfil(snapshot),
+                    Align(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          _buttonMisProyectos(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buttonValorar(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buttonPagos(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buttonNuevaOferta(),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          _botonOut()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
+
             return const CircularProgressIndicator();
           },
         ),
@@ -345,8 +351,9 @@ class PaginaUsr extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PaginaNuevaOferta()));
+          paginaActual = 2;
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Menu()));
         },
       );
     });
@@ -354,25 +361,26 @@ class PaginaUsr extends StatelessWidget {
 
   Widget _botonOut() {
     return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return ElevatedButton(
-        child: Icon(
-          Icons.logout,
-          size: 30.0,
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-        style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 255, 0, 0),
-          elevation: 10.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return ElevatedButton(
+          child: Icon(
+            Icons.logout,
+            size: 30.0,
+            color: Color.fromARGB(255, 255, 255, 255),
           ),
-        ),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PaginaLogin()));
-        },
-      );
-    });
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 255, 0, 0),
+            elevation: 10.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaginaLogin()));
+          },
+        );
+      },
+    );
   }
 }
