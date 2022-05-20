@@ -15,18 +15,16 @@ class PaginaTienda extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-
         child: ListView(children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: 20), 
-          child: Text(
-            "TIENDA",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                fontFamily: 'Arial', fontSize: 30, color: Colors.white),
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              "TIENDA",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontFamily: 'Arial', fontSize: 30, color: Colors.white),
+            ),
           ),
-          ),
-          
           Column(
             children: [
               menusalPack(),
@@ -58,7 +56,6 @@ class PaginaTienda extends StatelessWidget {
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
           child: Column(
-
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -206,7 +203,6 @@ class PaginaTienda extends StatelessWidget {
                     ],
                   ),
                 ],
-
               ),
             ],
           ),
@@ -302,4 +298,3 @@ class PaginaTienda extends StatelessWidget {
     );
   }
 }
-

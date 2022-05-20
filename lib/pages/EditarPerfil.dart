@@ -138,6 +138,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
             'https://phpninjahosting.com/manish/Coonet/Php/UpdateUserInfo.php',
             data: formData)
         .then((value) {
+      print(value.toString());
       if (value.toString() == "hecho") {
         login = emailctrl.text;
         Fluttertoast.showToast(
@@ -145,6 +146,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
             toastLength: Toast.LENGTH_SHORT);
         //Ir a otra pagina
         {
+          paginaActual = 4;
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Menu()));
         }
