@@ -54,7 +54,7 @@ class _MenuBare extends State<Menu> {
                 label: ""),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.ac_unit,
+                  Icons.chat,
                   size: 30,
                 ),
                 label: ""),
