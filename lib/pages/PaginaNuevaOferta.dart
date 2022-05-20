@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:coonet/pages/Menu.dart';
@@ -25,13 +24,12 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
 
   late TextEditingController tituloctrl = TextEditingController();
   late TextEditingController descripcionctrl = TextEditingController();
-  late TextEditingController precioctrl = TextEditingController();
-  late TextEditingController precioctrl2 = TextEditingController();
-  late TextEditingController precioctrl3 = TextEditingController();
-  late TextEditingController categoctrl = TextEditingController();
-  late TextEditingController descripcpl1 = TextEditingController();
-  late TextEditingController descripcpl2 = TextEditingController();
-  late TextEditingController descripcpl3 = TextEditingController();
+  late TextEditingController descripcion_E = TextEditingController();
+  late TextEditingController precio_E = TextEditingController();
+  late TextEditingController descripcion_S = TextEditingController();
+  late TextEditingController precio_S = TextEditingController();
+  late TextEditingController descripcion_P = TextEditingController();
+  late TextEditingController precio_P = TextEditingController();
 
   File? _image, _image2, _image3, _image4;
 
@@ -85,8 +83,6 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
             }
             break;
         }
-
-        // print(_image);
       });
     }
   }
@@ -94,44 +90,79 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
   Dio dio = new Dio();
 
   Future<void> _Subir() async {
-    String filename = _image!.path.split('/').last;
-
-    FormData formData = FormData.fromMap({
-      "email": login,
-      "titulo": tituloctrl.text,
-      "descripcion": descripcionctrl.text,
-      "categoria": vactu,
-      "precio": precioctrl.text,
-      'foto1': await MultipartFile.fromFile(_image!.path, filename: filename),
-      'foto2': await MultipartFile.fromFile(_image2!.path, filename: filename),
-      'foto3': await MultipartFile.fromFile(_image3!.path, filename: filename),
-      'foto4': await MultipartFile.fromFile(_image4!.path, filename: filename)
-    });
-
-    await dio
-        .post('https://phpninjahosting.com/manish/Coonet/Php/CrearOferta.php',
-            data: formData)
-        .then((value) {
-      if (value.toString() == 'si') {
+    if (tituloctrl.text.isEmpty ||
+        descripcionctrl.text.isEmpty ||
+        descripcion_E.text.isEmpty ||
+        precio_E.text.isEmpty ||
+        descripcion_S.text.isEmpty ||
+        precio_S.text.isEmpty ||
+        descripcion_P.text.isEmpty ||
+        precio_P.text.isEmpty) {
+      Fluttertoast.showToast(
+          msg: "Hay campos en vacio", toastLength: Toast.LENGTH_SHORT);
+    } else {
+      if (_image == null ||
+          _image2 == null ||
+          _image3 == null ||
+          _image4 == null) {
         Fluttertoast.showToast(
-            msg: "Oferta Creada Correctamente",
+            msg: "Has de selecionar las 4 imagenes",
             toastLength: Toast.LENGTH_SHORT);
-        //Ir a otra pagina
-        {
-          paginaActual = 0;
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Menu()));
-        }
-      } else if (value.toString() == 'no') {
+      } else if (vactu == " ") {
         Fluttertoast.showToast(
-            msg: "Error Imagen", toastLength: Toast.LENGTH_SHORT);
-      } else if (value.toString() == 'Error User') {
-        Fluttertoast.showToast(
-            msg: "Error User", toastLength: Toast.LENGTH_SHORT);
+            msg: "Debes selecionar una categoria",
+            toastLength: Toast.LENGTH_SHORT);
       } else {
-        print(value.toString());
+        String filename = _image!.path.split('/').last;
+
+        FormData formData = FormData.fromMap({
+          "email": login,
+          "titulo": tituloctrl.text,
+          "descripcion": descripcionctrl.text,
+          "categoria": vactu,
+          "descripcion_E": descripcion_E.text,
+          "precio_E": precio_E.text,
+          "descripcion_S": descripcion_S.text,
+          "precio_S": precio_S.text,
+          "descripcion_P": descripcion_P.text,
+          "precio_P": precio_P.text,
+          'foto1':
+              await MultipartFile.fromFile(_image!.path, filename: filename),
+          'foto2':
+              await MultipartFile.fromFile(_image2!.path, filename: filename),
+          'foto3':
+              await MultipartFile.fromFile(_image3!.path, filename: filename),
+          'foto4':
+              await MultipartFile.fromFile(_image4!.path, filename: filename)
+        });
+
+        await dio
+            .post(
+                'https://phpninjahosting.com/manish/Coonet/Php/CrearOferta.php',
+                data: formData)
+            .then((value) {
+          if (value.toString() == 'si') {
+            Fluttertoast.showToast(
+                msg: "Oferta Creada Correctamente",
+                toastLength: Toast.LENGTH_SHORT);
+            //Ir a otra pagina
+            {
+              paginaActual = 0;
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Menu()));
+            }
+          } else if (value.toString() == 'no') {
+            Fluttertoast.showToast(
+                msg: "Error Imagen", toastLength: Toast.LENGTH_SHORT);
+          } else if (value.toString() == 'Error User') {
+            Fluttertoast.showToast(
+                msg: "Error User", toastLength: Toast.LENGTH_SHORT);
+          } else {
+            print(value.toString());
+          }
+        });
       }
-    });
+    }
   }
 
   @override
@@ -443,7 +474,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precioctrl,
+          controller: precio_E,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -459,7 +490,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                 Icons.euro,
                 color: Colors.white,
               ),
-              labelText: 'Precio 1',
+              labelText: 'Precio',
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
@@ -476,7 +507,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precioctrl2,
+          controller: precio_S,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -492,7 +523,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                 Icons.euro,
                 color: Colors.white,
               ),
-              labelText: 'Precio 2',
+              labelText: 'Precio',
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
@@ -509,7 +540,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precioctrl3,
+          controller: precio_P,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -525,7 +556,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                 Icons.euro,
                 color: Colors.white,
               ),
-              labelText: 'Precio 3',
+              labelText: 'Precio',
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
@@ -663,7 +694,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         child: TextField(
           maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
-          controller: descripcpl1,
+          controller: descripcion_E,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
               filled: true,
@@ -680,7 +711,6 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                 Icons.description,
                 color: Colors.white,
               ),
-              //hintText: 'ejemplo@email.com',
               labelText: 'Descripción',
               labelStyle: TextStyle(
                 color: Colors.white,
@@ -702,7 +732,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         child: TextField(
           maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
-          controller: descripcpl2,
+          controller: descripcion_S,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
               filled: true,
@@ -741,7 +771,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         child: TextField(
           maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
-          controller: descripcpl3,
+          controller: descripcion_P,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
               filled: true,
