@@ -99,7 +99,9 @@ class _PaginaTiendaState extends State<PaginaTienda> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog();
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 Color.fromARGB(255, 147, 34, 200)),
@@ -275,7 +277,9 @@ class _PaginaTiendaState extends State<PaginaTienda> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog();
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 Color.fromARGB(255, 147, 34, 200)),
@@ -309,21 +313,42 @@ class _PaginaTiendaState extends State<PaginaTienda> {
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: Text("Descartar cambios"),
-          content: Text("¿Estas seguro de salir sin guardar los cambios?"),
+          title: Text("¿Desea adquirir el paquete?"),
           actions: [
             CupertinoDialogAction(
-                child: Text("SI"),
-                onPressed: () {
-                  paginaActual = 4;
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu()));
-                }),
+              child: Text("SI"),
+              onPressed: () {
+                acceptCompra();
+              },
+            ),
             CupertinoDialogAction(
-                child: Text("NO"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                })
+              child: Text("NO"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void acceptCompra() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text("Se ha adquirido el paquete exitosamente!"),
+          content: Text("!Gracias por su compra!"),
+          actions: [
+            CupertinoDialogAction(
+              child: Text("ACEPTAR"),
+              onPressed: () {
+                paginaActual = 0;
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Menu()));
+              },
+            ),
           ],
         );
       },
