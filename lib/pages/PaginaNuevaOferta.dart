@@ -26,7 +26,12 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
   late TextEditingController tituloctrl = TextEditingController();
   late TextEditingController descripcionctrl = TextEditingController();
   late TextEditingController precioctrl = TextEditingController();
+  late TextEditingController precioctrl2 = TextEditingController();
+  late TextEditingController precioctrl3 = TextEditingController();
   late TextEditingController categoctrl = TextEditingController();
+  late TextEditingController descripcpl1 = TextEditingController();
+  late TextEditingController descripcpl2 = TextEditingController();
+  late TextEditingController descripcpl3 = TextEditingController();
 
   File? _image, _image2, _image3, _image4;
 
@@ -170,20 +175,78 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               endIndent: 60,
               color: Color.fromARGB(110, 255, 255, 255),
             ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
+              child: Text(
+                'PLAN ECONÓMICO',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            _DesPlan1(),
             const SizedBox(
               height: 10,
             ),
             _precioTextField(),
             const SizedBox(
-              height: 25.0,
+              height: 10.0,
+            ),
+            const Divider(
+              indent: 60,
+              endIndent: 60,
+              color: Color.fromARGB(110, 255, 255, 255),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
+              child: Text(
+                'PLAN ESTÁNDAR',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            _DesPlan2(),
+            const SizedBox(
+              height: 10.0,
             ),
             _precio2TextField(),
             const SizedBox(
-              height: 25.0,
+              height: 10.0,
+            ),
+            const Divider(
+              indent: 60,
+              endIndent: 60,
+              color: Color.fromARGB(110, 255, 255, 255),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
+              child: Text(
+                'PLAN PREMIUM',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            _DesPlan3(),
+            const SizedBox(
+              height: 10,
             ),
             _precio3TextField(),
             const SizedBox(
-              height: 25.0,
+              height: 10.0,
             ),
             _SubirImagen(),
             const SizedBox(
@@ -413,7 +476,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precioctrl,
+          controller: precioctrl2,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -446,7 +509,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precioctrl,
+          controller: precioctrl3,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -587,5 +650,122 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
             onPressed: () => _Subir());
       }),
     );
+  }
+
+  Widget _DesPlan1() {
+    final maxLines = 5;
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Container(
+        margin: EdgeInsets.all(0),
+        height: maxLines * 24.0,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: TextField(
+          maxLines: maxLines,
+          style: const TextStyle(color: Colors.white),
+          controller: descripcpl1,
+          keyboardType: TextInputType.emailAddress,
+          decoration: const InputDecoration(
+              filled: true,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              icon: Icon(
+                Icons.description,
+                color: Colors.white,
+              ),
+              //hintText: 'ejemplo@email.com',
+              labelText: 'Descripción',
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+          onChanged: (value) {},
+        ),
+      );
+    });
+  }
+
+  Widget _DesPlan2() {
+    final maxLines = 5;
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Container(
+        margin: EdgeInsets.all(0),
+        height: maxLines * 24.0,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: TextField(
+          maxLines: maxLines,
+          style: const TextStyle(color: Colors.white),
+          controller: descripcpl2,
+          keyboardType: TextInputType.emailAddress,
+          decoration: const InputDecoration(
+              filled: true,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              icon: Icon(
+                Icons.description,
+                color: Colors.white,
+              ),
+              //hintText: 'ejemplo@email.com',
+              labelText: 'Descripción',
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+          onChanged: (value) {},
+        ),
+      );
+    });
+  }
+
+  Widget _DesPlan3() {
+    final maxLines = 5;
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return Container(
+        margin: EdgeInsets.all(0),
+        height: maxLines * 24.0,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: TextField(
+          maxLines: maxLines,
+          style: const TextStyle(color: Colors.white),
+          controller: descripcpl3,
+          keyboardType: TextInputType.emailAddress,
+          decoration: const InputDecoration(
+              filled: true,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              icon: Icon(
+                Icons.description,
+                color: Colors.white,
+              ),
+              //hintText: 'ejemplo@email.com',
+              labelText: 'Descripción',
+              labelStyle: TextStyle(
+                color: Colors.white,
+              )),
+          onChanged: (value) {},
+        ),
+      );
+    });
   }
 }

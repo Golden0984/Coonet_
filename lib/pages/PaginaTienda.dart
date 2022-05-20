@@ -1,10 +1,14 @@
-import 'dart:ui';
-
+import 'package:coonet/pages/Menu.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
+class PaginaTienda extends StatefulWidget {
+  const PaginaTienda({Key? key}) : super(key: key);
+  @override
+  _PaginaTiendaState createState() => _PaginaTiendaState();
+}
 
-class PaginaTienda extends StatelessWidget {
+class _PaginaTiendaState extends State<PaginaTienda> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,18 +19,16 @@ class PaginaTienda extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-
         child: ListView(children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: 20), 
-          child: Text(
-            "TIENDA",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                fontFamily: 'Arial', fontSize: 30, color: Colors.white),
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              "TIENDA",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontFamily: 'Arial', fontSize: 30, color: Colors.white),
+            ),
           ),
-          ),
-          
           Column(
             children: [
               menusalPack(),
@@ -58,7 +60,6 @@ class PaginaTienda extends StatelessWidget {
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 16),
           child: Column(
-
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -185,7 +186,9 @@ class PaginaTienda extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog();
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                                 Color.fromARGB(255, 147, 34, 200)),
@@ -206,7 +209,6 @@ class PaginaTienda extends StatelessWidget {
                     ],
                   ),
                 ],
-
               ),
             ],
           ),
@@ -301,5 +303,30 @@ class PaginaTienda extends StatelessWidget {
       ),
     );
   }
-}
 
+  void showDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text("Descartar cambios"),
+          content: Text("¿Estas seguro de salir sin guardar los cambios?"),
+          actions: [
+            CupertinoDialogAction(
+                child: Text("SI"),
+                onPressed: () {
+                  paginaActual = 4;
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()));
+                }),
+            CupertinoDialogAction(
+                child: Text("NO"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                })
+          ],
+        );
+      },
+    );
+  }
+}
