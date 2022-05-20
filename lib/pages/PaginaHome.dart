@@ -192,6 +192,66 @@ class _PaginaHomeState extends State<PaginaHome> {
                                         shape: BoxShape.circle,
                                       ),
                                       child: const Icon(
+                                        Icons.all_inclusive,
+                                        color:
+                                            Color.fromARGB(255, 140, 48, 183),
+                                        size: 32,
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 8, 0, 0),
+                                      child: Text(
+                                        'Todos',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              data = <Anuncios>[];
+                              get_anuncio_cat("programacion").then((value) {
+                                get_All_anuncio().then((value) {
+                                  setState(() {
+                                    data.addAll(value);
+                                  });
+                                });
+                              });
+                            });
+                          },
+                        ),
+                        InkWell(
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8, 8, 0, 8),
+                            child: Material(
+                              color: Colors.transparent,
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 48,
+                                      height: 48,
+                                      decoration: const BoxDecoration(
+                                        color: const Color(0xFFF1F4F8),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
                                         Icons.app_settings_alt,
                                         color:
                                             Color.fromARGB(255, 140, 48, 183),
