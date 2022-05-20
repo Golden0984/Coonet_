@@ -16,58 +16,63 @@ class PaginaUsr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/fondo.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: Center(
         child: FutureBuilder<FreeLan>(
           future: free,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView(children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: const Text('PERFIL',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                      )),
-                ),
-                _Perfil(snapshot),
-                Align(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      _buttonMisProyectos(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _buttonValorar(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _buttonPagos(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _buttonNuevaOferta(),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      _botonOut()
-                    ],
+              return Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/fondo.png'),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ]);
+                child: ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: const Text('PERFIL',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          )),
+                    ),
+                    _Perfil(snapshot),
+                    Align(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          _buttonMisProyectos(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buttonValorar(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buttonPagos(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _buttonNuevaOferta(),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          _botonOut()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
+
             return const CircularProgressIndicator();
           },
         ),
