@@ -558,6 +558,7 @@ class Servicios extends State<ServicioWidget> {
                       ],
                     ),
                   ),
+                  _valoraciones()
                 ],
               );
             } else if (snapshot.hasError) {
@@ -565,6 +566,78 @@ class Servicios extends State<ServicioWidget> {
             }
             return const CircularProgressIndicator();
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _valoraciones() {
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 5,
+              color: Color(0x3B000000),
+              offset: Offset(0, 2),
+            )
+          ],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'COONET PAGINA WEB RESPONSIVE',
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                '\300€',
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'ESTADO: PAGADO.',
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
+                          child: Text(
+                            'Total',
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
+                        Text(
+                          '\300€',
+                          textAlign: TextAlign.end,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
