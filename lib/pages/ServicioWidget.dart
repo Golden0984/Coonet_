@@ -145,7 +145,9 @@ class Servicios extends State<ServicioWidget> {
                                                         radius: 16.0,
                                                         child: ClipOval(
                                                           child: Image.network(
-                                                            "https://images.unsplash.com/photo-1608889825205-eebdb9fc5806?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+                                                            snapshot
+                                                                .data!.foto_user
+                                                                .toString(),
                                                             fit: BoxFit.cover,
                                                             width: 40.0,
                                                             height: 40.0,
@@ -159,9 +161,11 @@ class Servicios extends State<ServicioWidget> {
                                                         child: Text(
                                                           snapshot.data!.nombre
                                                               .toString(),
-                                                          style: const TextStyle(
-                                                            overflow: TextOverflow
-                                                                .ellipsis,
+                                                          style:
+                                                              const TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                             fontSize: 25.0,
                                                             fontWeight:
                                                                 FontWeight.bold,
