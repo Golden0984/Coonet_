@@ -10,6 +10,7 @@ class InfoAnuncio {
   String? descripcion;
   String? categoria;
   String? precio;
+  String? foto_user;
   String? foto1;
   String? foto2;
   String? foto3;
@@ -23,6 +24,7 @@ class InfoAnuncio {
       this.descripcion,
       this.categoria,
       this.precio,
+      this.foto_user,
       this.foto1,
       this.foto2,
       this.foto3,
@@ -36,6 +38,7 @@ class InfoAnuncio {
     descripcion = json['descripcion'];
     categoria = json['categoria'];
     precio = json['precio'];
+    foto_user = json['foto_user'];
     foto1 = json['foto1'];
     foto2 = json['foto2'];
     foto3 = json['foto3'];
@@ -50,7 +53,8 @@ class InfoAnuncio {
     data['titulo'] = this.titulo;
     data['descripcion'] = this.descripcion;
     data['categoria'] = this.categoria;
-    data['precio'] = this.precio;
+    data['precio_E'] = this.precio;
+    data['foto_user'] = this.foto_user;
     data['foto1'] = this.foto1;
     data['foto2'] = this.foto2;
     data['foto3'] = this.foto3;

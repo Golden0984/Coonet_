@@ -33,7 +33,6 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
   bool visibility_Pregunta = false;
   bool visibility_nuevacontra = false;
 
-
   // Implementing the image picker
   verificacion() {
     if (emailctrl.text == "") {
@@ -114,8 +113,11 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
             const SizedBox(
               height: 20.0,
             ),
-            visibility_email ? _emailTextField() : visibility_Pregunta ? _preguntaTextField() : _nuevaTextField(),
-            
+            visibility_email
+                ? _emailTextField()
+                : visibility_Pregunta
+                    ? _preguntaTextField()
+                    : _nuevaTextField(),
             const SizedBox(
               height: 30.0,
             ),
@@ -144,7 +146,8 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
                     color: Colors.white,
                   ),
                   hintText: 'ejemplo@email.com',
-                  hintStyle: TextStyle(color: Color.fromARGB(151, 255, 255, 255)),
+                  hintStyle:
+                      TextStyle(color: Color.fromARGB(151, 255, 255, 255)),
                   labelText: 'Correo Electrónico',
                   labelStyle: TextStyle(
                     color: Colors.white,
@@ -152,7 +155,9 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
               onChanged: (value) {},
             ),
           ),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
           _siguente(),
         ],
       );
@@ -165,27 +170,41 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
       return Container(
         child: Column(
           children: [
-            Text("PREGUNTA DE SEGURIDAD",  style: TextStyle(color: Colors.white, decoration: TextDecoration.underline, fontSize: 16),),
-            SizedBox(height: 20,),
+            const Text(
+              "PREGUNTA DE SEGURIDAD",
+              style: TextStyle(
+                  color: Colors.white,
+                  decoration: TextDecoration.underline,
+                  fontSize: 16),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 20),
               child: Row(
-                children: [
+                children: const [
                   Icon(
-                      Icons.question_mark,
-                      color: Colors.white,
-                    ),
-                    SizedBox(width: 20,),
-                  Text("PREGUNTA DE SEGURIDAD", style: TextStyle(color: Colors.white)),
+                    Icons.question_mark,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text("PREGUNTA DE SEGURIDAD",
+                      style: TextStyle(color: Colors.white)),
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             _respuestaTextField(),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             _cambiarAhora()
           ],
-          
         ),
       );
     });
@@ -246,9 +265,13 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
               onChanged: (value) {},
             ),
           ),
-          SizedBox(height: 10.0,),
+          SizedBox(
+            height: 10.0,
+          ),
           _repetirTextField(),
-          SizedBox(height: 30.0,),
+          SizedBox(
+            height: 30.0,
+          ),
           _cambiarContra()
         ],
       );
@@ -391,12 +414,9 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
                   msg: "Rellena todos los campos antes de continuar",
                   toastLength: Toast.LENGTH_SHORT);
             } else {
-              if (nuevoctrl.text == repetirctrl.text){
-                setState(() {
-                  
-              });
+              if (nuevoctrl.text == repetirctrl.text) {
+                setState(() {});
               }
-              
             }
           });
     });
