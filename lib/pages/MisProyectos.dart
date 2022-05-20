@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:coonet/pages/PreviewServicio.dart';
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:flutter/material.dart';
@@ -202,7 +203,7 @@ class _PaginaHomeState extends State<MisProyectos> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          ServicioWidget(
+                                                          PreviewServicio(
                                                               free: fetchINFO(
                                                                   id))));
                                             },
