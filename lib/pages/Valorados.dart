@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'PaginaChatPersonal.dart';
 import 'ServicioWidget.dart';
+import 'TextoValorados.dart';
 import 'Users/InfoAnuncio.dart';
 
 class Valorados extends StatefulWidget {
@@ -121,7 +122,7 @@ class _PaginaHomeState extends State<Valorados> {
                                 width: 100,
                                 height: 100,
                                 decoration: const BoxDecoration(
-                                  color: Color(0x80FFFFFF),
+                                  color: Color.fromARGB(207, 18, 18, 18),
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(8),
                                     bottomRight: Radius.circular(8),
@@ -166,11 +167,11 @@ class _PaginaHomeState extends State<Valorados> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          ServicioWidget(
+                                                          TextoValorados(
                                                               free: fetchINFO(
                                                                   id))));
                                             },
-                                            child: const Text('Editar'),
+                                            child: const Text('Ver'),
                                           ),
                                         ],
                                       ),
