@@ -23,14 +23,15 @@ class _PaginaHomeState extends State<PendienteValorar> {
   Future<List<Anuncios>> get_anuncios() async {
     var data = {"email": login};
     var url = Uri.parse(
-        'https://phpninjahosting.com/manish/Coonet/Php/Misproyectos.php');
+        'https://phpninjahosting.com/manish/Coonet/Php/Valoracion_P.php');
     final response = await http.post(url, body: data);
     var datos = jsonDecode(response.body);
     var registros = <Anuncios>[];
     if (response.statusCode == 200) {
       if (datos == 'no') {
         Fluttertoast.showToast(
-            msg: "No hay anuncios creados", toastLength: Toast.LENGTH_SHORT);
+            msg: "No hay ofertas para valorar",
+            toastLength: Toast.LENGTH_SHORT);
       } else {
         for (datos in datos) {
           registros.add(Anuncios.fromJson(datos));
