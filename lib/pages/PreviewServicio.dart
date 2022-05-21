@@ -1,3 +1,4 @@
+import 'package:coonet/pages/EditarOferta.dart';
 import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
@@ -17,10 +18,12 @@ class Servicios extends State<PreviewServicio> {
   late String dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final Future<InfoAnuncio> free;
+  
   Servicios(this.free);
 
-  @override
+    @override
   Widget build(BuildContext context) {
+    final AsyncSnapshot<InfoAnuncio> ia;
     return Scaffold(
       floatingActionButton: botonEditar(),
       key: scaffoldKey,
@@ -33,7 +36,7 @@ class Servicios extends State<PreviewServicio> {
               return Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  appbartt(snapshot.data!.titulo.toString()),
+                  appbartt(snapshot),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -147,7 +150,9 @@ class Servicios extends State<PreviewServicio> {
                                                         radius: 16.0,
                                                         child: ClipOval(
                                                           child: Image.network(
-                                                            "https://images.unsplash.com/photo-1608889825205-eebdb9fc5806?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+                                                            snapshot
+                                                                .data!.foto_user
+                                                                .toString(),
                                                             fit: BoxFit.cover,
                                                             width: 40.0,
                                                             height: 40.0,
@@ -161,9 +166,11 @@ class Servicios extends State<PreviewServicio> {
                                                         child: Text(
                                                           snapshot.data!.nombre
                                                               .toString(),
-                                                          style: const TextStyle(
-                                                            overflow: TextOverflow
-                                                                .ellipsis,
+                                                          style:
+                                                              const TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                             fontSize: 25.0,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -180,7 +187,7 @@ class Servicios extends State<PreviewServicio> {
                                                     left: 0.0),
                                                 child: Flexible(
                                                   child: RatingBarIndicator(
-                                                    rating: 3,
+                                                    rating: double.parse(snapshot.data!.valoracion_G.toString()),
                                                     itemBuilder:
                                                         (context, index) =>
                                                             const Icon(
@@ -292,13 +299,12 @@ class Servicios extends State<PreviewServicio> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
+                            'PLAN ECONÓMICO\n',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+                          Text(snapshot.data!.descripcion_E.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -316,7 +322,7 @@ class Servicios extends State<PreviewServicio> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '9,99€',
+                                      snapshot.data!.precio_E.toString() + "€",
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -383,13 +389,13 @@ class Servicios extends State<PreviewServicio> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
+                            'PLAN STANDAR\n',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+                            snapshot.data!.descripcion_S.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -407,7 +413,7 @@ class Servicios extends State<PreviewServicio> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '9,99€',
+                                      snapshot.data!.precio_S.toString() + "€",
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -474,13 +480,13 @@ class Servicios extends State<PreviewServicio> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
+                            'PLAN PREMIUM\n',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+                            snapshot.data!.descripcion_P.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -498,7 +504,7 @@ class Servicios extends State<PreviewServicio> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '9,99€',
+                                      snapshot.data!.precio_P.toString() + "€",
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -650,18 +656,19 @@ class Servicios extends State<PreviewServicio> {
       backgroundColor: Color.fromARGB(255, 157, 3, 218),
       foregroundColor: Colors.white,
       onPressed: () {
-        /*Navigator.push( context,MaterialPageRoute( builder: (context) =>
-        EditarPerfil(free: )));*/
+        Navigator.push( context,MaterialPageRoute( builder: (context) =>
+        EditarOferta()));
       },
       icon: Icon(Icons.edit),
       label: Text('EDITAR'),
     );
   }
 
-  Widget appbartt(String string) {
+  Widget appbartt(AsyncSnapshot<InfoAnuncio> snapshot) {
+    titulo = snapshot.data!.titulo.toString();
     return AppBar(
       backgroundColor: Color.fromARGB(255, 147, 34, 200),
-      title: Text(string),
+      title: Text(snapshot.data!.titulo.toString()),
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
