@@ -87,7 +87,6 @@ class InfoAnuncio {
   }
 }
 
-String id_comprar = "";
 String id_anuncio = "";
 String titulo = "";
 String descripcion = "";
