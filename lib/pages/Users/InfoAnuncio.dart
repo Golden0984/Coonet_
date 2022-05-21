@@ -9,7 +9,13 @@ class InfoAnuncio {
   String? titulo;
   String? descripcion;
   String? categoria;
-  String? precio;
+  String? descripcion_E;
+  String? precio_E;
+  String? descripcion_S;
+  String? precio_S;
+  String? descripcion_P;
+  String? precio_P;
+  String? valoracion_G;
   String? foto_user;
   String? foto1;
   String? foto2;
@@ -23,7 +29,13 @@ class InfoAnuncio {
       this.titulo,
       this.descripcion,
       this.categoria,
-      this.precio,
+      this.descripcion_E,
+      this.precio_E,
+      this.descripcion_S,
+      this.precio_S,
+      this.descripcion_P,
+      this.precio_P,
+      this.valoracion_G,
       this.foto_user,
       this.foto1,
       this.foto2,
@@ -37,7 +49,13 @@ class InfoAnuncio {
     titulo = json['titulo'];
     descripcion = json['descripcion'];
     categoria = json['categoria'];
-    precio = json['precio'];
+    descripcion_E = json['descripcion_E'];
+    precio_E = json['precio_E'];
+    descripcion_S = json['descripcion_S'];
+    precio_S = json['precio_S'];
+    descripcion_P = json['descripcion_P'];
+    precio_P = json['precio_P'];
+    valoracion_G = json['valoracion_G'];
     foto_user = json['foto_user'];
     foto1 = json['foto1'];
     foto2 = json['foto2'];
@@ -53,7 +71,13 @@ class InfoAnuncio {
     data['titulo'] = this.titulo;
     data['descripcion'] = this.descripcion;
     data['categoria'] = this.categoria;
-    data['precio_E'] = this.precio;
+    data['descripcion_E'] = this.descripcion_E;
+    data['precio_E'] = this.precio_E;
+    data['descripcion_S'] = this.descripcion_S;
+    data['precio_S'] = this.precio_S;
+    data['descripcion_P'] = this.descripcion_P;
+    data['precio_P'] = this.precio_P;
+    data['valoracion_G'] = this.valoracion_G;
     data['foto_user'] = this.foto_user;
     data['foto1'] = this.foto1;
     data['foto2'] = this.foto2;
@@ -62,6 +86,23 @@ class InfoAnuncio {
     return data;
   }
 }
+
+
+  String titulo = "";
+  String descripcion = "";
+  String categoria = "";
+  String descripcion_E = "";
+  String precio_E = "";
+  String descripcion_S = "";
+  String precio_S = "";
+  String descripcion_P = "";
+  String precio_P = "";
+  String valoracion_G = "";
+  String foto_user = "";
+  String foto1 = "";
+  String foto2 = "";
+  String foto3 = "";
+  String foto4 = "";
 
 Future<InfoAnuncio> fetchINFO(String id) async {
   var data = {"id_anuncio": id};
