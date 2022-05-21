@@ -123,7 +123,7 @@ class _PaginaHomeState extends State<PendienteValorar> {
                                 width: 100,
                                 height: 100,
                                 decoration: const BoxDecoration(
-                                  color: Color(0x80FFFFFF),
+                                  color: Color.fromARGB(207, 18, 18, 18),
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(8),
                                     bottomRight: Radius.circular(8),
