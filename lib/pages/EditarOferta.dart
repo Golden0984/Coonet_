@@ -4,6 +4,7 @@ import 'package:coonet/pages/Menu.dart';
 
 import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:coonet/pages/Users/InfoAnuncio.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -48,6 +49,7 @@ class _OfertaPageState extends State<EditarOferta> {
     precio_Sta.text = precio_S;
     descripcion_Pre.text = descripcion_P;
     precio_Pre.text = precio_P;
+    vactu = categoria;
   }
 
   // Implementing the image picker
@@ -194,12 +196,26 @@ class _OfertaPageState extends State<EditarOferta> {
             const SizedBox(
               height: 40.0,
             ),
-            const Text('Editar Oferta',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.white,
-                )),
+            Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_back),
+                          color: Colors.white,
+                          onPressed: () {
+                            showDialog();
+                          },
+                        ),
+                      ),
+                      const Text('EDITAR OFERTA',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
             const SizedBox(
               height: 20.0,
             ),
@@ -635,7 +651,7 @@ class _OfertaPageState extends State<EditarOferta> {
         color: Colors.grey[300],
         child: _image != null
             ? Image.file(_image, fit: BoxFit.fill)
-            : Icon(Icons.no_photography),
+            : Image.network(foto1 ,fit: BoxFit.cover,width: 100.0,height: 100.0,),
       ),
     ]);
   }
@@ -811,5 +827,31 @@ class _OfertaPageState extends State<EditarOferta> {
         ),
       );
     });
+  }
+
+  void showDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text("Descartar cambios"),
+          content: Text("¿Estas seguro de salir sin guardar los cambios?"),
+          actions: [
+            CupertinoDialogAction(
+                child: Text("SI"),
+                onPressed: () {
+                  paginaActual = 4;
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()));
+                }),
+            CupertinoDialogAction(
+                child: Text("NO"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                })
+          ],
+        );
+      },
+    );
   }
 }
