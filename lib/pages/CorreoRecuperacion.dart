@@ -33,7 +33,6 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
   bool visibility_Pregunta = false;
   bool visibility_nuevacontra = false;
 
-  // Implementing the image picker
   verificacion() {
     if (emailctrl.text == "") {
       if (preguntactrl.text == "" && respuestactrl.text == "") {

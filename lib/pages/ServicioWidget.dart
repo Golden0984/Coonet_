@@ -1,7 +1,10 @@
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'Users/InfoAnuncio.dart';
 
 class ServicioWidget extends StatefulWidget {
@@ -17,6 +20,33 @@ class Servicios extends State<ServicioWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final Future<InfoAnuncio> free;
   Servicios(this.free);
+
+  Dio dio = new Dio();
+
+  Future<void> _Comprar(String id) async {
+    FormData formData = FormData.fromMap({
+      "correo": login,
+      "id_Anuncio": id,
+    });
+
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/Comprar.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'hecho') {
+        Fluttertoast.showToast(
+            msg: "Compra Completada", toastLength: Toast.LENGTH_SHORT);
+        //Ir a otra pagina
+
+      } else if (value.toString() == 'Error') {
+        Fluttertoast.showToast(
+            msg: "Error al realizar la compra",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
+        print(value.toString());
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +212,10 @@ class Servicios extends State<ServicioWidget> {
                                                     left: 0.0),
                                                 child: Flexible(
                                                   child: RatingBarIndicator(
-                                                    rating: double.parse(snapshot.data!.valoracion_G.toString()),
+                                                    rating: double.parse(
+                                                        snapshot
+                                                            .data!.valoracion_G
+                                                            .toString()),
                                                     itemBuilder:
                                                         (context, index) =>
                                                             const Icon(
@@ -299,7 +332,8 @@ class Servicios extends State<ServicioWidget> {
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text(snapshot.data!.descripcion_E.toString(),
+                          Text(
+                            snapshot.data!.descripcion_E.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -330,7 +364,10 @@ class Servicios extends State<ServicioWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                            snapshot.data!.id.toString());
+                                      },
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
@@ -421,7 +458,10 @@ class Servicios extends State<ServicioWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                            snapshot.data!.id.toString());
+                                      },
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
@@ -512,7 +552,10 @@ class Servicios extends State<ServicioWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                            snapshot.data!.id.toString());
+                                      },
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
@@ -571,6 +614,32 @@ class Servicios extends State<ServicioWidget> {
           },
         ),
       ),
+    );
+  }
+
+  void showDialog(String string) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text("¿Desea adquirir el paquete?"),
+          actions: [
+            CupertinoDialogAction(
+              child: Text("SI"),
+              onPressed: () {
+                _Comprar(string);
+                Navigator.of(context).pop();
+              },
+            ),
+            CupertinoDialogAction(
+              child: Text("NO"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
     );
   }
 
