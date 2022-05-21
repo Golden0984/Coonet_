@@ -1,5 +1,6 @@
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
+import 'package:coonet/pages/Users/Valoracion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'Users/InfoAnuncio.dart';
@@ -7,26 +8,27 @@ import 'Users/InfoAnuncio.dart';
 //https://programmerclick.com/article/30011048702/
 
 class TextoValorados extends StatefulWidget {
-  final Future<InfoAnuncio> free;
-  const TextoValorados({Key? key, required this.free}) : super(key: key);
+  final Future<Valoracion> valoracion;
+
+  TextoValorados({Key? key, required this.valoracion}) : super(key: key);
   @override
-  Servicios createState() => Servicios(free);
+  Servicios createState() => Servicios(valoracion);
 }
 
 class Servicios extends State<TextoValorados> {
   late PageController pageViewController = PageController();
   late String dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final Future<InfoAnuncio> free;
-  Servicios(this.free);
+  final Future<Valoracion> valoracion;
+  Servicios(this.valoracion);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       body: SingleChildScrollView(
-        child: FutureBuilder<InfoAnuncio>(
-          future: free,
+        child: FutureBuilder<Valoracion>(
+          future: valoracion,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
@@ -147,7 +149,7 @@ class Servicios extends State<TextoValorados> {
                                                         child: ClipOval(
                                                           child: Image.network(
                                                             snapshot
-                                                                .data!.foto_user
+                                                                .data!.fotoUser
                                                                 .toString(),
                                                             fit: BoxFit.cover,
                                                             width: 40.0,
@@ -246,26 +248,22 @@ class Servicios extends State<TextoValorados> {
                                 padding: const EdgeInsets.only(
                                     left: 65.0, bottom: 20.0),
                                 child: Flexible(
-                                  child: RatingBar.builder(
-                                    initialRating: 5,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemCount: 5,
-                                    itemSize: 25,
-                                    itemBuilder: (context, _) => const Icon(
+                                  child: RatingBarIndicator(
+                                    rating: double.parse(
+                                        snapshot.data!.estrellas.toString()),
+                                    itemBuilder: (context, index) => const Icon(
                                       Icons.star,
                                       color: Colors.amber,
                                     ),
-                                    onRatingUpdate: (rating) {
-                                      print(rating);
-                                    },
+                                    itemCount: 5,
+                                    itemSize: 25.0,
+                                    direction: Axis.horizontal,
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          valoresult(),
+                          valoresult(snapshot),
                           const Divider(
                             height: 24,
                             thickness: 2,
@@ -280,21 +278,17 @@ class Servicios extends State<TextoValorados> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Color.fromARGB(
-                                                    255, 147, 34, 200)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('CERRAR'),
-                                        ],
-                                      )),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Color.fromARGB(
+                                                  255, 147, 34, 200)),
+                                    ),
+                                    child: Text('CERRAR'),
+                                  ),
                                 ],
                               ),
                             ],
@@ -348,10 +342,9 @@ class Servicios extends State<TextoValorados> {
     );
   }
 
-  Widget valoresult() {
+  Widget valoresult(AsyncSnapshot<Valoracion> snapshot) {
     return Container(
-      child: Text(
-          "adsdaadsdaadsdaadsdaadsdaadsdaadsdaadsdaadsdaadsdaadsdaadsdaadsdaadsdaadsda"),
+      child: Text(snapshot.data!.comentario.toString()),
     );
   }
 }

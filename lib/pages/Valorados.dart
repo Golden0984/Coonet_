@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
+import 'package:coonet/pages/Users/Valoracion.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -37,18 +38,10 @@ class _PaginaHomeState extends State<Valorados> {
         }
       }
     } else {
-      // Si la llamada no fue exitosa, lanza un error.
       throw Exception('Failed to load post');
     }
 
     return registros;
-    /*if (response.statusCode == 200) {
-    // Si la llamada al servidor fue exitosa, analiza el JSON
-    
-  } else {
-    // Si la llamada no fue exitosa, lanza un error.
-    throw Exception('Failed to load post');
-  }*/
   }
 
   @override
@@ -160,16 +153,18 @@ class _PaginaHomeState extends State<Valorados> {
                                         children: [
                                           ElevatedButton(
                                             onPressed: () {
-                                              String id =
-                                                  data[index].id_anuncio;
-                                              fetchINFO(id);
+                                              String id_comprar = data[index]
+                                                  .id_compra
+                                                  .toString();
+                                              fetchValoracion(id_comprar!);
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
                                                           TextoValorados(
-                                                              free: fetchINFO(
-                                                                  id))));
+                                                              valoracion:
+                                                                  fetchValoracion(
+                                                                      id_comprar))));
                                             },
                                             child: const Text('Ver'),
                                           ),
