@@ -1,24 +1,69 @@
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'Users/InfoAnuncio.dart';
+import 'Valorar.dart';
 
 //https://programmerclick.com/article/30011048702/
 
 class ComentarioValo extends StatefulWidget {
   final Future<InfoAnuncio> free;
-  const ComentarioValo({Key? key, required this.free}) : super(key: key);
+  String? id_comprar;
+  ComentarioValo(this.id_comprar, {Key? key, required this.free})
+      : super(key: key);
   @override
-  Servicios createState() => Servicios(free);
+  Servicios createState() => Servicios(free, id_comprar);
 }
 
 class Servicios extends State<ComentarioValo> {
   late PageController pageViewController = PageController();
+  late TextEditingController comentarioctrl = TextEditingController();
   late String dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final Future<InfoAnuncio> free;
-  Servicios(this.free);
+  String? id_comprar;
+  Servicios(this.free, this.id_comprar);
+
+  double valoracion = 0.0;
+
+  Dio dio = new Dio();
+
+  Future<void> _Comentar() async {
+    if (comentarioctrl.text.trim().isEmpty || valoracion == 0.0) {
+      Fluttertoast.showToast(
+          msg: "Hay campos vacios.", toastLength: Toast.LENGTH_SHORT);
+    } else {
+      FormData formData = FormData.fromMap({
+        "id_comprar": id_comprar,
+        "email_user": login,
+        "id_anuncio": id_anuncio,
+        "valoracion": valoracion.toString(),
+        "comentario": comentarioctrl.text,
+      });
+      await dio
+          .post('https://phpninjahosting.com/manish/Coonet/Php/Comentarios.php',
+              data: formData)
+          .then((value) {
+        if (value.toString() == 'hecho') {
+          Fluttertoast.showToast(
+              msg: "Comentario realizado corectamente",
+              toastLength: Toast.LENGTH_SHORT);
+          //Ir a otra pagina
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ValoWidget()));
+        } else if (value.toString() == 'Error') {
+          Fluttertoast.showToast(
+              msg: "Ha habido un error al publicar el comentario",
+              toastLength: Toast.LENGTH_SHORT);
+        } else {
+          print(value.toString());
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -247,10 +292,9 @@ class Servicios extends State<ComentarioValo> {
                                     left: 65.0, bottom: 20.0),
                                 child: Flexible(
                                   child: RatingBar.builder(
-                                    initialRating: 5,
+                                    initialRating: 0,
                                     minRating: 1,
                                     direction: Axis.horizontal,
-                                    allowHalfRating: true,
                                     itemCount: 5,
                                     itemSize: 25,
                                     itemBuilder: (context, _) => const Icon(
@@ -258,7 +302,7 @@ class Servicios extends State<ComentarioValo> {
                                       color: Colors.amber,
                                     ),
                                     onRatingUpdate: (rating) {
-                                      print(rating);
+                                      valoracion = rating;
                                     },
                                   ),
                                 ),
@@ -280,7 +324,11 @@ class Servicios extends State<ComentarioValo> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        id_anuncio =
+                                            snapshot.data!.id.toString();
+                                        _Comentar();
+                                      },
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
@@ -350,11 +398,11 @@ class Servicios extends State<ComentarioValo> {
 
   Widget textheg() {
     final maxLines = 5;
-
     return Container(
       margin: EdgeInsets.all(0),
       height: maxLines * 24.0,
       child: TextField(
+        controller: comentarioctrl,
         maxLines: maxLines,
         decoration: InputDecoration(
           hintText: "Enter a message",

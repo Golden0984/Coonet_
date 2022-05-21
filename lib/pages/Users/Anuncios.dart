@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Anuncios {
-  late final String id_anuncio;
+  final String? id_compra;
+  final String id_anuncio;
   final String nombre;
   final String email;
   final String titulo;
@@ -20,6 +21,7 @@ class Anuncios {
   final String foto2;
 
   Anuncios({
+    this.id_compra,
     required this.id_anuncio,
     required this.nombre,
     required this.email,
@@ -40,6 +42,7 @@ class Anuncios {
 
   factory Anuncios.fromJson(Map json) {
     return Anuncios(
+      id_compra: json['id_compras'],
       id_anuncio: json['id'],
       nombre: json['nombre'],
       email: json['correo_electronico'],

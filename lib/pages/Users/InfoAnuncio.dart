@@ -87,22 +87,23 @@ class InfoAnuncio {
   }
 }
 
-
-  String titulo = "";
-  String descripcion = "";
-  String categoria = "";
-  String descripcion_E = "";
-  String precio_E = "";
-  String descripcion_S = "";
-  String precio_S = "";
-  String descripcion_P = "";
-  String precio_P = "";
-  String valoracion_G = "";
-  String foto_user = "";
-  String foto1 = "";
-  String foto2 = "";
-  String foto3 = "";
-  String foto4 = "";
+String id_comprar = "";
+String id_anuncio = "";
+String titulo = "";
+String descripcion = "";
+String categoria = "";
+String descripcion_E = "";
+String precio_E = "";
+String descripcion_S = "";
+String precio_S = "";
+String descripcion_P = "";
+String precio_P = "";
+String valoracion_G = "";
+String foto_user = "";
+String foto1 = "";
+String foto2 = "";
+String foto3 = "";
+String foto4 = "";
 
 Future<InfoAnuncio> fetchINFO(String id) async {
   var data = {"id_anuncio": id};
