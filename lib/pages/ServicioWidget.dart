@@ -182,7 +182,7 @@ class Servicios extends State<ServicioWidget> {
                                                     left: 0.0),
                                                 child: Flexible(
                                                   child: RatingBarIndicator(
-                                                    rating: 3,
+                                                    rating: double.parse(snapshot.data!.valoracion_G.toString()),
                                                     itemBuilder:
                                                         (context, index) =>
                                                             const Icon(
@@ -294,13 +294,12 @@ class Servicios extends State<ServicioWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
+                            'PLAN ECONÓMICO\n',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+                          Text(snapshot.data!.descripcion_E.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -318,7 +317,7 @@ class Servicios extends State<ServicioWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '9,99€',
+                                      snapshot.data!.precio_E.toString() + "€",
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -385,13 +384,13 @@ class Servicios extends State<ServicioWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
+                            'PLAN STANDAR\n',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+                            snapshot.data!.descripcion_S.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -409,7 +408,7 @@ class Servicios extends State<ServicioWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '9,99€',
+                                      snapshot.data!.precio_S.toString() + "€",
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -476,13 +475,13 @@ class Servicios extends State<ServicioWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'SUSCRIPCIÓN PREMIUM (MENSUAL)\n',
+                            'PLAN PREMIUM\n',
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            'El FreeLancer obtendrá una reducción del 15%\nen la comisión de retención.',
+                            snapshot.data!.descripcion_P.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -500,7 +499,7 @@ class Servicios extends State<ServicioWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '9,99€',
+                                      snapshot.data!.precio_P.toString() + "€",
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:coonet/pages/Menu.dart';
 
 import 'package:coonet/pages/Users/FreeLancer.dart';
+import 'package:coonet/pages/Users/InfoAnuncio.dart';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -11,31 +12,44 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:image_picker/image_picker.dart';
 
-class PaginaNuevaOferta extends StatefulWidget {
+class EditarOferta extends StatefulWidget {
   static String id = 'Register_page';
 
   @override
   _OfertaPageState createState() => _OfertaPageState();
 }
 
-class _OfertaPageState extends State<PaginaNuevaOferta> {
+class _OfertaPageState extends State<EditarOferta> {
   String texto = "ningun valor selecionado";
   String vactu = " ";
 
   late TextEditingController tituloctrl = TextEditingController();
   late TextEditingController descripcionctrl = TextEditingController();
-  late TextEditingController descripcion_E = TextEditingController();
-  late TextEditingController precio_E = TextEditingController();
-  late TextEditingController descripcion_S = TextEditingController();
-  late TextEditingController precio_S = TextEditingController();
-  late TextEditingController descripcion_P = TextEditingController();
-  late TextEditingController precio_P = TextEditingController();
+  late TextEditingController descripcion_Eco = TextEditingController();
+  late TextEditingController precio_Eco = TextEditingController();
+  late TextEditingController descripcion_Sta = TextEditingController();
+  late TextEditingController precio_Sta = TextEditingController();
+  late TextEditingController descripcion_Pre = TextEditingController();
+  late TextEditingController precio_Pre = TextEditingController();
 
   File? _image, _image2, _image3, _image4;
 
   int index = 0;
   final _picker = ImagePicker();
   List<XFile> _imageList = [];
+
+  @override
+  void initState(){
+    tituloctrl.text = titulo;
+    descripcionctrl.text = descripcion;
+    descripcion_Eco.text = descripcion_E;
+    precio_Eco.text = precio_E;
+    descripcion_Sta.text = descripcion_S;
+    precio_Sta.text = precio_S;
+    descripcion_Pre.text = descripcion_P;
+    precio_Pre.text = precio_P;
+  }
+
   // Implementing the image picker
   Future<void> _openImagePicker() async {
     final XFile? pickedImage =
@@ -92,12 +106,12 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
   Future<void> _Subir() async {
     if (tituloctrl.text.trim().isEmpty ||
         descripcionctrl.text.trim().isEmpty ||
-        descripcion_E.text.trim().isEmpty ||
-        precio_E.text.trim().isEmpty ||
-        descripcion_S.text.trim().isEmpty ||
-        precio_S.text.trim().isEmpty ||
-        descripcion_P.text.trim().isEmpty ||
-        precio_P.text.trim().isEmpty) {
+        descripcion_Eco.text.trim().isEmpty ||
+        precio_Eco.text.trim().isEmpty ||
+        descripcion_Sta.text.trim().isEmpty ||
+        precio_Sta.text.trim().isEmpty ||
+        descripcion_Pre.text.trim().isEmpty ||
+        precio_Pre.text.trim().isEmpty) {
       Fluttertoast.showToast(
           msg: "Hay campos vacios.", toastLength: Toast.LENGTH_SHORT);
     } else {
@@ -120,12 +134,12 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           "titulo": tituloctrl.text,
           "descripcion": descripcionctrl.text,
           "categoria": vactu,
-          "descripcion_E": descripcion_E.text,
-          "precio_E": precio_E.text,
-          "descripcion_S": descripcion_S.text,
-          "precio_S": precio_S.text,
-          "descripcion_P": descripcion_P.text,
-          "precio_P": precio_P.text,
+          "descripcion_E": descripcion_Eco.text,
+          "precio_E": precio_Eco.text,
+          "descripcion_S": descripcion_Sta.text,
+          "precio_S": precio_Sta.text,
+          "descripcion_P": descripcion_Pre.text,
+          "precio_P": precio_Pre.text,
           'foto1':
               await MultipartFile.fromFile(_image!.path, filename: filename),
           'foto2':
@@ -180,7 +194,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
             const SizedBox(
               height: 40.0,
             ),
-            const Text('Nueva Oferta',
+            const Text('Editar Oferta',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
@@ -474,7 +488,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precio_E,
+          controller: precio_Eco,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -507,7 +521,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precio_S,
+          controller: precio_Sta,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -540,7 +554,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          controller: precio_P,
+          controller: precio_Pre,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -664,7 +678,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 15.0),
                 alignment: Alignment.center,
                 child: const Text(
-                  'Crear',
+                  'Guardar cambios',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16.0,
@@ -694,7 +708,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         child: TextField(
           maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
-          controller: descripcion_E,
+          controller: descripcion_Eco,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
               filled: true,
@@ -732,7 +746,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         child: TextField(
           maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
-          controller: descripcion_S,
+          controller: descripcion_Sta,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
               filled: true,
@@ -771,7 +785,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         child: TextField(
           maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
-          controller: descripcion_P,
+          controller: descripcion_Pre,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
               filled: true,
