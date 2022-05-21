@@ -2,6 +2,7 @@ import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaChat.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:coonet/pages/PaginaTienda.dart';
+import 'package:coonet/pages/Politicas.dart';
 import 'package:flutter/material.dart';
 import 'PaginaHome.dart';
 import 'ServicioWidget.dart';
@@ -23,7 +24,7 @@ class _MenuBare extends State<Menu> {
     PaginaHome(),
     PaginaChat(),
     PaginaNuevaOferta(),
-    PaginaTienda(),
+    Politicas(),
     PaginaUsr(free: fetchPost()),
   ];
 

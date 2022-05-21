@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaLogin.dart';
+import 'package:coonet/pages/Politicas.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,7 +31,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
   late TextEditingController repeatpassctrl = TextEditingController();
   late TextEditingController preguntactrl = TextEditingController();
   late TextEditingController respuestactrl = TextEditingController();
-
+  late bool agree = false;
   File? _image;
 
   String texto = "ninguna pregunta selecionado";
@@ -162,6 +163,10 @@ class _RegisterPageState extends State<PaginaRegistro> {
               height: 25.0,
             ),
             _SubirImagen(),
+            const SizedBox(
+              height: 30.0,
+            ),
+            terminos(),
             const SizedBox(
               height: 30.0,
             ),
@@ -534,7 +539,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () => _Subir());
+          onPressed: () => agree ? _Subir() : Fluttertoast.showToast(
+            msg: "No se han aceptado los terminos!", toastLength: Toast.LENGTH_SHORT));
     });
   }
 
@@ -562,6 +568,45 @@ class _RegisterPageState extends State<PaginaRegistro> {
     });
   }
 
+  Widget terminos(){
+    return Row(
+      children: [
+        Theme(data: ThemeData(unselectedWidgetColor: Colors.white),
+        child: 
+        Checkbox(value: agree, onChanged: (value) {
+                      setState(() {
+                        agree = value ?? false;
+                      });
+                    },
+                    
+        )),
+        servicios()
+      ],
+    );
+  }
+
+  Widget servicios(){
+    return InkWell(
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Column(
+            children: const [
+              Text(
+                'He leido y acepto los terminos y condiciones de la ',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                'Politica de Privacidad y Servicios',
+                style: TextStyle(color: Color.fromARGB(255, 175, 82, 206),decoration: TextDecoration.underline),
+              ),
+            ],
+          ),
+        ),
+        onTap: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Politicas())),
+      );
+  }
+  
   Widget _SubirImagen() {
     return Container(
       decoration: BoxDecoration(
