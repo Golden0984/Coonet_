@@ -139,10 +139,14 @@ class _PaginaHomeState extends State<PendienteValorar> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              data[index].titulo,
+                                              data[index].titulo.toUpperCase(),
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
                                             Text(
                                               data[index].nombre,
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
                                           ],
                                         ),
@@ -168,7 +172,11 @@ class _PaginaHomeState extends State<PendienteValorar> {
                                                 ),
                                               );
                                             },
-                                            child: const Text('Valorar'),
+                                            child: const Text('Valorar',
+                                                style: TextStyle(
+                                                    color: Colors.black)),
+                                            style: ElevatedButton.styleFrom(
+                                            primary: Colors.white)
                                           ),
                                         ],
                                       ),

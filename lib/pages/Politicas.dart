@@ -108,7 +108,7 @@ class _PoliticasState extends State<Politicas> {
         "\n\nPara los diseñadores, Flutter ayuda a entregar la visión de diseño original sin pérdida de fidelidad ni compromisos. También actúa como una herramienta productiva de creación de prototipos."+
         "\n\nEl proposito de esta aplicación es totalmente de carácter educativo. No se enviará ningún tipo de datos a terceros. Esta aplicación se ha desarrollado como proyecto final de grado de DAM2T (Curso 21-22)"+
         "\n\nLos desarolladores de la aplicacion son Sahil Kumar, Manish Thakur y Arnau Cervera."+
-        "\n\nSe reclaca que la versión de esta aplicación es una versión BETA, lo cúal quiere decir que en futuras actualizaciones, se mejorará el rendimiento y nuevas funncionalidades.", 
+        "\n\nSe reclaca que la versión de esta aplicación es una versión BETA, lo cúal quiere decir que en futuras actualizaciones, se mejorará el rendimiento y nuevas funcionalidades.", 
         style: TextStyle(color: Colors.white), textAlign: TextAlign.justify,),
       );
     });
