@@ -43,13 +43,6 @@ class _PaginaHomeState extends State<PendienteValorar> {
     }
 
     return registros;
-    /*if (response.statusCode == 200) {
-    // Si la llamada al servidor fue exitosa, analiza el JSON
-    
-  } else {
-    // Si la llamada no fue exitosa, lanza un error.
-    throw Exception('Failed to load post');
-  }*/
   }
 
   @override
@@ -123,7 +116,7 @@ class _PaginaHomeState extends State<PendienteValorar> {
                                 width: 100,
                                 height: 100,
                                 decoration: const BoxDecoration(
-                                  color: Color(0x80FFFFFF),
+                                  color: Color.fromARGB(207, 18, 18, 18),
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(8),
                                     bottomRight: Radius.circular(8),
@@ -163,14 +156,17 @@ class _PaginaHomeState extends State<PendienteValorar> {
                                             onPressed: () {
                                               String id =
                                                   data[index].id_anuncio;
+                                              String? id_comprar =
+                                                  data[index].id_compra;
                                               fetchINFO(id);
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ComentarioValo(
-                                                              free: fetchINFO(
-                                                                  id))));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ComentarioValo(id_comprar,
+                                                          free: fetchINFO(id)),
+                                                ),
+                                              );
                                             },
                                             child: const Text('Valorar'),
                                           ),

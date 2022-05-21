@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'PaginaChatPersonal.dart';
 import 'ServicioWidget.dart';
+import 'TextoValorados.dart';
 import 'Users/InfoAnuncio.dart';
 
 class Valorados extends StatefulWidget {
@@ -22,14 +23,14 @@ class _PaginaHomeState extends State<Valorados> {
   Future<List<Anuncios>> get_anuncios() async {
     var data = {"email": login};
     var url = Uri.parse(
-        'https://phpninjahosting.com/manish/Coonet/Php/Misproyectos.php');
+        'https://phpninjahosting.com/manish/Coonet/Php/Valoracion_H.php');
     final response = await http.post(url, body: data);
     var datos = jsonDecode(response.body);
     var registros = <Anuncios>[];
     if (response.statusCode == 200) {
       if (datos == 'no') {
         Fluttertoast.showToast(
-            msg: "No hay anuncios creados", toastLength: Toast.LENGTH_SHORT);
+            msg: "No hay ofertas valoradas", toastLength: Toast.LENGTH_SHORT);
       } else {
         for (datos in datos) {
           registros.add(Anuncios.fromJson(datos));
@@ -121,7 +122,7 @@ class _PaginaHomeState extends State<Valorados> {
                                 width: 100,
                                 height: 100,
                                 decoration: const BoxDecoration(
-                                  color: Color(0x80FFFFFF),
+                                  color: Color.fromARGB(207, 18, 18, 18),
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(8),
                                     bottomRight: Radius.circular(8),
@@ -166,11 +167,11 @@ class _PaginaHomeState extends State<Valorados> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          ServicioWidget(
+                                                          TextoValorados(
                                                               free: fetchINFO(
                                                                   id))));
                                             },
-                                            child: const Text('Editar'),
+                                            child: const Text('Ver'),
                                           ),
                                         ],
                                       ),

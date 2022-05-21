@@ -40,7 +40,7 @@ class _OfertaPageState extends State<EditarOferta> {
   List<XFile> _imageList = [];
 
   @override
-  void initState(){
+  void initState() {
     tituloctrl.text = titulo;
     descripcionctrl.text = descripcion;
     descripcion_Eco.text = descripcion_E;
@@ -197,25 +197,25 @@ class _OfertaPageState extends State<EditarOferta> {
               height: 40.0,
             ),
             Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back),
-                          color: Colors.white,
-                          onPressed: () {
-                            showDialog();
-                          },
-                        ),
-                      ),
-                      const Text('EDITAR OFERTA',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.white,
-                          ))
-                    ],
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    color: Colors.white,
+                    onPressed: () {
+                      showDialog();
+                    },
                   ),
+                ),
+                const Text('EDITAR OFERTA',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    ))
+              ],
+            ),
             const SizedBox(
               height: 20.0,
             ),
@@ -619,15 +619,15 @@ class _OfertaPageState extends State<EditarOferta> {
               const SizedBox(
                 width: 5.0,
               ),
-              _selectimagen(_image2),
+              _selectimagen2(_image2),
               const SizedBox(
                 width: 5.0,
               ),
-              _selectimagen(_image3),
+              _selectimagen3(_image3),
               const SizedBox(
                 width: 5.0,
               ),
-              _selectimagen(_image4),
+              _selectimagen4(_image4),
             ]),
             const SizedBox(
               height: 10.0,
@@ -651,7 +651,69 @@ class _OfertaPageState extends State<EditarOferta> {
         color: Colors.grey[300],
         child: _image != null
             ? Image.file(_image, fit: BoxFit.fill)
-            : Image.network(foto1 ,fit: BoxFit.cover,width: 100.0,height: 100.0,),
+            : Image.network(
+                foto1,
+                fit: BoxFit.cover,
+                width: 100.0,
+                height: 100.0,
+              ),
+      ),
+    ]);
+  }
+
+  Widget _selectimagen2(File? _image) {
+    return Row(children: [
+      Container(
+        alignment: Alignment.center,
+        width: 80,
+        height: 80,
+        color: Colors.grey[300],
+        child: _image != null
+            ? Image.file(_image, fit: BoxFit.fill)
+            : Image.network(
+                foto2,
+                fit: BoxFit.cover,
+                width: 100.0,
+                height: 100.0,
+              ),
+      ),
+    ]);
+  }
+
+  Widget _selectimagen3(File? _image) {
+    return Row(children: [
+      Container(
+        alignment: Alignment.center,
+        width: 80,
+        height: 80,
+        color: Colors.grey[300],
+        child: _image != null
+            ? Image.file(_image, fit: BoxFit.fill)
+            : Image.network(
+                foto3,
+                fit: BoxFit.cover,
+                width: 100.0,
+                height: 100.0,
+              ),
+      ),
+    ]);
+  }
+
+  Widget _selectimagen4(File? _image) {
+    return Row(children: [
+      Container(
+        alignment: Alignment.center,
+        width: 80,
+        height: 80,
+        color: Colors.grey[300],
+        child: _image != null
+            ? Image.file(_image, fit: BoxFit.fill)
+            : Image.network(
+                foto4,
+                fit: BoxFit.cover,
+                width: 100.0,
+                height: 100.0,
+              ),
       ),
     ]);
   }
