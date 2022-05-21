@@ -250,9 +250,10 @@ class Servicios extends State<ServicioWidget> {
                       children: [
                         Expanded(
                           child: Text(
-                            snapshot.data!.titulo.toString(),
+                            snapshot.data!.titulo.toString().toUpperCase(),
                             style: const TextStyle(
-                              fontSize: 15.0,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -285,6 +286,7 @@ class Servicios extends State<ServicioWidget> {
                             style: TextStyle(
                               fontSize: 15.0,
                             ),
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                       ],
@@ -335,6 +337,7 @@ class Servicios extends State<ServicioWidget> {
                           Text(
                             snapshot.data!.descripcion_E.toString(),
                             style: TextStyle(fontSize: 13),
+                            textAlign: TextAlign.justify,
                           ),
                           Divider(
                             height: 24,
@@ -429,6 +432,7 @@ class Servicios extends State<ServicioWidget> {
                           Text(
                             snapshot.data!.descripcion_S.toString(),
                             style: TextStyle(fontSize: 13),
+                            textAlign: TextAlign.justify,
                           ),
                           Divider(
                             height: 24,
@@ -523,6 +527,7 @@ class Servicios extends State<ServicioWidget> {
                           Text(
                             snapshot.data!.descripcion_P.toString(),
                             style: TextStyle(fontSize: 13),
+                            textAlign: TextAlign.justify,
                           ),
                           Divider(
                             height: 24,
@@ -588,13 +593,13 @@ class Servicios extends State<ServicioWidget> {
                     height: 20,
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 30),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 10, 20),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         const Expanded(
                           child: Text(
-                            "VALORACIÓN GENERAL",
+                            "COMENTARIOS",
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -604,7 +609,7 @@ class Servicios extends State<ServicioWidget> {
                       ],
                     ),
                   ),
-                  _valoraciones()
+                  _valoraciones(snapshot)
                 ],
               );
             } else if (snapshot.hasError) {
@@ -643,9 +648,9 @@ class Servicios extends State<ServicioWidget> {
     );
   }
 
-  Widget _valoraciones() {
+  Widget _valoraciones(AsyncSnapshot snapshot) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 16, 12),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -669,16 +674,27 @@ class Servicios extends State<ServicioWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    CircleAvatar(
+                      radius: 16.0,
+                      child: ClipOval(
+                        child: Image.network(
+                          snapshot.data!.foto_user.toString(),
+                          fit: BoxFit.cover,
+                          width: 40.0,
+                          height: 40.0,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
-                      'COONET PAGINA WEB RESPONSIVE',
+                      snapshot.data!.nombre.toString(),
+                      style: TextStyle(fontSize: 20),
                     ),
                   ],
                 ),
-              ),
-              Text(
-                '\300€',
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
@@ -687,21 +703,27 @@ class Servicios extends State<ServicioWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'ESTADO: PAGADO.',
+                      'Muy buen trabajo!',
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
-                          child: Text(
-                            'Total',
-                            textAlign: TextAlign.end,
+                          padding: const EdgeInsets.only(left: 0.0),
+                          child: Flexible(
+                            child: RatingBarIndicator(
+                              rating: double.parse(
+                                  //snapshot.data!.valoracion_G.toString()),
+                                  '4.5'),
+                              itemBuilder: (context, index) => const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                              itemSize: 25.0,
+                              direction: Axis.horizontal,
+                            ),
                           ),
-                        ),
-                        Text(
-                          '\300€',
-                          textAlign: TextAlign.end,
                         ),
                       ],
                     ),

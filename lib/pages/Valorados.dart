@@ -138,10 +138,10 @@ class _PaginaHomeState extends State<Valorados> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              data[index].titulo,
+                                              data[index].titulo.toUpperCase(), style: TextStyle(color: Colors.white),
                                             ),
                                             Text(
-                                              data[index].nombre,
+                                              data[index].nombre, style: TextStyle(color: Colors.white),
                                             ),
                                           ],
                                         ),
@@ -156,7 +156,7 @@ class _PaginaHomeState extends State<Valorados> {
                                               String id_comprar = data[index]
                                                   .id_compra
                                                   .toString();
-                                              fetchValoracion(id_comprar!);
+                                              fetchValoracion(id_comprar);
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -166,8 +166,11 @@ class _PaginaHomeState extends State<Valorados> {
                                                                   fetchValoracion(
                                                                       id_comprar))));
                                             },
-                                            child: const Text('Ver'),
-                                          ),
+                                            child: const Text('Ver', style: TextStyle(
+                                                    color: Colors.black)),
+                                            style: ElevatedButton.styleFrom(
+                                            primary: Colors.white)
+                                          ), 
                                         ],
                                       ),
                                     ],
