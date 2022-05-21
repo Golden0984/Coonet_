@@ -666,6 +666,19 @@ class Servicios extends State<PreviewServicio> {
 
   Widget appbartt(AsyncSnapshot<InfoAnuncio> snapshot) {
     titulo = snapshot.data!.titulo.toString();
+    descripcion = snapshot.data!.descripcion.toString();
+    categoria = snapshot.data!.categoria.toString();
+    descripcion_E = snapshot.data!.descripcion_E.toString();
+    precio_E = snapshot.data!.precio_E.toString();
+    descripcion_S = snapshot.data!.descripcion_S.toString();
+    precio_S = snapshot.data!.precio_S.toString();
+    descripcion_P = snapshot.data!.descripcion_P.toString();
+    precio_P = snapshot.data!.precio_P.toString();
+    foto1 = snapshot.data!.foto1.toString();
+    foto2 = snapshot.data!.foto2.toString();
+    foto3 = snapshot.data!.foto3.toString();
+    foto4 = snapshot.data!.foto4.toString();
+
     return AppBar(
       backgroundColor: Color.fromARGB(255, 147, 34, 200),
       title: Text(snapshot.data!.titulo.toString()),
