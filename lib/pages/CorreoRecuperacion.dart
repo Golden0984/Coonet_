@@ -28,11 +28,11 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
   late TextEditingController respuestactrl = TextEditingController();
   late TextEditingController nuevoctrl = TextEditingController();
   late TextEditingController repetirctrl = TextEditingController();
+  String pregunta_s = "";
 
   bool visibility_email = true;
   bool visibility_Pregunta = false;
   bool visibility_nuevacontra = false;
-
   verificacion() {
     if (emailctrl.text == "") {
       if (preguntactrl.text == "" && respuestactrl.text == "") {
@@ -44,34 +44,84 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
 
   Dio dio = new Dio();
 
-  Future<void> _Subir() async {
-    /*String filename = _image!.path.split('/').last;
-
-    await dio.post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
-    data: formData).then((value){
-      if(value.toString()=='si'){
+  Future<void> _selectEmail() async {
+    FormData formData = FormData.fromMap({
+      "email": emailctrl.text,
+    });
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/SelectEmail.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'no') {
+        Fluttertoast.showToast(
+            msg: "No hay usuario Registrado con este email",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
         login = emailctrl.text;
+        setState(() {
+          fetchPost();
+          visibility_email = false;
+          visibility_Pregunta = true;
+        });
+        pregunta_s = value.toString();
+      }
+    });
+  }
+
+  Future<void> _pregunta() async {
+    FormData formData = FormData.fromMap({
+      "email": emailctrl.text,
+      "respuesta": respuestactrl.text,
+    });
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/pregunta.php',
+            data: formData)
+        .then((value) {
+      print(value.toString());
+      if (value.toString() == 'si') {
+        setState(() {
+          visibility_Pregunta = false;
+          visibility_nuevacontra = true;
+        });
+      } else if (value.toString() == 'respuesta no coincide') {
         Fluttertoast.showToast(
-            msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
-        //Ir a otra pagina
-        {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Menu()));
-        }
-      }else if(value.toString()=='Usuario Registrado'){
+            msg: "Respuesta errónea", toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'no') {
         Fluttertoast.showToast(
-          msg: "El Usuario ya esta Registrado",
-          toastLength: Toast.LENGTH_SHORT);
-      }else if(value.toString()=='Contra no coincide'){
-        Fluttertoast.showToast(
-          msg: "la contraseña no coinciden.", toastLength: Toast.LENGTH_SHORT);
-      }else if(value.toString()=='no'){
-        Fluttertoast.showToast(
-          msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
-      }else{
+            msg: "Error al enviar la pregunta",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
         print(value.toString());
       }
-    });*/
+    });
+  }
+
+  Future<void> _contrasena() async {
+    FormData formData = FormData.fromMap({
+      "email": emailctrl.text,
+      "pass": nuevoctrl.text,
+      "pass_valid": repetirctrl.text,
+    });
+    await dio
+        .post(
+            'https://phpninjahosting.com/manish/Coonet/Php/RecuperarContrasena.php',
+            data: formData)
+        .then((value) {
+      print(value.toString());
+      if (value.toString() == 'hecho') {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => PaginaLogin()));
+      } else if (value.toString() == 'respuesta no coincide') {
+        Fluttertoast.showToast(
+            msg: "Respuesta errónea", toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'no') {
+        Fluttertoast.showToast(
+            msg: "Error al enviar la pregunta",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
+        print(value.toString());
+      }
+    });
   }
 
   @override
@@ -115,7 +165,7 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
             visibility_email
                 ? _emailTextField()
                 : visibility_Pregunta
-                    ? _preguntaTextField()
+                    ? _preguntaTextField(free: fetchPost())
                     : _nuevaTextField(),
             const SizedBox(
               height: 30.0,
@@ -163,50 +213,60 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
     });
   }
 
-  Widget _preguntaTextField() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        child: Column(
-          children: [
-            const Text(
-              "PREGUNTA DE SEGURIDAD",
-              style: TextStyle(
-                  color: Colors.white,
-                  decoration: TextDecoration.underline,
-                  fontSize: 16),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 20),
-              child: Row(
-                children: const [
-                  Icon(
-                    Icons.question_mark,
-                    color: Colors.white,
+  Widget _preguntaTextField({required Future<FreeLan> free}) {
+    return FutureBuilder<FreeLan>(
+      future: free,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return StreamBuilder(
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return Container(
+              child: Column(
+                children: [
+                  const Text(
+                    "PREGUNTA DE SEGURIDAD",
+                    style: TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                        fontSize: 16),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, top: 20),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.question_mark,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(pregunta_s, style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
                   ),
                   SizedBox(
-                    width: 20,
+                    height: 10,
                   ),
-                  Text("PREGUNTA DE SEGURIDAD",
-                      style: TextStyle(color: Colors.white)),
+                  _respuestaTextField(),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  _cambiarAhora()
                 ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            _respuestaTextField(),
-            SizedBox(
-              height: 40,
-            ),
-            _cambiarAhora()
-          ],
-        ),
-      );
-    });
+            );
+          });
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+
+        return const CircularProgressIndicator();
+      },
+    );
   }
 
   Widget _respuestaTextField() {
@@ -335,10 +395,7 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
                   msg: "Rellena el campo antes de continuar",
                   toastLength: Toast.LENGTH_SHORT);
             } else {
-              setState(() {
-                visibility_email = false;
-                visibility_Pregunta = true;
-              });
+              _selectEmail();
             }
           });
     });
@@ -374,10 +431,7 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
                   msg: "Rellena el campo antes de continuar",
                   toastLength: Toast.LENGTH_SHORT);
             } else {
-              setState(() {
-                visibility_Pregunta = false;
-                visibility_nuevacontra = true;
-              });
+              _pregunta();
             }
           });
     });
@@ -414,7 +468,7 @@ class _CorrreoRecuperacionState extends State<CorrreoRecuperacion> {
                   toastLength: Toast.LENGTH_SHORT);
             } else {
               if (nuevoctrl.text == repetirctrl.text) {
-                setState(() {});
+                _contrasena();
               }
             }
           });

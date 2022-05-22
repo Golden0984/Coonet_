@@ -13,6 +13,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import 'MisProyectos.dart';
+
 class EditarOferta extends StatefulWidget {
   static String id = 'Register_page';
 
@@ -116,23 +118,113 @@ class _OfertaPageState extends State<EditarOferta> {
         precio_Pre.text.trim().isEmpty) {
       Fluttertoast.showToast(
           msg: "Hay campos vacios.", toastLength: Toast.LENGTH_SHORT);
+    } else if (vactu == " ") {
+      Fluttertoast.showToast(
+          msg: "Debes selecionar una categoria",
+          toastLength: Toast.LENGTH_SHORT);
     } else {
-      if (_image == null ||
-          _image2 == null ||
-          _image3 == null ||
+      if (_image == null &&
+          _image2 == null &&
+          _image3 == null &&
           _image4 == null) {
-        Fluttertoast.showToast(
-            msg: "Has de selecionar las 4 imagenes",
-            toastLength: Toast.LENGTH_SHORT);
-      } else if (vactu == " ") {
-        Fluttertoast.showToast(
-            msg: "Debes selecionar una categoria",
-            toastLength: Toast.LENGTH_SHORT);
+        FormData formData = FormData.fromMap({
+          "id_anuncio": id_anuncio,
+          "titulo": tituloctrl.text,
+          "descripcion": descripcionctrl.text,
+          "categoria": vactu,
+          "descripcion_E": descripcion_Eco.text,
+          "precio_E": precio_Eco.text,
+          "descripcion_S": descripcion_Sta.text,
+          "precio_S": precio_Sta.text,
+          "descripcion_P": descripcion_Pre.text,
+          "precio_P": precio_Pre.text,
+          'foto1': "no",
+          'foto2': "no",
+          'foto3': "no",
+          'foto4': "no",
+        });
+
+        Update(formData);
+      } else if (_image != null &&
+          _image2 == null &&
+          _image3 == null &&
+          _image4 == null) {
+        String filename = _image!.path.split('/').last;
+
+        FormData formData = FormData.fromMap({
+          "id_anuncio": id_anuncio,
+          "titulo": tituloctrl.text,
+          "descripcion": descripcionctrl.text,
+          "categoria": vactu,
+          "descripcion_E": descripcion_Eco.text,
+          "precio_E": precio_Eco.text,
+          "descripcion_S": descripcion_Sta.text,
+          "precio_S": precio_Sta.text,
+          "descripcion_P": descripcion_Pre.text,
+          "precio_P": precio_Pre.text,
+          'foto1':
+              await MultipartFile.fromFile(_image!.path, filename: filename),
+          'foto2': "no",
+          'foto3': "no",
+          'foto4': "no",
+        });
+        Update(formData);
+      } else if (_image != null &&
+          _image2 != null &&
+          _image3 == null &&
+          _image4 == null) {
+        String filename = _image!.path.split('/').last;
+
+        FormData formData = FormData.fromMap({
+          "id_anuncio": id_anuncio,
+          "titulo": tituloctrl.text,
+          "descripcion": descripcionctrl.text,
+          "categoria": vactu,
+          "descripcion_E": descripcion_Eco.text,
+          "precio_E": precio_Eco.text,
+          "descripcion_S": descripcion_Sta.text,
+          "precio_S": precio_Sta.text,
+          "descripcion_P": descripcion_Pre.text,
+          "precio_P": precio_Pre.text,
+          'foto1':
+              await MultipartFile.fromFile(_image!.path, filename: filename),
+          'foto2':
+              await MultipartFile.fromFile(_image2!.path, filename: filename),
+          'foto3': "no",
+          'foto4': "no",
+        });
+        Update(formData);
+      } else if (_image != null &&
+          _image2 != null &&
+          _image3 != null &&
+          _image4 == null) {
+        String filename = _image!.path.split('/').last;
+
+        FormData formData = FormData.fromMap({
+          "id_anuncio": id_anuncio,
+          "titulo": tituloctrl.text,
+          "descripcion": descripcionctrl.text,
+          "categoria": vactu,
+          "descripcion_E": descripcion_Eco.text,
+          "precio_E": precio_Eco.text,
+          "descripcion_S": descripcion_Sta.text,
+          "precio_S": precio_Sta.text,
+          "descripcion_P": descripcion_Pre.text,
+          "precio_P": precio_Pre.text,
+          'foto1':
+              await MultipartFile.fromFile(_image!.path, filename: filename),
+          'foto2':
+              await MultipartFile.fromFile(_image2!.path, filename: filename),
+          'foto3':
+              await MultipartFile.fromFile(_image3!.path, filename: filename),
+          'foto4': "no",
+        });
+        Update(formData);
       } else {
         String filename = _image!.path.split('/').last;
 
         FormData formData = FormData.fromMap({
-          "email": login,
+          "id_anuncio": id_anuncio,
           "titulo": tituloctrl.text,
           "descripcion": descripcionctrl.text,
           "categoria": vactu,
@@ -151,34 +243,32 @@ class _OfertaPageState extends State<EditarOferta> {
           'foto4':
               await MultipartFile.fromFile(_image4!.path, filename: filename)
         });
-
-        await dio
-            .post(
-                'https://phpninjahosting.com/manish/Coonet/Php/CrearOferta.php',
-                data: formData)
-            .then((value) {
-          if (value.toString() == 'si') {
-            Fluttertoast.showToast(
-                msg: "Oferta Creada Correctamente",
-                toastLength: Toast.LENGTH_SHORT);
-            //Ir a otra pagina
-            {
-              paginaActual = 0;
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Menu()));
-            }
-          } else if (value.toString() == 'no') {
-            Fluttertoast.showToast(
-                msg: "Error Imagen", toastLength: Toast.LENGTH_SHORT);
-          } else if (value.toString() == 'Error User') {
-            Fluttertoast.showToast(
-                msg: "Error User", toastLength: Toast.LENGTH_SHORT);
-          } else {
-            print(value.toString());
-          }
-        });
+        Update(formData);
       }
     }
+  }
+
+  Update(FormData formData) async {
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/EditarAnuncio.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'si') {
+        Fluttertoast.showToast(
+            msg: "Se ha editado Correctamente la oferta",
+            toastLength: Toast.LENGTH_SHORT);
+        //Ir a otra pagina
+        {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MisProyectos()));
+        }
+      } else if (value.toString() == 'no') {
+        Fluttertoast.showToast(
+            msg: "Error al guardar los datos", toastLength: Toast.LENGTH_SHORT);
+      } else {
+        print(value.toString());
+      }
+    });
   }
 
   @override
