@@ -18,10 +18,10 @@ class Servicios extends State<PreviewServicio> {
   late String dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final Future<InfoAnuncio> free;
-  
+
   Servicios(this.free);
 
-    @override
+  @override
   Widget build(BuildContext context) {
     final AsyncSnapshot<InfoAnuncio> ia;
     return Scaffold(
@@ -187,7 +187,10 @@ class Servicios extends State<PreviewServicio> {
                                                     left: 0.0),
                                                 child: Flexible(
                                                   child: RatingBarIndicator(
-                                                    rating: double.parse(snapshot.data!.valoracion_G.toString()),
+                                                    rating: double.parse(
+                                                        snapshot
+                                                            .data!.valoracion_G
+                                                            .toString()),
                                                     itemBuilder:
                                                         (context, index) =>
                                                             const Icon(
@@ -304,7 +307,8 @@ class Servicios extends State<PreviewServicio> {
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text(snapshot.data!.descripcion_E.toString(),
+                          Text(
+                            snapshot.data!.descripcion_E.toString(),
                             style: TextStyle(fontSize: 13),
                           ),
                           Divider(
@@ -651,13 +655,13 @@ class Servicios extends State<PreviewServicio> {
     );
   }
 
-  Widget botonEditar(){
+  Widget botonEditar() {
     return FloatingActionButton.extended(
       backgroundColor: Color.fromARGB(255, 157, 3, 218),
       foregroundColor: Colors.white,
       onPressed: () {
-        Navigator.push( context,MaterialPageRoute( builder: (context) =>
-        EditarOferta()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => EditarOferta()));
       },
       icon: Icon(Icons.edit),
       label: Text('EDITAR'),
@@ -665,6 +669,7 @@ class Servicios extends State<PreviewServicio> {
   }
 
   Widget appbartt(AsyncSnapshot<InfoAnuncio> snapshot) {
+    id_anuncio = snapshot.data!.id.toString();
     titulo = snapshot.data!.titulo.toString();
     descripcion = snapshot.data!.descripcion.toString();
     categoria = snapshot.data!.categoria.toString();
