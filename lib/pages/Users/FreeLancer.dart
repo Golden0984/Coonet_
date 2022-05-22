@@ -9,6 +9,7 @@ class FreeLan {
   final String correo;
   late final String telefono;
   final String foto;
+  final bool premium;
 
   FreeLan({
     required this.id,
@@ -18,6 +19,7 @@ class FreeLan {
     required this.correo,
     required this.telefono,
     required this.foto,
+    required this.premium
   });
 
   factory FreeLan.fromJson(Map json) {
@@ -29,6 +31,7 @@ class FreeLan {
       correo: json['correo_electronico'] as String,
       telefono: json['numero_telefono'] as String,
       foto: json['foto_pefil'] as String,
+      premium: json['premium'] as bool,
     );
   }
 }
@@ -41,6 +44,7 @@ String correo = "";
 String telefono = "";
 String foto = "";
 String login = "";
+bool premium = false;
 Future<FreeLan> fetchPost() async {
   var data = {"email": login};
   var url =
