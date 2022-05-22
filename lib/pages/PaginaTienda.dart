@@ -1,4 +1,5 @@
 import 'package:coonet/pages/Menu.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,27 @@ class PaginaTienda extends StatefulWidget {
 }
 
 class _PaginaTiendaState extends State<PaginaTienda> {
+
+  late bool premium = false;
+
+  Dio dio = new Dio();
+
+  Future<void> _Subir() async {
+
+    FormData formData = FormData.fromMap({
+      //"premium" = premium;
+    });
+
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'si') {
+        
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
