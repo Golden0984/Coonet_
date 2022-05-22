@@ -89,12 +89,12 @@ class PaginaUsr extends StatelessWidget {
     telefono = snapshot.data!.telefono;
     correo = snapshot.data!.correo;
     foto = snapshot.data!.foto;
-    /*/premium = snapshot.data!.premium;
-    if (snapshot.data!.premium == false){
+    premium = snapshot.data!.premium.toString();
+    if (snapshot.data!.premium == "0") {
       plus = "No adquirido";
     } else {
       plus = "Adquirido";
-    }*/
+    }
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
@@ -140,16 +140,27 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: Text(
-                        "Nombre: " +
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
                             snapshot.data!.nombre +
-                            " " +
-                            snapshot.data!.apellido,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(245, 243, 243, 1),
-                          fontSize: 16.0,
-                        ),
-                        textAlign: TextAlign.justify,
+                                " " +
+                                snapshot.data!.apellido,
+                            style: const TextStyle(
+                              color: Color.fromRGBO(245, 243, 243, 1),
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -159,13 +170,25 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: Text(
-                        "Usuario: " + snapshot.data!.user,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(245, 243, 243, 1),
-                          fontSize: 16.0,
-                        ),
-                        textAlign: TextAlign.justify,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            snapshot.data!.user,
+                            style: const TextStyle(
+                              color: Color.fromRGBO(245, 243, 243, 1),
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -175,13 +198,25 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: Text(
-                        "Email: " + snapshot.data!.correo,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(245, 243, 243, 1),
-                          fontSize: 16.0,
-                        ),
-                        textAlign: TextAlign.justify,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.email,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            snapshot.data!.correo,
+                            style: const TextStyle(
+                              color: Color.fromRGBO(245, 243, 243, 1),
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -191,13 +226,25 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: Text(
-                        "Tel: " + snapshot.data!.telefono,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(245, 243, 243, 1),
-                          fontSize: 16.0,
-                        ),
-                        textAlign: TextAlign.justify,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            snapshot.data!.telefono,
+                            style: const TextStyle(
+                              color: Color.fromRGBO(245, 243, 243, 1),
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ],
                       ),
                     ),
                   ),
