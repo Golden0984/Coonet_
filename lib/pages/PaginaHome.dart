@@ -17,7 +17,7 @@ class _PaginaHomeState extends State<PaginaHome> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<Anuncios> data = <Anuncios>[];
-
+  bool visible = false;
   Future<List<Anuncios>> get_All_anuncio() async {
     var url =
         Uri.parse("https://phpninjahosting.com/manish/Coonet/Php/Anuncio.php");
@@ -39,9 +39,12 @@ class _PaginaHomeState extends State<PaginaHome> {
     var datos = jsonDecode(response.body);
     var registros = <Anuncios>[];
     if (jsonDecode(response.body) == "no") {
-      Fluttertoast.showToast(
+      if (visible == false){
+        Fluttertoast.showToast(
           msg: "No hay ninguna ofeta con esta categoria",
           toastLength: Toast.LENGTH_SHORT);
+      }
+      
     } else {
       for (datos in datos) {
         registros.add(Anuncios.fromJson(datos));
@@ -212,6 +215,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                           ),
                           onTap: () {
                             setState(() {
+                              visible = true;
                               data = <Anuncios>[];
                               get_anuncio_cat("programacion").then((value) {
                                 get_All_anuncio().then((value) {
@@ -272,6 +276,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                           ),
                           onTap: () {
                             setState(() {
+                              visible = false;
                               data = <Anuncios>[];
                               get_anuncio_cat("app").then((value) {
                                 setState(() {
@@ -388,6 +393,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                           ),
                           onTap: () {
                             setState(() {
+                              visible = false;
                               data = <Anuncios>[];
                               get_anuncio_cat("disenoweb").then((value) {
                                 setState(() {
@@ -446,6 +452,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                           ),
                           onTap: () {
                             setState(() {
+                              visible = false;
                               data = <Anuncios>[];
                               get_anuncio_cat("videoEditig").then((value) {
                                 setState(() {
@@ -504,6 +511,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                           ),
                           onTap: () {
                             setState(() {
+                              visible = false;
                               data = <Anuncios>[];
                               get_anuncio_cat("editfotos").then((value) {
                                 setState(() {
@@ -562,6 +570,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                           ),
                           onTap: () {
                             setState(() {
+                              visible = false;
                               data = <Anuncios>[];
                               get_anuncio_cat("produvideo").then((value) {
                                 setState(() {

@@ -68,10 +68,6 @@ class _PagoWidgetState extends State<PagoWidget> {
                 const SizedBox(
                   height: 10,
                 ),
-                _Pagos(),
-                const SizedBox(
-                  height: 10,
-                ),
               ],
             ),
           ],
@@ -111,36 +107,59 @@ class _PagoWidgetState extends State<PagoWidget> {
                   children: [
                     Text(
                       'COONET PAGINA WEB RESPONSIVE',
+
+                      style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold),
+
                     ),
                   ],
                 ),
               ),
-              Text(
-                '\300€',
+
+              Row(
+                children: [
+                  Text(
+                    'PLAN: ',
+                    style: TextStyle(
+                                fontWeight: FontWeight.bold),
+                  ),
+                  Text("PLAN ECONOMICO", 
+                  )
+                ],
+
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'ESTADO: PAGADO.',
+                      'ESTADO: ',
+                      style: TextStyle(
+                                fontWeight: FontWeight.bold),
                     ),
+                    Text("PAGADO",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 255, 8),
+                                fontWeight: FontWeight.bold),
+                     ),
+                                Spacer(),
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
-                          child: Text(
-                            'Total',
-                            textAlign: TextAlign.end,
-                          ),
-                        ),
+
+                          child:
                         Text(
-                          '\300€',
+                          '\-300€',
                           textAlign: TextAlign.end,
-                        ),
+                          style: TextStyle(
+                                fontWeight: FontWeight.bold),
+                        )),
+
                       ],
                     ),
                   ],
