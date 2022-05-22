@@ -23,10 +23,14 @@ class Servicios extends State<ServicioWidget> {
 
   Dio dio = new Dio();
 
-  Future<void> _Comprar(String id) async {
+  Future<void> _Comprar(
+      String id, String plan, String titulo, String precio) async {
     FormData formData = FormData.fromMap({
       "correo": login,
       "id_Anuncio": id,
+      "plan": plan,
+      "titulo": titulo,
+      "precio": precio,
     });
 
     await dio
@@ -369,7 +373,10 @@ class Servicios extends State<ServicioWidget> {
                                   ElevatedButton(
                                       onPressed: () {
                                         showDialog(
-                                            snapshot.data!.id.toString());
+                                            snapshot.data!.id.toString(),
+                                            'PLAN ECONÓMICO',
+                                            snapshot.data!.titulo.toString(),
+                                            snapshot.data!.precio_E.toString());
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
@@ -464,7 +471,10 @@ class Servicios extends State<ServicioWidget> {
                                   ElevatedButton(
                                       onPressed: () {
                                         showDialog(
-                                            snapshot.data!.id.toString());
+                                            snapshot.data!.id.toString(),
+                                            'PLAN STANDAR',
+                                            snapshot.data!.titulo.toString(),
+                                            snapshot.data!.precio_S.toString());
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
@@ -559,7 +569,10 @@ class Servicios extends State<ServicioWidget> {
                                   ElevatedButton(
                                       onPressed: () {
                                         showDialog(
-                                            snapshot.data!.id.toString());
+                                            snapshot.data!.id.toString(),
+                                            'PLAN PREMIUM',
+                                            snapshot.data!.titulo.toString(),
+                                            snapshot.data!.precio_P.toString());
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
@@ -622,7 +635,7 @@ class Servicios extends State<ServicioWidget> {
     );
   }
 
-  void showDialog(String string) {
+  void showDialog(String id, String plan, String titulo, String precio) {
     showCupertinoDialog(
       context: context,
       builder: (context) {
@@ -632,7 +645,7 @@ class Servicios extends State<ServicioWidget> {
             CupertinoDialogAction(
               child: Text("SI"),
               onPressed: () {
-                _Comprar(string);
+                _Comprar(id, plan, titulo, precio);
                 Navigator.of(context).pop();
               },
             ),

@@ -107,13 +107,16 @@ class _PagoWidgetState extends State<PagoWidget> {
                   children: [
                     Text(
                       'COONET PAGINA WEB RESPONSIVE',
+
                       style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.bold),
+
                     ),
                   ],
                 ),
               ),
+
               Row(
                 children: [
                   Text(
@@ -124,6 +127,7 @@ class _PagoWidgetState extends State<PagoWidget> {
                   Text("PLAN ECONOMICO", 
                   )
                 ],
+
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
@@ -141,11 +145,13 @@ class _PagoWidgetState extends State<PagoWidget> {
                                 fontWeight: FontWeight.bold),
                      ),
                                 Spacer(),
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
+
                           child:
                         Text(
                           '\-300€',
@@ -153,6 +159,7 @@ class _PagoWidgetState extends State<PagoWidget> {
                           style: TextStyle(
                                 fontWeight: FontWeight.bold),
                         )),
+
                       ],
                     ),
                   ],
