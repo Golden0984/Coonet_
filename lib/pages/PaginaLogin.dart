@@ -6,11 +6,10 @@ import 'package:coonet/pages/PreguntaSeguridad.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-
+import 'Users/FreeLancer.dart';
 import 'CorreoRecuperacion.dart';
 import 'Menu.dart';
 import 'RecuperarContra.dart';
-import 'Users/FreeLancer.dart';
 
 class PaginaLogin extends StatefulWidget {
   static String id = 'login_page';
