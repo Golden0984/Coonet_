@@ -1,7 +1,9 @@
 import 'package:coonet/pages/Menu.dart';
+import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PaginaTienda extends StatefulWidget {
   const PaginaTienda({Key? key}) : super(key: key);
@@ -10,23 +12,30 @@ class PaginaTienda extends StatefulWidget {
 }
 
 class _PaginaTiendaState extends State<PaginaTienda> {
-
   late bool premium = false;
 
   Dio dio = new Dio();
 
-  Future<void> _Subir() async {
-
+  Future<void> _Comprar(String plan, String titulo, String precio) async {
     FormData formData = FormData.fromMap({
-      //"premium" = premium;
+      "correo": login,
+      "plan": plan,
+      "titulo": titulo,
+      "precio": precio,
     });
 
     await dio
-        .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+        .post('https://phpninjahosting.com/manish/Coonet/Php/Tienda.php',
             data: formData)
         .then((value) {
-      if (value.toString() == 'si') {
-        
+      if (value.toString() == 'hecho') {
+        acceptCompra();
+      } else if (value.toString() == 'Error') {
+        Fluttertoast.showToast(
+            msg: "Error al realizar la compra",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
+        print(value.toString());
       }
     });
   }
@@ -122,7 +131,8 @@ class _PaginaTiendaState extends State<PaginaTienda> {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            showDialog();
+                            showDialog('SUSCRIPCIÓN PREMIUM',
+                                'SUSCRIPCIÓN PREMIUM (MENSUAL)', '9,99');
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -211,7 +221,8 @@ class _PaginaTiendaState extends State<PaginaTienda> {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            showDialog();
+                            showDialog('SUSCRIPCIÓN PREMIUM',
+                                'SUSCRIPCIÓN PREMIUM (TRIMESTRAL)', '25,99');
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -287,7 +298,7 @@ class _PaginaTiendaState extends State<PaginaTienda> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '89,99€/mes',
+                          '64,99€/Anual',
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
@@ -300,7 +311,8 @@ class _PaginaTiendaState extends State<PaginaTienda> {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            showDialog();
+                            showDialog('SUSCRIPCIÓN PREMIUM',
+                                'SUSCRIPCIÓN PREMIUM (ANUAL)', '64,99');
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
@@ -330,7 +342,7 @@ class _PaginaTiendaState extends State<PaginaTienda> {
     );
   }
 
-  void showDialog() {
+  void showDialog(String titulo, String plan, String precio) {
     showCupertinoDialog(
       context: context,
       builder: (context) {
@@ -340,7 +352,7 @@ class _PaginaTiendaState extends State<PaginaTienda> {
             CupertinoDialogAction(
               child: Text("SI"),
               onPressed: () {
-                acceptCompra();
+                _Comprar(plan, titulo, precio);
               },
             ),
             CupertinoDialogAction(
