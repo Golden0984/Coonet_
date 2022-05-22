@@ -49,7 +49,7 @@ String login = "";
 String premium = "";
 
 Future<FreeLan> fetchPost() async {
-  var data = {"email": "h"};
+  var data = {"email": login};
   var url =
       Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/UserInfo.php');
   final response = await http.post(url, body: data);
@@ -65,7 +65,7 @@ Future<FreeLan> fetchPost() async {
 }
 
 Future<FreeLan> Pregunta() async {
-  var data = {"email": "h"};
+  var data = {"email": login};
   var url =
       Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/UserInfo.php');
   final response = await http.post(url, body: data);
