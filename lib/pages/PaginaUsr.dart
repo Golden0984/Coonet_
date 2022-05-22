@@ -1,7 +1,7 @@
 import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
-import '../Pagos.dart';
+import 'Pagos.dart';
 import 'Menu.dart';
 import 'MisProyectos.dart';
 import 'PaginaLogin.dart';
@@ -173,7 +173,7 @@ class PaginaUsr extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.person,
+                            Icons.alternate_email_rounded,
                             color: Color.fromARGB(255, 255, 255, 255),
                             size: 20,
                           ),
@@ -254,13 +254,25 @@ class PaginaUsr extends StatelessWidget {
                   SizedBox(
                     child: Align(
                       alignment: const AlignmentDirectional(-1, 0),
-                      child: Text(
-                        "Premium: " + plus,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(245, 243, 243, 1),
-                          fontSize: 16.0,
-                        ),
-                        textAlign: TextAlign.justify,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.verified,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            size: 20,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            plus,
+                            style: const TextStyle(
+                              color: Color.fromRGBO(245, 243, 243, 1),
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ],
                       ),
                     ),
                   ),
