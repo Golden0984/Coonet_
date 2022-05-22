@@ -82,12 +82,19 @@ class PaginaUsr extends StatelessWidget {
   }
 
   Widget _Perfil(AsyncSnapshot<FreeLan> snapshot) {
+    String plus = "";
     nombre = snapshot.data!.nombre;
     apellido = snapshot.data!.apellido;
     user = snapshot.data!.user;
     telefono = snapshot.data!.telefono;
     correo = snapshot.data!.correo;
     foto = snapshot.data!.foto;
+    /*/premium = snapshot.data!.premium;
+    if (snapshot.data!.premium == false){
+      plus = "No adquirido";
+    } else {
+      plus = "Adquirido";
+    }*/
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
@@ -186,6 +193,22 @@ class PaginaUsr extends StatelessWidget {
                       alignment: const AlignmentDirectional(-1, 0),
                       child: Text(
                         "Tel: " + snapshot.data!.telefono,
+                        style: const TextStyle(
+                          color: Color.fromRGBO(245, 243, 243, 1),
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  SizedBox(
+                    child: Align(
+                      alignment: const AlignmentDirectional(-1, 0),
+                      child: Text(
+                        "Premium: " + plus,
                         style: const TextStyle(
                           color: Color.fromRGBO(245, 243, 243, 1),
                           fontSize: 16.0,
