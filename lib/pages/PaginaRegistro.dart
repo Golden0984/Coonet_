@@ -36,6 +36,14 @@ class _RegisterPageState extends State<PaginaRegistro> {
 
   String texto = "ninguna pregunta selecionado";
   String vactu = " ";
+  bool _validate = false;
+  bool _validate2 = false;
+  bool _validate3 = false;
+  bool _validate4 = false;
+  bool _validate5 = false;
+  bool _validate6 = false;
+  bool _validate7 = false;
+  bool _validate9 = false;
 
   final _picker = ImagePicker();
   // Implementing the image picker
@@ -193,7 +201,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           style: const TextStyle(color: Colors.white),
           controller: nombrectrl,
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -205,7 +214,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              nombrectrl.text.isEmpty ? _validate = true : _validate = false;
+            });
+          },
         ),
       );
     });
@@ -220,7 +233,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           style: const TextStyle(color: Colors.white),
           controller: apellidosctrl,
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate2 ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -232,7 +246,13 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              apellidosctrl.text.isEmpty
+                  ? _validate2 = true
+                  : _validate2 = false;
+            });
+          },
         ),
       );
     });
@@ -247,7 +267,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           style: const TextStyle(color: Colors.white),
           controller: userctrl,
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate3 ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -259,7 +280,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              userctrl.text.isEmpty ? _validate3 = true : _validate3 = false;
+            });
+          },
         ),
       );
     });
@@ -274,7 +299,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           style: const TextStyle(color: Colors.white),
           controller: telefonoctrl,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate4 ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -285,7 +311,13 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              telefonoctrl.text.isEmpty
+                  ? _validate4 = true
+                  : _validate4 = false;
+            });
+          },
         ),
       );
     });
@@ -300,7 +332,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           style: const TextStyle(color: Colors.white),
           controller: emailctrl,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate5 ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -315,7 +348,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              emailctrl.text.isEmpty ? _validate5 = true : _validate5 = false;
+            });
+          },
         ),
       );
     });
@@ -331,7 +368,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: passctrl,
           keyboardType: TextInputType.text,
           obscureText: true,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate6 ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -346,7 +384,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              passctrl.text.isEmpty ? _validate6 = true : _validate6 = false;
+            });
+          },
         ),
       );
     });
@@ -362,7 +404,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: repeatpassctrl,
           keyboardType: TextInputType.text,
           obscureText: true,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate7 ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -377,7 +420,13 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              repeatpassctrl.text.isEmpty
+                  ? _validate7 = true
+                  : _validate7 = false;
+            });
+          },
         ),
       );
     });
@@ -494,7 +543,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           style: const TextStyle(color: Colors.white),
           controller: respuestactrl,
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _validate9 ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -509,7 +559,13 @@ class _RegisterPageState extends State<PaginaRegistro> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              respuestactrl.text.isEmpty
+                  ? _validate9 = true
+                  : _validate9 = false;
+            });
+          },
         ),
       );
     });
@@ -539,8 +595,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () => agree ? _Subir() : Fluttertoast.showToast(
-            msg: "No se han aceptado los terminos!", toastLength: Toast.LENGTH_SHORT));
+          onPressed: () => agree
+              ? _Subir()
+              : Fluttertoast.showToast(
+                  msg: "No se han aceptado los terminos!",
+                  toastLength: Toast.LENGTH_SHORT));
     });
   }
 
@@ -568,45 +627,48 @@ class _RegisterPageState extends State<PaginaRegistro> {
     });
   }
 
-  Widget terminos(){
+  Widget terminos() {
     return Row(
       children: [
-        Theme(data: ThemeData(unselectedWidgetColor: Colors.white),
-        child: 
-        Checkbox(value: agree, onChanged: (value) {
-                      setState(() {
-                        agree = value ?? false;
-                      });
-                    },
-                    
-        )),
+        Theme(
+            data: ThemeData(unselectedWidgetColor: Colors.white),
+            child: Checkbox(
+              value: agree,
+              onChanged: (value) {
+                setState(() {
+                  agree = value ?? false;
+                });
+              },
+            )),
         servicios()
       ],
     );
   }
 
-  Widget servicios(){
+  Widget servicios() {
     return InkWell(
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            children: const [
-              Text(
-                'He leido y acepto los terminos y condiciones de la ',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'Politica de Privacidad y Servicios',
-                style: TextStyle(color: Color.fromARGB(255, 175, 82, 206),decoration: TextDecoration.underline),
-              ),
-            ],
-          ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Column(
+          children: const [
+            Text(
+              'He leido y acepto los terminos y condiciones de la ',
+              style: TextStyle(color: Colors.white),
+            ),
+            Text(
+              'Politica de Privacidad y Servicios',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 38, 55, 212),
+                  decoration: TextDecoration.underline),
+            ),
+          ],
         ),
-        onTap: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Politicas())),
-      );
+      ),
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Politicas())),
+    );
   }
-  
+
   Widget _SubirImagen() {
     return Container(
       decoration: BoxDecoration(
