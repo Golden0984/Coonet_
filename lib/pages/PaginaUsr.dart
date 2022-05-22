@@ -1,7 +1,7 @@
 import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
-import '../Pagos.dart';
+import 'Pagos.dart';
 import 'Menu.dart';
 import 'MisProyectos.dart';
 import 'PaginaLogin.dart';
