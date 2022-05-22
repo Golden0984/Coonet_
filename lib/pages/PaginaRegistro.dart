@@ -29,7 +29,6 @@ class _RegisterPageState extends State<PaginaRegistro> {
   late TextEditingController emailctrl = TextEditingController();
   late TextEditingController passctrl = TextEditingController();
   late TextEditingController repeatpassctrl = TextEditingController();
-  late TextEditingController preguntactrl = TextEditingController();
   late TextEditingController respuestactrl = TextEditingController();
   late bool agree = false;
   File? _image;
@@ -62,52 +61,72 @@ class _RegisterPageState extends State<PaginaRegistro> {
   Dio dio = new Dio();
 
   Future<void> _Subir() async {
-    String filename = _image!.path.split('/').last;
+    if (nombrectrl.text.trim().isEmpty ||
+        apellidosctrl.text.trim().isEmpty ||
+        userctrl.text.trim().isEmpty ||
+        telefonoctrl.text.trim().isEmpty ||
+        emailctrl.text.trim().isEmpty ||
+        passctrl.text.trim().isEmpty ||
+        repeatpassctrl.text.trim().isEmpty ||
+        respuestactrl.text.trim().isEmpty) {
+      Fluttertoast.showToast(
+          msg: "Hay campos en vacio", toastLength: Toast.LENGTH_SHORT);
+    } else if (vactu == " ") {
+      Fluttertoast.showToast(
+          msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
+    } else if (_image == null) {
+      Fluttertoast.showToast(
+          msg: "Seleciona una iamgen para continuar",
+          toastLength: Toast.LENGTH_SHORT);
+    } else {
+      String filename = _image!.path.split('/').last;
 
-    FormData formData = FormData.fromMap({
-      "nombre": nombrectrl.text,
-      "apellidos": apellidosctrl.text,
-      "usuario": userctrl.text,
-      "email": emailctrl.text,
-      "tel": telefonoctrl.text,
-      "pass": passctrl.text,
-      "pass_valid": repeatpassctrl.text,
-      "pregunta": vactu,
-      "respuesta": respuestactrl.text,
-      'file': await MultipartFile.fromFile(_image!.path, filename: filename)
-    });
+      FormData formData = FormData.fromMap({
+        "nombre": nombrectrl.text,
+        "apellidos": apellidosctrl.text,
+        "usuario": userctrl.text,
+        "email": emailctrl.text,
+        "tel": telefonoctrl.text,
+        "pass": passctrl.text,
+        "pass_valid": repeatpassctrl.text,
+        "pregunta": vactu,
+        "respuesta": respuestactrl.text,
+        'file': await MultipartFile.fromFile(_image!.path, filename: filename)
+      });
 
-    await dio
-        .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
-            data: formData)
-        .then((value) {
-      if (value.toString() == 'si') {
-        login = emailctrl.text;
-        Fluttertoast.showToast(
-            msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
-        //Ir a otra pagina
-        {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Menu()));
+      await dio
+          .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+              data: formData)
+          .then((value) {
+        if (value.toString() == 'si') {
+          login = emailctrl.text;
+          Fluttertoast.showToast(
+              msg: "se ha creado correctamnete",
+              toastLength: Toast.LENGTH_SHORT);
+          //Ir a otra pagina
+          {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Menu()));
+          }
+        } else if (value.toString() == 'Usuario Registrado') {
+          Fluttertoast.showToast(
+              msg: "El Usuario ya esta Registrado",
+              toastLength: Toast.LENGTH_SHORT);
+        } else if (value.toString() == 'Contra no coincide') {
+          Fluttertoast.showToast(
+              msg: "la contraseña no coinciden.",
+              toastLength: Toast.LENGTH_SHORT);
+        } else if (value.toString() == 'no') {
+          Fluttertoast.showToast(
+              msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
+        } else if (value.toString() == 'SELECIONA PREGUNTA') {
+          Fluttertoast.showToast(
+              msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
+        } else {
+          print(value.toString());
         }
-      } else if (value.toString() == 'Usuario Registrado') {
-        Fluttertoast.showToast(
-            msg: "El Usuario ya esta Registrado",
-            toastLength: Toast.LENGTH_SHORT);
-      } else if (value.toString() == 'Contra no coincide') {
-        Fluttertoast.showToast(
-            msg: "la contraseña no coinciden.",
-            toastLength: Toast.LENGTH_SHORT);
-      } else if (value.toString() == 'no') {
-        Fluttertoast.showToast(
-            msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
-      } else if (value.toString() == 'SELECIONA PREGUNTA') {
-        Fluttertoast.showToast(
-            msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
-      } else {
-        print(value.toString());
-      }
-    });
+      });
+    }
   }
 
   @override
