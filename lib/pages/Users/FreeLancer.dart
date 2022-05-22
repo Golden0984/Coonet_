@@ -10,19 +10,18 @@ class FreeLan {
   final String pregunta;
   late final String telefono;
   final String foto;
-  final bool premium;
+  final String premium;
 
-  FreeLan({
-    required this.id,
-    required this.nombre,
-    required this.apellido,
-    required this.user,
-    required this.correo,
-    required this.pregunta,
-    required this.telefono,
-    required this.foto,
-    required this.premium
-  });
+  FreeLan(
+      {required this.id,
+      required this.nombre,
+      required this.apellido,
+      required this.user,
+      required this.correo,
+      required this.pregunta,
+      required this.telefono,
+      required this.foto,
+      required this.premium});
 
   factory FreeLan.fromJson(Map json) {
     return FreeLan(
@@ -34,7 +33,7 @@ class FreeLan {
       pregunta: json['pregunta_recuperacion'] as String,
       telefono: json['numero_telefono'] as String,
       foto: json['foto_pefil'] as String,
-      premium: json['premium'] as bool,
+      premium: json['Premium'] as String,
     );
   }
 }
@@ -47,7 +46,8 @@ String correo = "";
 String telefono = "";
 String foto = "";
 String login = "";
-bool premium = false;
+String premium = "";
+
 Future<FreeLan> fetchPost() async {
   var data = {"email": "h"};
   var url =
