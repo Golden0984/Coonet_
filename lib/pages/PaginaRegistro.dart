@@ -43,7 +43,9 @@ class _RegisterPageState extends State<PaginaRegistro> {
   bool _vacioContra = false;
   bool _vacioRepetir = false;
   bool _vacioRespuesta = false;
+  bool _valUser = false;
   bool _valEmail = false;
+  bool _valTel = false;
   bool _valContra = false;
   bool _valRepetir = false;
 
@@ -62,7 +64,9 @@ class _RegisterPageState extends State<PaginaRegistro> {
   }
 
   Dio dio = new Dio();
-  RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,18}$');
+  RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*\d)[a-zA-Z\d]{8,18}$');
+  RegExp user = RegExp(r'^(?=.*[a-z])[a-zA-Z\d]{2,}$');
+  RegExp tel = RegExp(r'^[0-9]{9}$');
   Future<void> _Subir() async {
     if (nombrectrl.text.trim().isEmpty ||
         apellidosctrl.text.trim().isEmpty ||
@@ -77,10 +81,29 @@ class _RegisterPageState extends State<PaginaRegistro> {
     } else if (vactu == " ") {
       Fluttertoast.showToast(
           msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
-    } else if (_image == null) {
+    } else if (_valContra != false) {
+          Fluttertoast.showToast(
+          msg: "Contraseña no cumple los requisitos", toastLength: Toast.LENGTH_SHORT);
+    } else if (_valUser != false) {
       Fluttertoast.showToast(
-          msg: "Seleciona una iamgen para continuar",
-          toastLength: Toast.LENGTH_SHORT);
+          msg: "Usuario invalido", toastLength: Toast.LENGTH_SHORT);
+    } else if (_valTel != false) {
+      Fluttertoast.showToast(
+                msg: "Telefono invalido", toastLength: Toast.LENGTH_SHORT);
+    } else if (_image == null) {
+
+      FormData formData = FormData.fromMap({
+        "nombre": nombrectrl.text,
+        "apellidos": apellidosctrl.text,
+        "usuario": userctrl.text,
+        "email": emailctrl.text,
+        "tel": telefonoctrl.text,
+        "pass": passctrl.text,
+        "pass_valid": repeatpassctrl.text,
+        "pregunta": vactu,
+        "respuesta": respuestactrl.text,
+        'file': 'no'
+      });
     } else {
       String filename = _image!.path.split('/').last;
 
@@ -119,9 +142,6 @@ class _RegisterPageState extends State<PaginaRegistro> {
           Fluttertoast.showToast(
               msg: "la contraseña no coinciden.",
               toastLength: Toast.LENGTH_SHORT);
-        } else if (value.toString() == 'no') {
-          Fluttertoast.showToast(
-              msg: "Elije una imagen", toastLength: Toast.LENGTH_SHORT);
         } else if (value.toString() == 'SELECIONA PREGUNTA') {
           Fluttertoast.showToast(
               msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
@@ -290,7 +310,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: userctrl,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              errorText: _vacioUser ? 'No se puede dejar vacio' : null,
+              errorText: _vacioUser ? 'No se puede dejar vacio' : _valUser ? 'Usuario invalido' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -305,6 +325,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           onChanged: (value) {
             setState(() {
               userctrl.text.isEmpty ? _vacioUser = true : _vacioUser = false;
+              !user.hasMatch(userctrl.text) ? _valUser = true : _valUser = false;
             });
           },
         ),
@@ -322,7 +343,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: telefonoctrl,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
-              errorText: _vacioTelefono ? 'No se puede dejar vacio' : null,
+              errorText: _vacioTelefono ? 'No se puede dejar vacio' : _valTel ? 'Telefono invalido' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -335,9 +356,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              telefonoctrl.text.isEmpty
-                  ? _vacioTelefono = true
-                  : _vacioTelefono = false;
+              telefonoctrl.text.isEmpty ? _vacioTelefono = true : _vacioTelefono = false;
+              !tel.hasMatch(telefonoctrl.text) ? _valTel = true : _valTel = false;
             });
           },
         ),
