@@ -4,7 +4,7 @@ import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaLogin.dart';
 import 'package:coonet/pages/Politicas.dart';
 import 'package:flutter/material.dart';
-
+import 'package:email_validator/email_validator.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
@@ -35,14 +35,17 @@ class _RegisterPageState extends State<PaginaRegistro> {
 
   String texto = "ninguna pregunta selecionado";
   String vactu = " ";
-  bool _validate = false;
-  bool _validate2 = false;
-  bool _validate3 = false;
-  bool _validate4 = false;
-  bool _validate5 = false;
-  bool _validate6 = false;
-  bool _validate7 = false;
-  bool _validate9 = false;
+  bool _vacioNombre = false;
+  bool _vacioApellido = false;
+  bool _vacioUser = false;
+  bool _vacioTelefono = false;
+  bool _vacioEmail = false;
+  bool _vacioContra = false;
+  bool _vacioRepetir = false;
+  bool _vacioRespuesta = false;
+  bool _valEmail = false;
+  bool _valContra = false;
+  bool _valRepetir = false;
 
   final _picker = ImagePicker();
   // Implementing the image picker
@@ -59,7 +62,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
   }
 
   Dio dio = new Dio();
-
+  RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,18}$');
   Future<void> _Subir() async {
     if (nombrectrl.text.trim().isEmpty ||
         apellidosctrl.text.trim().isEmpty ||
@@ -221,7 +224,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: nombrectrl,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              errorText: _validate ? 'No se puede dejar vacio' : null,
+              errorText: _vacioNombre ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -235,7 +238,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              nombrectrl.text.isEmpty ? _validate = true : _validate = false;
+              nombrectrl.text.isEmpty ? _vacioNombre = true : _vacioNombre = false;
             });
           },
         ),
@@ -253,7 +256,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: apellidosctrl,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              errorText: _validate2 ? 'No se puede dejar vacio' : null,
+              errorText: _vacioApellido ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -268,8 +271,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           onChanged: (value) {
             setState(() {
               apellidosctrl.text.isEmpty
-                  ? _validate2 = true
-                  : _validate2 = false;
+                  ? _vacioApellido = true
+                  : _vacioApellido = false;
             });
           },
         ),
@@ -287,7 +290,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: userctrl,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              errorText: _validate3 ? 'No se puede dejar vacio' : null,
+              errorText: _vacioUser ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -301,7 +304,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              userctrl.text.isEmpty ? _validate3 = true : _validate3 = false;
+              userctrl.text.isEmpty ? _vacioUser = true : _vacioUser = false;
             });
           },
         ),
@@ -319,7 +322,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: telefonoctrl,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
-              errorText: _validate4 ? 'No se puede dejar vacio' : null,
+              errorText: _vacioTelefono ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -333,8 +336,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           onChanged: (value) {
             setState(() {
               telefonoctrl.text.isEmpty
-                  ? _validate4 = true
-                  : _validate4 = false;
+                  ? _vacioTelefono = true
+                  : _vacioTelefono = false;
             });
           },
         ),
@@ -352,7 +355,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: emailctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-              errorText: _validate5 ? 'No se puede dejar vacio' : null,
+              errorText: _vacioEmail ? 'No se puede dejar vacio' : _valEmail  ? 'Correo Invalido' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -369,7 +372,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              emailctrl.text.isEmpty ? _validate5 = true : _validate5 = false;
+              emailctrl.text.isEmpty ? _vacioEmail = true : _vacioEmail = false;
+              !(EmailValidator.validate(emailctrl.text)) ? _valEmail = true : _valEmail = false;
             });
           },
         ),
@@ -388,14 +392,14 @@ class _RegisterPageState extends State<PaginaRegistro> {
           keyboardType: TextInputType.text,
           obscureText: true,
           decoration: InputDecoration(
-              errorText: _validate6 ? 'No se puede dejar vacio' : null,
+              errorText: _vacioContra ? 'No se puede dejar vacio' : _valContra ? 'Min. 8 caracteres(1 Mayus, 1 Minus & 1 Num)' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Caracteres (Min. 5 - Max. 18)',
+              hintText: 'Caracteres (Min. 8 - Max. 18)',
               hintStyle: TextStyle(
                 color: Colors.white54,
               ),
@@ -405,7 +409,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              passctrl.text.isEmpty ? _validate6 = true : _validate6 = false;
+              passctrl.text.isEmpty ? _vacioContra = true : _vacioContra = false;
+              !regex.hasMatch(passctrl.text) ? _valContra = true : _valContra = false;
             });
           },
         ),
@@ -424,7 +429,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           keyboardType: TextInputType.text,
           obscureText: true,
           decoration: InputDecoration(
-              errorText: _validate7 ? 'No se puede dejar vacio' : null,
+              errorText: _vacioRepetir ? 'No se puede dejar vacio' : _valRepetir ? 'No coincide con la contraseña' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -441,9 +446,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              repeatpassctrl.text.isEmpty
-                  ? _validate7 = true
-                  : _validate7 = false;
+              repeatpassctrl.text.isEmpty ? _vacioRepetir = true : _vacioRepetir = false;
+              !(passctrl.text == repeatpassctrl.text) ? _valRepetir = true : _valRepetir = false;
             });
           },
         ),
@@ -563,7 +567,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: respuestactrl,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              errorText: _validate9 ? 'No se puede dejar vacio' : null,
+              errorText: _vacioRespuesta ? 'No se puede dejar vacio' : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -581,8 +585,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
           onChanged: (value) {
             setState(() {
               respuestactrl.text.isEmpty
-                  ? _validate9 = true
-                  : _validate9 = false;
+                  ? _vacioRespuesta = true
+                  : _vacioRespuesta = false;
             });
           },
         ),
