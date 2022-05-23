@@ -31,6 +31,25 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
   late TextEditingController descripcion_P = TextEditingController();
   late TextEditingController precio_P = TextEditingController();
 
+  bool _vacioTitulo = false;
+  bool _vacioDescp1 = false;
+  bool _vacioDescp2 = false;
+  bool _vacioDescp3 = false;
+  bool _vacioDescp4 = false;
+  bool _vacioPrecio1 = false;
+  bool _vacioPrecio2 = false;
+  bool _vacioPrecio3 = false;
+  bool _vacioPrecio4 = false;
+  bool _valPrecio1 = false;
+  bool _valPrecio2 = false;
+  bool _valPrecio3 = false;
+  bool _compPrecio1 = false;
+  bool _compPrecio2 = false;
+  bool _compPrecio3 = false;
+  bool _valCategoria = false;
+
+  RegExp precio = RegExp(r'^[0-9]{1,}$');
+
   File? _image, _image2, _image3, _image4;
 
   int index = 0;
@@ -302,7 +321,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: tituloctrl,
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+             errorText: _vacioTitulo ? 'No se puede dejar vacio' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -320,7 +340,11 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (tituloctrl.text.isEmpty || tituloctrl.text == " ") ? _vacioTitulo = true : _vacioTitulo = false;
+            });
+          },
         ),
       );
     });
@@ -339,7 +363,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: descripcionctrl,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioDescp1 ? 'No se puede dejar vacio' : null,
               filled: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
@@ -359,7 +384,11 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (descripcionctrl.text.isEmpty || descripcionctrl.text == " ") ? _vacioDescp1 = true : _vacioDescp1 = false;
+            });
+          },
         ),
       );
     });
@@ -370,7 +399,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       alignment: Alignment.center,
       child: DropdownButtonFormField<String>(
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _valCategoria ? 'Selecciona una categoria' : null,
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
             ),
@@ -462,6 +492,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
             setState(() {
               texto = valor!;
               vactu = valor;
+              (vactu == " ") ? _valCategoria = true : _valCategoria = false;
             });
           }),
     );
@@ -476,7 +507,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: precio_E,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioPrecio1 ? 'No se puede dejar vacio' : _valPrecio1 ? 'No puede ser mayor que el Estándar y el Premium' : _compPrecio1 ? 'Precio  invalido' : null,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
@@ -494,7 +526,13 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (precio_E.text.isEmpty || precio_E.text == " ") ? _vacioPrecio1 = true : _vacioPrecio1 = false;
+              !precio.hasMatch(precio_E.text) ? _compPrecio1 =  true : _compPrecio1 = false;
+              (int.parse(precio_E.text) > int.parse(precio_S.text) || int.parse(precio_E.text) > int.parse(precio_P.text)) ? _valPrecio1 = true : _valPrecio1 = false;
+            });
+          },
         ),
       );
     });
@@ -509,7 +547,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: precio_S,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _vacioPrecio2 ? 'No se puede dejar vacio' : _valPrecio2 ? 'No puede ser menor que el Económico y mayor que el Premium' : _compPrecio2 ? 'Precio  invalido' : null,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
@@ -527,7 +566,13 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (precio_S.text.isEmpty || precio_S.text == " ") ? _vacioPrecio2 = true : _vacioPrecio2 = false;
+              !precio.hasMatch(precio_S.text) ? _compPrecio2 =  true : _compPrecio2 = false;
+              (int.parse(precio_E.text) > int.parse(precio_S.text) || int.parse(precio_S.text) > int.parse(precio_P.text)) ? _valPrecio2 = true : _valPrecio2 = false;
+            });
+          },
         ),
       );
     });
@@ -542,7 +587,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: precio_P,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioPrecio3 ? 'No se puede dejar vacio' : _valPrecio3 ? 'No puede ser menor que los otros planes' : _compPrecio3 ? 'Precio  invalido' : null,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
@@ -560,7 +606,13 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (precio_P.text.isEmpty || precio_P.text == " ") ? _vacioPrecio3 = true : _vacioPrecio3 = false;
+              !precio.hasMatch(precio_P.text) ? _compPrecio3 =  true : _compPrecio3 = false;
+              (int.parse(precio_E.text) > int.parse(precio_P.text) || int.parse(precio_S.text) > int.parse(precio_P.text)) ? _valPrecio3 = true : _valPrecio3 = false;
+            });
+          },
         ),
       );
     });
@@ -696,7 +748,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: descripcion_E,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _vacioDescp2 ? 'No se puede dejar vacio' : null,
               filled: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
@@ -715,7 +768,11 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (descripcion_E.text.isEmpty || descripcion_E.text == " ") ? _vacioDescp2 = true : _vacioDescp2 = false;
+            });
+          },
         ),
       );
     });
@@ -734,7 +791,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: descripcion_S,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioDescp3 ? 'No se puede dejar vacio' : null,
               filled: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
@@ -754,7 +812,11 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (descripcion_S.text.isEmpty || descripcion_S.text == " ") ? _vacioDescp3 = true : _vacioDescp3 = false;
+            });
+          },
         ),
       );
     });
@@ -773,7 +835,8 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
           style: const TextStyle(color: Colors.white),
           controller: descripcion_P,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioDescp4 ? 'No se puede dejar vacio' : null,
               filled: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
@@ -793,7 +856,11 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (descripcion_P.text.isEmpty || descripcion_P.text == " ") ? _vacioDescp4 = true : _vacioDescp4 = false;
+            });
+          },
         ),
       );
     });
