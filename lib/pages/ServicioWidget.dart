@@ -1,3 +1,4 @@
+import 'package:coonet/pages/Chat.dart';
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:dio/dio.dart';
@@ -6,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Users/InfoAnuncio.dart';
+import 'package:flutter/material.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+
+import 'data_utils.dart';
 
 class ServicioWidget extends StatefulWidget {
   final Future<InfoAnuncio> free;
@@ -20,11 +25,11 @@ class Servicios extends State<ServicioWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final Future<InfoAnuncio> free;
   Servicios(this.free);
-
+  final _keyChannels = GlobalKey<ChannelsBlocState>();
   Dio dio = new Dio();
 
-  Future<void> _Comprar(
-      String id, String plan, String titulo, String precio) async {
+  Future<void> _Comprar(String id, String plan, String titulo, String precio,
+      String nombre_user_free) async {
     FormData formData = FormData.fromMap({
       "correo": login,
       "id_Anuncio": id,
@@ -41,7 +46,7 @@ class Servicios extends State<ServicioWidget> {
         Fluttertoast.showToast(
             msg: "Compra Completada", toastLength: Toast.LENGTH_SHORT);
         //Ir a otra pagina
-
+        _onCreateChannel(nombre_user_free);
       } else if (value.toString() == 'Error') {
         Fluttertoast.showToast(
             msg: "Error al realizar la compra",
@@ -50,6 +55,20 @@ class Servicios extends State<ServicioWidget> {
         print(value.toString());
       }
     });
+  }
+
+  Future<void> _onCreateChannel(String nombre_user_free) async {
+    final client = StreamChat.of(context).client;
+    //final channel = client.channel('messaging', id: 'sahil');
+    final channel = client.channel('messaging', extraData: {
+      'neme': 'grupo',
+      'image': DataUtils.getChannelImage(),
+      'members': [StreamChat.of(context).currentUser!.id, nombre_user_free],
+    });
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ChannelListPage()));
+    await channel.watch();
+    _keyChannels.currentState?.queryChannels();
   }
 
   @override
@@ -376,7 +395,8 @@ class Servicios extends State<ServicioWidget> {
                                             snapshot.data!.id.toString(),
                                             'PLAN ECONÓMICO',
                                             snapshot.data!.titulo.toString(),
-                                            snapshot.data!.precio_E.toString());
+                                            snapshot.data!.precio_E.toString(),
+                                            snapshot.data!.nombre.toString());
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
@@ -474,7 +494,8 @@ class Servicios extends State<ServicioWidget> {
                                             snapshot.data!.id.toString(),
                                             'PLAN STANDAR',
                                             snapshot.data!.titulo.toString(),
-                                            snapshot.data!.precio_S.toString());
+                                            snapshot.data!.precio_S.toString(),
+                                            snapshot.data!.nombre.toString());
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
@@ -572,7 +593,8 @@ class Servicios extends State<ServicioWidget> {
                                             snapshot.data!.id.toString(),
                                             'PLAN PREMIUM',
                                             snapshot.data!.titulo.toString(),
-                                            snapshot.data!.precio_P.toString());
+                                            snapshot.data!.precio_P.toString(),
+                                            snapshot.data!.nombre.toString());
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
@@ -635,7 +657,8 @@ class Servicios extends State<ServicioWidget> {
     );
   }
 
-  void showDialog(String id, String plan, String titulo, String precio) {
+  void showDialog(String id, String plan, String titulo, String precio,
+      String nombre_user_free) {
     showCupertinoDialog(
       context: context,
       builder: (context) {
@@ -645,7 +668,7 @@ class Servicios extends State<ServicioWidget> {
             CupertinoDialogAction(
               child: Text("SI"),
               onPressed: () {
-                _Comprar(id, plan, titulo, precio);
+                _Comprar(id, plan, titulo, precio, nombre_user_free);
                 Navigator.of(context).pop();
               },
             ),

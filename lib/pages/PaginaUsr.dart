@@ -1,6 +1,7 @@
 import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:flutter/material.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'Pagos.dart';
 import 'Menu.dart';
 import 'MisProyectos.dart';
@@ -458,6 +459,8 @@ class PaginaUsr extends StatelessWidget {
             ),
           ),
           onPressed: () {
+            final client = StreamChat.of(context).client;
+            client.disconnectUser();
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => PaginaLogin()));
           },
