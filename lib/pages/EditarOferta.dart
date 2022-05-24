@@ -995,6 +995,8 @@ class _OfertaPageState extends State<EditarOferta> {
                   paginaActual = 4;
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Menu()));
+                      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => MisProyectos()));
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
