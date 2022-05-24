@@ -1,10 +1,13 @@
 import 'package:coonet/pages/EditarOferta.dart';
 import 'package:coonet/pages/EditarPerfil.dart';
+import 'package:coonet/pages/MisProyectos.dart';
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'Menu.dart';
 import 'Users/InfoAnuncio.dart';
 
@@ -23,6 +26,35 @@ class Servicios extends State<PreviewServicio> {
 
   Servicios(this.free);
 
+  Dio dio = new Dio();
+  Future<void> _Eliminar() async {
+    print(id_anuncio + 'as');
+    FormData formData = FormData.fromMap({
+      "id_anuncio": id_anuncio,
+    });
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/ElimarOferta.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'hecho') {
+        Fluttertoast.showToast(
+            msg: "Se ha eliminado la oferta correctamente",
+            toastLength: Toast.LENGTH_SHORT);
+        paginaActual = 4;
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Menu()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MisProyectos()));
+      } else if (value.toString() == 'Error') {
+        Fluttertoast.showToast(
+            msg: "Ha habido un error al eliminar la oferta",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
+        print(value.toString());
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final AsyncSnapshot<InfoAnuncio> ia;
@@ -31,7 +63,9 @@ class Servicios extends State<PreviewServicio> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           botonEditar(),
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           botonEliminar()
         ],
       ),
@@ -490,8 +524,6 @@ class Servicios extends State<PreviewServicio> {
     );
   }
 
-  
-
   Widget botonEditar() {
     return FloatingActionButton.extended(
       backgroundColor: Color.fromARGB(255, 157, 3, 218),
@@ -510,40 +542,34 @@ class Servicios extends State<PreviewServicio> {
       backgroundColor: Color.fromARGB(255, 218, 3, 3),
       foregroundColor: Colors.white,
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => EditarOferta()));
+        _Eliminar();
       },
       icon: Icon(Icons.delete),
       label: Text('ELIMINAR'),
     );
   }
-  
-_onSpeedDialAction(int selectedActionIndex) {
-  print('$selectedActionIndex Selected');
+
+  _onSpeedDialAction(int selectedActionIndex) {
+    print('$selectedActionIndex Selected');
   }
 
   void showDialog() {
     showCupertinoDialog(
-      context: context,
-      builder: (context) {
-        return CupertinoAlertDialog(
-          title: Text("Eliminar oferta"),
-          content: Text("¿Estas seguro de que quieres eliminar la oferta?"),
-          actions: [
-            CupertinoDialogAction(
-                child: Text("SI"),
-                onPressed: () {
-                  
-                }),
-            CupertinoDialogAction(
-                child: Text("NO"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                })
-          ],
-        );
-      }
-    );
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text("Eliminar oferta"),
+            content: Text("¿Estas seguro de que quieres eliminar la oferta?"),
+            actions: [
+              CupertinoDialogAction(child: Text("SI"), onPressed: () {}),
+              CupertinoDialogAction(
+                  child: Text("NO"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  })
+            ],
+          );
+        });
   }
 
   Widget appbartt(AsyncSnapshot<InfoAnuncio> snapshot) {
