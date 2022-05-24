@@ -36,7 +36,7 @@ class _PoliticasState extends State<Politicas> {
         child: ListView(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 70.0),
+            const SizedBox(height: 40.0),
             const Align(
               alignment: Alignment.topCenter,
               child: Text('Politicas y Servicios',
@@ -66,6 +66,7 @@ class _PoliticasState extends State<Politicas> {
                 flex: 40,
               )
             ]),
+            SizedBox(height: 40,)
           ],
         ),
       ),

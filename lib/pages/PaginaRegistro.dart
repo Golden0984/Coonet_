@@ -258,7 +258,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              nombrectrl.text.isEmpty ? _vacioNombre = true : _vacioNombre = false;
+              (nombrectrl.text.isEmpty || nombrectrl.text == " ") ? _vacioNombre = true : _vacioNombre = false;
             });
           },
         ),
@@ -290,7 +290,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              apellidosctrl.text.isEmpty
+              (apellidosctrl.text.isEmpty || apellidosctrl.text == " ")
                   ? _vacioApellido = true
                   : _vacioApellido = false;
             });
@@ -456,7 +456,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Caracteres (Min. 5 - Max. 18)',
+              hintText: 'Caracteres (Min. 8 - Max. 18)',
               hintStyle: TextStyle(
                 color: Colors.white54,
               ),
@@ -654,7 +654,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
           children: const [
             Spacer(),
             Text(
-              'Ya tienes cuenta? ',
+              '¿Ya tienes cuenta? ',
               style: TextStyle(color: Colors.white),
             ),
             Text(
