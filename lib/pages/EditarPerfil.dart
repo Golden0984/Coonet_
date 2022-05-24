@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PaginaLogin.dart';
 import 'package:coonet/pages/PaginaUsr.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,24 @@ class _EditarPerfilState extends State<EditarPerfil> {
   late TextEditingController emailctrl = TextEditingController();
   late TextEditingController passctrl = TextEditingController();
   late TextEditingController repeatpassctrl = TextEditingController();
+
+  bool _vacioNombre = false;
+  bool _vacioApellido = false;
+  bool _vacioUser = false;
+  bool _vacioTelefono = false;
+  bool _vacioEmail = false;
+  bool _vacioContra = false;
+  bool _vacioRepetir = false;
+  bool _vacioRespuesta = false;
+  bool _valUser = false;
+  bool _valEmail = false;
+  bool _valTel = false;
+  bool _valContra = false;
+  bool _valRepetir = false;
+
+  RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*\d)[a-zA-Z\d]{8,18}$');
+  RegExp usu = RegExp(r'^(?=.*[a-z])[a-zA-Z\d]{2,}$');
+  RegExp tel = RegExp(r'^[0-9]{9}$');
 
   File? _image;
 
@@ -296,7 +315,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
           style: const TextStyle(color: Colors.white),
           controller: nombrectrl,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioNombre ? 'No se puede dejar vacio' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -316,7 +336,11 @@ class _EditarPerfilState extends State<EditarPerfil> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (nombrectrl.text.isEmpty || nombrectrl.text == " ") ? _vacioNombre = true : _vacioNombre = false;
+            });
+          },
         ),
       );
     });
@@ -331,7 +355,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
           style: const TextStyle(color: Colors.white),
           controller: apellidosctrl,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioApellido ? 'No se puede dejar vacio' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -349,7 +374,13 @@ class _EditarPerfilState extends State<EditarPerfil> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              (apellidosctrl.text.isEmpty || apellidosctrl.text == " ")
+                  ? _vacioApellido = true
+                  : _vacioApellido = false;
+            });
+          },
         ),
       );
     });
@@ -364,7 +395,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
           style: const TextStyle(color: Colors.white),
           controller: userctrl,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _vacioUser ? 'No se puede dejar vacio' : _valUser ? 'Usuario invalido' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -382,7 +414,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              userctrl.text.isEmpty ? _vacioUser = true : _vacioUser = false;
+              !usu.hasMatch(userctrl.text) ? _valUser = true : _valUser = false;
+            });
+          },
         ),
       );
     });
@@ -397,7 +434,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
           style: const TextStyle(color: Colors.white),
           controller: telefonoctrl,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+              errorText: _vacioTelefono ? 'No se puede dejar vacio' : _valTel ? 'Telefono invalido' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -415,7 +453,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              telefonoctrl.text.isEmpty ? _vacioTelefono = true : _vacioTelefono = false;
+              !tel.hasMatch(telefonoctrl.text) ? _valTel = true : _valTel = false;
+            });
+          },
         ),
       );
     });
@@ -430,7 +473,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
           style: const TextStyle(color: Colors.white),
           controller: emailctrl,
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioEmail ? 'No se puede dejar vacio' : _valEmail  ? 'Correo Invalido' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -451,7 +495,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              emailctrl.text.isEmpty ? _vacioEmail = true : _vacioEmail = false;
+              !(EmailValidator.validate(emailctrl.text)) ? _valEmail = true : _valEmail = false;
+            });
+          },
         ),
       );
     });
@@ -467,7 +516,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: passctrl,
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioContra ? 'No se puede dejar vacio' : _valContra ? 'Min. 8 caracteres(1 Mayus, 1 Minus & 1 Num)' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -480,7 +530,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Caracteres (Min. 5 - Max. 18)',
+              hintText: 'Caracteres (Min. 8 - Max. 18)',
               hintStyle: TextStyle(
                 color: Colors.white54,
               ),
@@ -488,7 +538,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              passctrl.text.isEmpty ? _vacioContra = true : _vacioContra = false;
+              !regex.hasMatch(passctrl.text) ? _valContra = true : _valContra = false;
+            });
+          },
         ),
       );
     });
@@ -504,7 +559,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: repeatpassctrl,
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioRepetir ? 'No se puede dejar vacio' : _valRepetir ? 'No coincide con la contraseña' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -517,7 +573,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Caracteres (Min. 5 - Max. 18)',
+              hintText: 'Caracteres (Min. 8 - Max. 18)',
               hintStyle: TextStyle(
                 color: Colors.white54,
               ),
@@ -525,7 +581,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              repeatpassctrl.text.isEmpty ? _vacioRepetir = true : _vacioRepetir = false;
+              !(passctrl.text == repeatpassctrl.text) ? _valRepetir = true : _valRepetir = false;
+            });
+          },
         ),
       );
     });
