@@ -12,7 +12,10 @@ class PaginaTienda extends StatefulWidget {
 }
 
 class _PaginaTiendaState extends State<PaginaTienda> {
-  late bool premium = false;
+  @override
+  void initState() {
+    prime();
+  }
 
   Dio dio = new Dio();
 
@@ -343,28 +346,34 @@ class _PaginaTiendaState extends State<PaginaTienda> {
   }
 
   void showDialog(String titulo, String plan, String precio) {
-    showCupertinoDialog(
-      context: context,
-      builder: (context) {
-        return CupertinoAlertDialog(
-          title: Text("¿Desea adquirir el paquete?"),
-          actions: [
-            CupertinoDialogAction(
-              child: Text("SI"),
-              onPressed: () {
-                _Comprar(plan, titulo, precio);
-              },
-            ),
-            CupertinoDialogAction(
-              child: Text("NO"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        );
-      },
-    );
+    if (premium == "1") {
+      Fluttertoast.showToast(
+          msg: "No se ha podido completar la compra ya esres un usuario prime",
+          toastLength: Toast.LENGTH_SHORT);
+    } else {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text("¿Desea adquirir el paquete?"),
+            actions: [
+              CupertinoDialogAction(
+                child: Text("SI"),
+                onPressed: () {
+                  _Comprar(plan, titulo, precio);
+                },
+              ),
+              CupertinoDialogAction(
+                child: Text("NO"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
+    }
   }
 
   void acceptCompra() {
@@ -378,7 +387,9 @@ class _PaginaTiendaState extends State<PaginaTienda> {
             CupertinoDialogAction(
               child: Text("ACEPTAR"),
               onPressed: () {
-                paginaActual = 0;
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                paginaActual = 4;
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Menu()));
               },

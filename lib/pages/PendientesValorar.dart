@@ -157,27 +157,28 @@ class _PaginaHomeState extends State<PendienteValorar> {
                                             MainAxisAlignment.center,
                                         children: [
                                           ElevatedButton(
-                                            onPressed: () {
-                                              String id =
-                                                  data[index].id_anuncio;
-                                              String? id_comprar =
-                                                  data[index].id_compra;
-                                              fetchINFO(id);
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ComentarioValo(id_comprar,
-                                                          free: fetchINFO(id)),
-                                                ),
-                                              );
-                                            },
-                                            child: const Text('Valorar',
-                                                style: TextStyle(
-                                                    color: Colors.black)),
-                                            style: ElevatedButton.styleFrom(
-                                            primary: Colors.white)
-                                          ),
+                                              onPressed: () {
+                                                String id =
+                                                    data[index].id_anuncio;
+                                                String? id_comprar =
+                                                    data[index].id_compra;
+                                                fetchINFO(id);
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ComentarioValo(
+                                                            id_comprar,
+                                                            free:
+                                                                fetchINFO(id)),
+                                                  ),
+                                                );
+                                              },
+                                              child: const Text('Valorar',
+                                                  style: TextStyle(
+                                                      color: Colors.black)),
+                                              style: ElevatedButton.styleFrom(
+                                                  primary: Colors.white)),
                                         ],
                                       ),
                                     ],

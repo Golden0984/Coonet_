@@ -11,16 +11,21 @@ import 'Valorar.dart';
 
 void main() => runApp(PaginaUsr(free: fetchPost()));
 
-class PaginaUsr extends StatelessWidget {
+class PaginaUsr extends StatefulWidget {
   final Future<FreeLan> free;
   const PaginaUsr({Key? key, required this.free}) : super(key: key);
 
+  @override
+  State<PaginaUsr> createState() => _PaginaUsrState();
+}
+
+class _PaginaUsrState extends State<PaginaUsr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: FutureBuilder<FreeLan>(
-          future: free,
+          future: widget.free,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Container(
@@ -90,7 +95,7 @@ class PaginaUsr extends StatelessWidget {
     telefono = snapshot.data!.telefono;
     correo = snapshot.data!.correo;
     foto = snapshot.data!.foto;
-    premium = snapshot.data!.premium.toString();
+    premium = snapshot.data!.premium;
     if (snapshot.data!.premium == "0") {
       plus = "No adquirido";
     } else {
