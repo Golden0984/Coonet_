@@ -8,11 +8,14 @@ import 'package:email_validator/email_validator.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 import 'Users/FreeLancer.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
+
+import 'data_utils.dart';
 
 class PaginaRegistro extends StatefulWidget {
   static String id = 'Register_page';
@@ -64,7 +67,8 @@ class _RegisterPageState extends State<PaginaRegistro> {
   }
 
   Dio dio = new Dio();
-  RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*\d)[a-zA-Z\d]{8,18}$');
+  RegExp regex =
+      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*\d)[a-zA-Z\d]{8,18}$');
   RegExp user = RegExp(r'^(?=.*[a-z])[a-zA-Z\d]{2,}$');
   RegExp tel = RegExp(r'^[0-9]{9}$');
   Future<void> _Subir() async {
@@ -82,16 +86,16 @@ class _RegisterPageState extends State<PaginaRegistro> {
       Fluttertoast.showToast(
           msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
     } else if (_valContra != false) {
-          Fluttertoast.showToast(
-          msg: "Contraseña no cumple los requisitos", toastLength: Toast.LENGTH_SHORT);
+      Fluttertoast.showToast(
+          msg: "Contraseña no cumple los requisitos",
+          toastLength: Toast.LENGTH_SHORT);
     } else if (_valUser != false) {
       Fluttertoast.showToast(
           msg: "Usuario invalido", toastLength: Toast.LENGTH_SHORT);
     } else if (_valTel != false) {
       Fluttertoast.showToast(
-                msg: "Telefono invalido", toastLength: Toast.LENGTH_SHORT);
+          msg: "Telefono invalido", toastLength: Toast.LENGTH_SHORT);
     } else if (_image == null) {
-
       FormData formData = FormData.fromMap({
         "nombre": nombrectrl.text,
         "apellidos": apellidosctrl.text,
@@ -104,6 +108,7 @@ class _RegisterPageState extends State<PaginaRegistro> {
         "respuesta": respuestactrl.text,
         'file': 'no'
       });
+      register(formData);
     } else {
       String filename = _image!.path.split('/').last;
 
@@ -119,37 +124,47 @@ class _RegisterPageState extends State<PaginaRegistro> {
         "respuesta": respuestactrl.text,
         'file': await MultipartFile.fromFile(_image!.path, filename: filename)
       });
-
-      await dio
-          .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
-              data: formData)
-          .then((value) {
-        if (value.toString() == 'si') {
-          login = emailctrl.text;
-          Fluttertoast.showToast(
-              msg: "se ha creado correctamnete",
-              toastLength: Toast.LENGTH_SHORT);
-          //Ir a otra pagina
-          {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Menu()));
-          }
-        } else if (value.toString() == 'Usuario Registrado') {
-          Fluttertoast.showToast(
-              msg: "El Usuario ya esta Registrado",
-              toastLength: Toast.LENGTH_SHORT);
-        } else if (value.toString() == 'Contra no coincide') {
-          Fluttertoast.showToast(
-              msg: "la contraseña no coinciden.",
-              toastLength: Toast.LENGTH_SHORT);
-        } else if (value.toString() == 'SELECIONA PREGUNTA') {
-          Fluttertoast.showToast(
-              msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
-        } else {
-          print(value.toString());
-        }
-      });
+      register(formData);
     }
+  }
+
+  register(FormData formData) async {
+    final username = userctrl.text;
+    final client = StreamChat.of(context).client;
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/register.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'si') {
+        login = emailctrl.text;
+        Fluttertoast.showToast(
+            msg: "se ha creado correctamnete", toastLength: Toast.LENGTH_SHORT);
+        /////api
+        client.connectUser(
+            User(
+                id: username,
+                extraData: {'imag': DataUtils.getUserImage(username)}),
+            client.devToken(username).rawValue);
+        //Ir a otra pagina
+        {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Menu()));
+        }
+      } else if (value.toString() == 'Usuario Registrado') {
+        Fluttertoast.showToast(
+            msg: "El Usuario ya esta Registrado",
+            toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'Contra no coincide') {
+        Fluttertoast.showToast(
+            msg: "la contraseña no coinciden.",
+            toastLength: Toast.LENGTH_SHORT);
+      } else if (value.toString() == 'SELECIONA PREGUNTA') {
+        Fluttertoast.showToast(
+            msg: "Seleciona una pregunta", toastLength: Toast.LENGTH_SHORT);
+      } else {
+        print(value.toString());
+      }
+    });
   }
 
   @override
@@ -258,7 +273,9 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              nombrectrl.text.isEmpty ? _vacioNombre = true : _vacioNombre = false;
+              nombrectrl.text.isEmpty
+                  ? _vacioNombre = true
+                  : _vacioNombre = false;
             });
           },
         ),
@@ -310,7 +327,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: userctrl,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-              errorText: _vacioUser ? 'No se puede dejar vacio' : _valUser ? 'Usuario invalido' : null,
+              errorText: _vacioUser
+                  ? 'No se puede dejar vacio'
+                  : _valUser
+                      ? 'Usuario invalido'
+                      : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -325,7 +346,9 @@ class _RegisterPageState extends State<PaginaRegistro> {
           onChanged: (value) {
             setState(() {
               userctrl.text.isEmpty ? _vacioUser = true : _vacioUser = false;
-              !user.hasMatch(userctrl.text) ? _valUser = true : _valUser = false;
+              !user.hasMatch(userctrl.text)
+                  ? _valUser = true
+                  : _valUser = false;
             });
           },
         ),
@@ -343,7 +366,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: telefonoctrl,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
-              errorText: _vacioTelefono ? 'No se puede dejar vacio' : _valTel ? 'Telefono invalido' : null,
+              errorText: _vacioTelefono
+                  ? 'No se puede dejar vacio'
+                  : _valTel
+                      ? 'Telefono invalido'
+                      : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -356,8 +383,12 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              telefonoctrl.text.isEmpty ? _vacioTelefono = true : _vacioTelefono = false;
-              !tel.hasMatch(telefonoctrl.text) ? _valTel = true : _valTel = false;
+              telefonoctrl.text.isEmpty
+                  ? _vacioTelefono = true
+                  : _vacioTelefono = false;
+              !tel.hasMatch(telefonoctrl.text)
+                  ? _valTel = true
+                  : _valTel = false;
             });
           },
         ),
@@ -375,7 +406,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
           controller: emailctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-              errorText: _vacioEmail ? 'No se puede dejar vacio' : _valEmail  ? 'Correo Invalido' : null,
+              errorText: _vacioEmail
+                  ? 'No se puede dejar vacio'
+                  : _valEmail
+                      ? 'Correo Invalido'
+                      : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -393,7 +428,9 @@ class _RegisterPageState extends State<PaginaRegistro> {
           onChanged: (value) {
             setState(() {
               emailctrl.text.isEmpty ? _vacioEmail = true : _vacioEmail = false;
-              !(EmailValidator.validate(emailctrl.text)) ? _valEmail = true : _valEmail = false;
+              !(EmailValidator.validate(emailctrl.text))
+                  ? _valEmail = true
+                  : _valEmail = false;
             });
           },
         ),
@@ -412,7 +449,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
           keyboardType: TextInputType.text,
           obscureText: true,
           decoration: InputDecoration(
-              errorText: _vacioContra ? 'No se puede dejar vacio' : _valContra ? 'Min. 8 caracteres(1 Mayus, 1 Minus & 1 Num)' : null,
+              errorText: _vacioContra
+                  ? 'No se puede dejar vacio'
+                  : _valContra
+                      ? 'Min. 8 caracteres(1 Mayus, 1 Minus & 1 Num)'
+                      : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -429,8 +470,12 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              passctrl.text.isEmpty ? _vacioContra = true : _vacioContra = false;
-              !regex.hasMatch(passctrl.text) ? _valContra = true : _valContra = false;
+              passctrl.text.isEmpty
+                  ? _vacioContra = true
+                  : _vacioContra = false;
+              !regex.hasMatch(passctrl.text)
+                  ? _valContra = true
+                  : _valContra = false;
             });
           },
         ),
@@ -449,7 +494,11 @@ class _RegisterPageState extends State<PaginaRegistro> {
           keyboardType: TextInputType.text,
           obscureText: true,
           decoration: InputDecoration(
-              errorText: _vacioRepetir ? 'No se puede dejar vacio' : _valRepetir ? 'No coincide con la contraseña' : null,
+              errorText: _vacioRepetir
+                  ? 'No se puede dejar vacio'
+                  : _valRepetir
+                      ? 'No coincide con la contraseña'
+                      : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -466,8 +515,12 @@ class _RegisterPageState extends State<PaginaRegistro> {
               )),
           onChanged: (value) {
             setState(() {
-              repeatpassctrl.text.isEmpty ? _vacioRepetir = true : _vacioRepetir = false;
-              !(passctrl.text == repeatpassctrl.text) ? _valRepetir = true : _valRepetir = false;
+              repeatpassctrl.text.isEmpty
+                  ? _vacioRepetir = true
+                  : _vacioRepetir = false;
+              !(passctrl.text == repeatpassctrl.text)
+                  ? _valRepetir = true
+                  : _valRepetir = false;
             });
           },
         ),

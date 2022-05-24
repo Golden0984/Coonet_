@@ -6,10 +6,12 @@ import 'package:coonet/pages/PreguntaSeguridad.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'Users/FreeLancer.dart';
 import 'CorreoRecuperacion.dart';
 import 'Menu.dart';
 import 'RecuperarContra.dart';
+import 'data_utils.dart';
 
 class PaginaLogin extends StatefulWidget {
   static String id = 'login_page';
@@ -84,28 +86,38 @@ class _LoginPageState extends State<PaginaLogin> {
   }
 
   Future<void> loginUser() async {
+    final user = StreamChat.of(context).client;
     var client = http.Client();
     var data = {"email": emailctrl.text, "pass": passctrl.text};
     var url =
         Uri.parse('https://phpninjahosting.com/manish/Coonet/Php/login.php');
     var Response = await client.post(url, body: data);
 
-    if (jsonDecode(Response.body) == "Correcto") {
+    if (jsonDecode(Response.body) == "no") {
+      Fluttertoast.showToast(
+          msg: "El usuario y la contraseña no coinciden.",
+          toastLength: Toast.LENGTH_SHORT);
+    } else if (Response.statusCode == 200) {
       login = emailctrl.text;
+      String username = jsonDecode(Response.body);
       Fluttertoast.showToast(
           msg: "Se ha iniciado sesion correctamente",
           toastLength: Toast.LENGTH_SHORT);
+      user.connectUser(
+          User(
+              id: username,
+              extraData: {'imag': DataUtils.getUserImage(username)}),
+          user.devToken(username).rawValue);
       //Ir a otra pagina
+
       {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Menu()));
       }
-    } else if (jsonDecode(Response.body) == "no") {
-      Fluttertoast.showToast(
-          msg: "El usuario y la contraseña no coinciden.",
-          toastLength: Toast.LENGTH_SHORT);
     } else {
-      Fluttertoast.showToast(msg: "Ha petao", toastLength: Toast.LENGTH_SHORT);
+      Fluttertoast.showToast(
+          msg: "Ha habido un error al hacer el login",
+          toastLength: Toast.LENGTH_SHORT);
     }
   }
 
