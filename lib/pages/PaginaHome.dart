@@ -637,7 +637,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                             const EdgeInsetsDirectional.fromSTEB(30, 16, 30, 0),
                         child: Container(
                           width: double.infinity,
-                          height: 200,
+                          height: 220,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             image: DecorationImage(
@@ -657,12 +657,12 @@ class _PaginaHomeState extends State<PaginaHome> {
                           ),
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 120, 0, 0),
+                                0, 110, 0, 0),
                             child: Container(
                               width: 100,
                               height: 100,
                               decoration: const BoxDecoration(
-                                color: Color.fromARGB(207, 18, 18, 18),
+                                color: Color.fromARGB(207, 0, 0, 0),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(8),
                                   bottomRight: Radius.circular(8),
@@ -689,11 +689,33 @@ class _PaginaHomeState extends State<PaginaHome> {
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),
-                                          Text(
-                                            data[index].nombre,
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                          const Divider(
+                                            indent: 0,
+                                            endIndent: 90,
+                                            color: Color.fromARGB(
+                                                255, 255, 255, 255),
                                           ),
+                                          Row(children: [
+                                            CircleAvatar(
+                                              radius: 15.0,
+                                              child: ClipOval(
+                                                child: Image.network(
+                                                  data[index].foto_user,
+                                                  fit: BoxFit.cover,
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              data[index].nombre,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ]),
                                         ],
                                       ),
                                     ),
