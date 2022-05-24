@@ -291,7 +291,15 @@ class _EditarPerfilState extends State<EditarPerfil> {
                   const SizedBox(
                     height: 30.0,
                   ),
-                  _buttonRegister(),
+                  Row(
+                    children: [Spacer(), _buttonRegister(), Spacer()],
+                  ),
+                  const SizedBox(
+                    height: 25.0,
+                  ),
+                  Row(
+                    children: [Spacer(), _buttonDelete(), Spacer()],
+                  ),
                   const SizedBox(
                     height: 25.0,
                   ),
@@ -657,6 +665,36 @@ class _EditarPerfilState extends State<EditarPerfil> {
     });
   }
 
+  Widget _buttonDelete() {
+    return StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      return ElevatedButton(
+          child: Container(
+              width: 150,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 15.0),
+              alignment: Alignment.center,
+              child: const Text(
+                'ELIMINAR PERFIL',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 255, 0, 0),
+            elevation: 10.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          onPressed: () {
+            showDialogDelete();
+          });
+    });
+  }
+
   Widget _SubirImagen() {
     return Container(
       decoration: BoxDecoration(
@@ -698,7 +736,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
                 const SizedBox(width: 30),
                 Center(
                   child: ElevatedButton(
-                    child: const Text('Select An Image'),
+                    child: const Text('Seleccionar Imagen'),
                     onPressed: _openImagePicker,
                   ),
                 ),
@@ -721,6 +759,31 @@ class _EditarPerfilState extends State<EditarPerfil> {
                 onPressed: () {
                   _Subir();
                   Navigator.of(context).pop();
+                }),
+            CupertinoDialogAction(
+                child: Text("NO"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                })
+          ],
+        );
+      },
+    );
+  }
+
+  void showDialogDelete() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text("ELIMINAR PERFIL"),
+          content: Text("¿Estas seguro de que quieres eliminar el perfil?"),
+          actions: [
+            CupertinoDialogAction(
+                child: Text("SI"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => PaginaLogin()));
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
