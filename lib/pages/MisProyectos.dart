@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'PaginaChatPersonal.dart';
 import 'ServicioWidget.dart';
+import 'Users/FreeLancer.dart';
 import 'Users/InfoAnuncio.dart';
 
 class MisProyectos extends StatefulWidget {
@@ -133,7 +134,7 @@ class _PaginaHomeState extends State<MisProyectos> {
                               16, 8, 16, 0),
                           child: Container(
                             width: double.infinity,
-                            height: 200,
+                            height: 220,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               image: DecorationImage(
@@ -153,12 +154,12 @@ class _PaginaHomeState extends State<MisProyectos> {
                             ),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0, 120, 0, 0),
+                                  0, 110, 0, 0),
                               child: Container(
                                 width: 100,
                                 height: 100,
                                 decoration: const BoxDecoration(
-                                  color: Color(0x80FFFFFF),
+                                  color: Color.fromARGB(207, 18, 18, 18),
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(8),
                                     bottomRight: Radius.circular(8),
@@ -182,9 +183,35 @@ class _PaginaHomeState extends State<MisProyectos> {
                                           children: [
                                             Text(
                                               data[index].titulo,
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
-                                            Text(
-                                              data[index].nombre,
+                                            const Divider(
+                                              indent: 0,
+                                              endIndent: 90,
+                                              color: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                            ),
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 15.0,
+                                                  child: ClipOval(
+                                                    child: Image.network(
+                                                      data[index].foto_user,
+                                                      fit: BoxFit.cover,
+                                                      width: 30.0,
+                                                      height: 30.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 5,),
+                                                Text(
+                                                  data[index].nombre,
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -207,7 +234,30 @@ class _PaginaHomeState extends State<MisProyectos> {
                                                               free: fetchINFO(
                                                                   id))));
                                             },
-                                            child: const Text('Editar'),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.remove_red_eye,
+                                                  color: Colors.black,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                const Text(
+                                                  'VER',
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                              ],
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(
+                                                    255, 255, 255, 255),
+                                                elevation: 10.0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                )),
                                           ),
                                         ],
                                       ),
