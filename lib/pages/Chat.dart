@@ -34,7 +34,7 @@ class _ChannelListPageState extends State<ChannelListPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 147, 34, 200),
       appBar: AppBar(
-        title: Text('Public Chat'),
+        title: Text('Chat'),
         backgroundColor: Color.fromARGB(255, 147, 34, 200),
       ),
       body: Container(
