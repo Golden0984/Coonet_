@@ -2,8 +2,10 @@ import 'package:coonet/pages/EditarOferta.dart';
 import 'package:coonet/pages/EditarPerfil.dart';
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'Menu.dart';
 import 'Users/InfoAnuncio.dart';
 
 class PreviewServicio extends StatefulWidget {
@@ -25,7 +27,14 @@ class Servicios extends State<PreviewServicio> {
   Widget build(BuildContext context) {
     final AsyncSnapshot<InfoAnuncio> ia;
     return Scaffold(
-      floatingActionButton: botonEditar(),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          botonEditar(),
+          SizedBox(height: 5,),
+          botonEliminar()
+        ],
+      ),
       key: scaffoldKey,
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
@@ -334,34 +343,6 @@ class Servicios extends State<PreviewServicio> {
                                   ],
                                 ),
                               ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Color.fromARGB(
-                                                    255, 147, 34, 200)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            size: 20,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('COMPRAR'),
-                                        ],
-                                      )),
-                                ],
-                              ),
                             ],
                           ),
                         ],
@@ -424,34 +405,6 @@ class Servicios extends State<PreviewServicio> {
                                     ),
                                   ],
                                 ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Color.fromARGB(
-                                                    255, 147, 34, 200)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            size: 20,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('COMPRAR'),
-                                        ],
-                                      )),
-                                ],
                               ),
                             ],
                           ),
@@ -516,34 +469,6 @@ class Servicios extends State<PreviewServicio> {
                                   ],
                                 ),
                               ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Color.fromARGB(
-                                                    255, 147, 34, 200)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            size: 20,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('COMPRAR'),
-                                        ],
-                                      )),
-                                ],
-                              ),
                             ],
                           ),
                         ],
@@ -553,24 +478,6 @@ class Servicios extends State<PreviewServicio> {
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 8, 20, 30),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const Expanded(
-                          child: Text(
-                            "VALORACIÓN GENERAL",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  _valoraciones()
                 ],
               );
             } else if (snapshot.hasError) {
@@ -583,77 +490,7 @@ class Servicios extends State<PreviewServicio> {
     );
   }
 
-  Widget _valoraciones() {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 5,
-              color: Color(0x3B000000),
-              offset: Offset(0, 2),
-            )
-          ],
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'COONET PAGINA WEB RESPONSIVE',
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                '\300€',
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'ESTADO: PAGADO.',
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
-                          child: Text(
-                            'Total',
-                            textAlign: TextAlign.end,
-                          ),
-                        ),
-                        Text(
-                          '\300€',
-                          textAlign: TextAlign.end,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  
 
   Widget botonEditar() {
     return FloatingActionButton.extended(
@@ -665,6 +502,47 @@ class Servicios extends State<PreviewServicio> {
       },
       icon: Icon(Icons.edit),
       label: Text('EDITAR'),
+    );
+  }
+
+  Widget botonEliminar() {
+    return FloatingActionButton.extended(
+      backgroundColor: Color.fromARGB(255, 218, 3, 3),
+      foregroundColor: Colors.white,
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => EditarOferta()));
+      },
+      icon: Icon(Icons.delete),
+      label: Text('ELIMINAR'),
+    );
+  }
+  
+_onSpeedDialAction(int selectedActionIndex) {
+  print('$selectedActionIndex Selected');
+  }
+
+  void showDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text("Eliminar oferta"),
+          content: Text("¿Estas seguro de que quieres eliminar la oferta?"),
+          actions: [
+            CupertinoDialogAction(
+                child: Text("SI"),
+                onPressed: () {
+                  
+                }),
+            CupertinoDialogAction(
+                child: Text("NO"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                })
+          ],
+        );
+      }
     );
   }
 
