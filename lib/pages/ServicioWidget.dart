@@ -1,4 +1,5 @@
 import 'package:coonet/pages/Chat.dart';
+import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
 import 'package:dio/dio.dart';
@@ -65,8 +66,8 @@ class Servicios extends State<ServicioWidget> {
       'image': DataUtils.getChannelImage(),
       'members': [StreamChat.of(context).currentUser!.id, nombre_user_free],
     });
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ChannelListPage()));
+    paginaActual = 1;
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()));
     await channel.watch();
     _keyChannels.currentState?.queryChannels();
   }

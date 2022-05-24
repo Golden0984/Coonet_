@@ -49,7 +49,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
   bool _valContra = false;
   bool _valRepetir = false;
 
-  RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*\d)[a-zA-Z\d]{8,18}$');
+  RegExp regex =
+      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*\d)[a-zA-Z\d]{8,18}$');
   RegExp usu = RegExp(r'^(?=.*[a-z])[a-zA-Z\d]{2,}$');
   RegExp tel = RegExp(r'^[0-9]{9}$');
 
@@ -316,7 +317,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: nombrectrl,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            errorText: _vacioNombre ? 'No se puede dejar vacio' : null,
+              errorText: _vacioNombre ? 'No se puede dejar vacio' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -338,7 +339,9 @@ class _EditarPerfilState extends State<EditarPerfil> {
               )),
           onChanged: (value) {
             setState(() {
-              (nombrectrl.text.isEmpty || nombrectrl.text == " ") ? _vacioNombre = true : _vacioNombre = false;
+              (nombrectrl.text.isEmpty || nombrectrl.text == " ")
+                  ? _vacioNombre = true
+                  : _vacioNombre = false;
             });
           },
         ),
@@ -356,7 +359,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: apellidosctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            errorText: _vacioApellido ? 'No se puede dejar vacio' : null,
+              errorText: _vacioApellido ? 'No se puede dejar vacio' : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -396,7 +399,11 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: userctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-              errorText: _vacioUser ? 'No se puede dejar vacio' : _valUser ? 'Usuario invalido' : null,
+              errorText: _vacioUser
+                  ? 'No se puede dejar vacio'
+                  : _valUser
+                      ? 'Usuario invalido'
+                      : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -435,7 +442,11 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: telefonoctrl,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
-              errorText: _vacioTelefono ? 'No se puede dejar vacio' : _valTel ? 'Telefono invalido' : null,
+              errorText: _vacioTelefono
+                  ? 'No se puede dejar vacio'
+                  : _valTel
+                      ? 'Telefono invalido'
+                      : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -455,8 +466,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               )),
           onChanged: (value) {
             setState(() {
-              telefonoctrl.text.isEmpty ? _vacioTelefono = true : _vacioTelefono = false;
-              !tel.hasMatch(telefonoctrl.text) ? _valTel = true : _valTel = false;
+              telefonoctrl.text.isEmpty
+                  ? _vacioTelefono = true
+                  : _vacioTelefono = false;
+              !tel.hasMatch(telefonoctrl.text)
+                  ? _valTel = true
+                  : _valTel = false;
             });
           },
         ),
@@ -474,7 +489,11 @@ class _EditarPerfilState extends State<EditarPerfil> {
           controller: emailctrl,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            errorText: _vacioEmail ? 'No se puede dejar vacio' : _valEmail  ? 'Correo Invalido' : null,
+              errorText: _vacioEmail
+                  ? 'No se puede dejar vacio'
+                  : _valEmail
+                      ? 'Correo Invalido'
+                      : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -498,7 +517,9 @@ class _EditarPerfilState extends State<EditarPerfil> {
           onChanged: (value) {
             setState(() {
               emailctrl.text.isEmpty ? _vacioEmail = true : _vacioEmail = false;
-              !(EmailValidator.validate(emailctrl.text)) ? _valEmail = true : _valEmail = false;
+              !(EmailValidator.validate(emailctrl.text))
+                  ? _valEmail = true
+                  : _valEmail = false;
             });
           },
         ),
@@ -517,7 +538,11 @@ class _EditarPerfilState extends State<EditarPerfil> {
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
-            errorText: _vacioContra ? 'No se puede dejar vacio' : _valContra ? 'Min. 8 caracteres(1 Mayus, 1 Minus & 1 Num)' : null,
+              errorText: _vacioContra
+                  ? 'No se puede dejar vacio'
+                  : _valContra
+                      ? 'Min. 8 caracteres(1 Mayus, 1 Minus & 1 Num)'
+                      : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -540,8 +565,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               )),
           onChanged: (value) {
             setState(() {
-              passctrl.text.isEmpty ? _vacioContra = true : _vacioContra = false;
-              !regex.hasMatch(passctrl.text) ? _valContra = true : _valContra = false;
+              passctrl.text.isEmpty
+                  ? _vacioContra = true
+                  : _vacioContra = false;
+              !regex.hasMatch(passctrl.text)
+                  ? _valContra = true
+                  : _valContra = false;
             });
           },
         ),
@@ -560,7 +589,11 @@ class _EditarPerfilState extends State<EditarPerfil> {
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
-            errorText: _vacioRepetir ? 'No se puede dejar vacio' : _valRepetir ? 'No coincide con la contraseña' : null,
+              errorText: _vacioRepetir
+                  ? 'No se puede dejar vacio'
+                  : _valRepetir
+                      ? 'No coincide con la contraseña'
+                      : null,
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               focusedBorder: OutlineInputBorder(
@@ -583,8 +616,12 @@ class _EditarPerfilState extends State<EditarPerfil> {
               )),
           onChanged: (value) {
             setState(() {
-              repeatpassctrl.text.isEmpty ? _vacioRepetir = true : _vacioRepetir = false;
-              !(passctrl.text == repeatpassctrl.text) ? _valRepetir = true : _valRepetir = false;
+              repeatpassctrl.text.isEmpty
+                  ? _vacioRepetir = true
+                  : _vacioRepetir = false;
+              !(passctrl.text == repeatpassctrl.text)
+                  ? _valRepetir = true
+                  : _valRepetir = false;
             });
           },
         ),
@@ -651,7 +688,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
                           ? Image.file(_image!, fit: BoxFit.cover)
                           : Image.network(
                               foto,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                               width: 100.0,
                               height: 100.0,
                             ),
@@ -682,9 +719,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
             CupertinoDialogAction(
                 child: Text("SI"),
                 onPressed: () {
-                  paginaActual = 4;
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu()));
+                  _Subir();
+                  Navigator.of(context).pop();
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
