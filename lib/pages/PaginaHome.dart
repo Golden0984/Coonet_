@@ -76,7 +76,7 @@ class _PaginaHomeState extends State<PaginaHome> {
         child: Column(
           children: [
             const SizedBox(
-              height: 70.0,
+              height: 30.0,
             ),
             const Align(
               alignment: Alignment.centerLeft,
@@ -168,7 +168,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                         InkWell(
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                16, 8, 0, 8),
+                                16, 1, 0, 1),
                             child: Material(
                               color: Colors.transparent,
                               elevation: 2,
@@ -187,7 +187,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                      width: 48,
+                                      width: 40,
                                       height: 48,
                                       decoration: const BoxDecoration(
                                         color: const Color(0xFFF1F4F8),
@@ -197,7 +197,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                         Icons.all_inclusive,
                                         color:
                                             Color.fromARGB(255, 140, 48, 183),
-                                        size: 32,
+                                        size: 30,
                                       ),
                                     ),
                                     const Padding(
