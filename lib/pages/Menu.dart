@@ -4,6 +4,7 @@ import 'package:coonet/pages/PaginaNuevaOferta.dart';
 import 'package:coonet/pages/PaginaTienda.dart';
 import 'package:coonet/pages/Politicas.dart';
 import 'package:flutter/material.dart';
+import 'Chat.dart';
 import 'PaginaHome.dart';
 import 'ServicioWidget.dart';
 import 'Users/FreeLancer.dart';
@@ -11,18 +12,17 @@ import 'PaginaUsr.dart';
 import 'imagen.dart';
 
 int paginaActual = 0;
+
 class Menu extends StatefulWidget {
   static String id = 'Menu_page';
   @override
   _MenuBare createState() => _MenuBare();
 }
- 
-class _MenuBare extends State<Menu> {
- 
 
+class _MenuBare extends State<Menu> {
   final List<Widget> _paginas = [
     PaginaHome(),
-    PaginaChat(),
+    ChannelListPage(),
     PaginaNuevaOferta(),
     PaginaTienda(),
     PaginaUsr(free: fetchPost()),

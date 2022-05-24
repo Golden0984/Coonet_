@@ -1,5 +1,64 @@
 import 'package:coonet/pages/PaginaLogin.dart';
 import 'package:flutter/material.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late StreamChatClient _client;
+  int _paginaActual = 0;
+
+  List<Widget> _paginas = [PaginaLogin()];
+  @override
+  void initState() {
+    // TODO: implement initState
+    _client = StreamChatClient(
+      've7dt9crz9er',
+      logLevel: Level.INFO,
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.light(),
+      builder: (context, child) {
+        return StreamChat(child: child, client: _client);
+      },
+      home: _paginas[_paginaActual],
+    );
+  }
+}
+
+/*import 'package:coonet/pages/PaginaLogin.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
@@ -48,4 +107,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-}
+}*/
