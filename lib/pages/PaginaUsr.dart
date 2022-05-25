@@ -89,6 +89,7 @@ class _PaginaUsrState extends State<PaginaUsr> {
 
   Widget _Perfil(AsyncSnapshot<FreeLan> snapshot) {
     String plus = "";
+    id_perfil = snapshot.data!.id;
     nombre = snapshot.data!.nombre;
     apellido = snapshot.data!.apellido;
     user = snapshot.data!.user;

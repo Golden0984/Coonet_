@@ -34,7 +34,8 @@ class _ChannelListPageState extends State<ChannelListPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 147, 34, 200),
       appBar: AppBar(
-        title: Text('Chat'),
+        toolbarHeight: 60,
+        title: Text('MENSAJES', style: TextStyle(fontSize: 30),),
         backgroundColor: Color.fromARGB(255, 147, 34, 200),
       ),
       body: Container(

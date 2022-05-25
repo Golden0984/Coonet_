@@ -782,12 +782,12 @@ class _RegisterPageState extends State<PaginaRegistro> {
             color: Colors.grey[300],
             child: _image != null
                 ? Image.file(_image!, fit: BoxFit.cover)
-                : const Text('Please select an image'),
+                : const Text('Por favor selecciona una imagen'),
           ),
           const SizedBox(width: 10),
           Center(
             child: ElevatedButton(
-              child: const Text('Select An Image'),
+              child: const Text('Seleccionar Imagen'),
               onPressed: _openImagePicker,
             ),
           ),
