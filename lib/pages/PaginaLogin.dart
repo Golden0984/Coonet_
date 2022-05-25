@@ -168,7 +168,7 @@ class _LoginPageState extends State<PaginaLogin> {
                 Icons.lock,
                 color: Colors.white,
               ),
-              hintText: 'Caracteres (Min. 5 - Max. 18)',
+              hintText: 'Caracteres (Min. 8 - Max. 18)',
               hintStyle: TextStyle(
                 color: Colors.white54,
               ),
@@ -190,7 +190,7 @@ class _LoginPageState extends State<PaginaLogin> {
           children: const [
             Spacer(),
             Text(
-              'Has olvidad la contraseña? ',
+              '¿Has olvidad la contraseña? ',
               style: TextStyle(color: Colors.white),
             ),
             Text(
@@ -243,7 +243,7 @@ class _LoginPageState extends State<PaginaLogin> {
           children: const [
             Spacer(),
             Text(
-              'No tienes cuenta? ',
+              '¿No tienes cuenta? ',
               style: TextStyle(color: Colors.white),
             ),
             Text(
