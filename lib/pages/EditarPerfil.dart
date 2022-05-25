@@ -76,80 +76,89 @@ class _EditarPerfilState extends State<EditarPerfil> {
 
   Dio dio = new Dio();
 
-  Future<void> _Subir() async {
-    if (passctrl.text.isEmpty || repeatpassctrl.text.isEmpty) {
-      if (passctrl.text == repeatpassctrl.text) {
-        if (_image != null) {
-          String filename = _image!.path.split('/').last;
+  Future<void> _Subir(String validar) async {
+    if (validar == "si") {
+      if (passctrl.text.isEmpty || repeatpassctrl.text.isEmpty) {
+        if (passctrl.text == repeatpassctrl.text) {
+          if (_image != null) {
+            String filename = _image!.path.split('/').last;
 
-          FormData formData = FormData.fromMap({
-            "correo_actual": login,
-            "nombre": nombrectrl.text,
-            "apellidos": apellidosctrl.text,
-            "usuario": userctrl.text,
-            "tel": telefonoctrl.text,
-            "email": emailctrl.text,
-            "pass": "no",
-            "pass_valid": "no",
-            'file':
-                await MultipartFile.fromFile(_image!.path, filename: filename)
-          });
+            FormData formData = FormData.fromMap({
+              "correo_actual": login,
+              "nombre": nombrectrl.text,
+              "apellidos": apellidosctrl.text,
+              "usuario": userctrl.text,
+              "tel": telefonoctrl.text,
+              "email": emailctrl.text,
+              "pass": "no",
+              "pass_valid": "no",
+              'file':
+                  await MultipartFile.fromFile(_image!.path, filename: filename)
+            });
 
-          Update(formData);
-        } else {
-          FormData formData = FormData.fromMap({
-            "correo_actual": login,
-            "nombre": nombrectrl.text,
-            "apellidos": apellidosctrl.text,
-            "usuario": userctrl.text,
-            "tel": telefonoctrl.text,
-            "email": emailctrl.text,
-            "pass": "no",
-            "pass_valid": "no",
-            'file': "no"
-          });
+            Update(formData);
+          } else {
+            FormData formData = FormData.fromMap({
+              "correo_actual": login,
+              "nombre": nombrectrl.text,
+              "apellidos": apellidosctrl.text,
+              "usuario": userctrl.text,
+              "tel": telefonoctrl.text,
+              "email": emailctrl.text,
+              "pass": "no",
+              "pass_valid": "no",
+              'file': "no"
+            });
 
-          Update(formData);
-        }
-      }
-    } else {
-      if (passctrl.text == repeatpassctrl.text) {
-        if (_image != null) {
-          String filename = _image!.path.split('/').last;
-
-          FormData formData = FormData.fromMap({
-            "correo_actual": login,
-            "nombre": nombrectrl.text,
-            "apellidos": apellidosctrl.text,
-            "usuario": userctrl.text,
-            "tel": telefonoctrl.text,
-            "email": emailctrl.text,
-            "pass": passctrl.text,
-            "pass_valid": repeatpassctrl.text,
-            'file':
-                await MultipartFile.fromFile(_image!.path, filename: filename)
-          });
-
-          Update(formData);
-        } else {
-          FormData formData = FormData.fromMap({
-            "correo_actual": login,
-            "nombre": nombrectrl.text,
-            "apellidos": apellidosctrl.text,
-            "usuario": userctrl.text,
-            "tel": telefonoctrl.text,
-            "email": emailctrl.text,
-            "pass": passctrl.text,
-            "pass_valid": repeatpassctrl.text,
-            'file': "no"
-          });
-
-          Update(formData);
+            Update(formData);
+          }
         }
       } else {
-        Fluttertoast.showToast(
-            msg: "La contraseña no coincide", toastLength: Toast.LENGTH_SHORT);
+        if (passctrl.text == repeatpassctrl.text) {
+          if (_image != null) {
+            String filename = _image!.path.split('/').last;
+
+            FormData formData = FormData.fromMap({
+              "correo_actual": login,
+              "nombre": nombrectrl.text,
+              "apellidos": apellidosctrl.text,
+              "usuario": userctrl.text,
+              "tel": telefonoctrl.text,
+              "email": emailctrl.text,
+              "pass": passctrl.text,
+              "pass_valid": repeatpassctrl.text,
+              'file':
+                  await MultipartFile.fromFile(_image!.path, filename: filename)
+            });
+
+            Update(formData);
+          } else {
+            FormData formData = FormData.fromMap({
+              "correo_actual": login,
+              "nombre": nombrectrl.text,
+              "apellidos": apellidosctrl.text,
+              "usuario": userctrl.text,
+              "tel": telefonoctrl.text,
+              "email": emailctrl.text,
+              "pass": passctrl.text,
+              "pass_valid": repeatpassctrl.text,
+              'file': "no"
+            });
+
+            Update(formData);
+          }
+        } else {
+          Fluttertoast.showToast(
+              msg: "La contraseña no coincide",
+              toastLength: Toast.LENGTH_SHORT);
+        }
       }
+    }else{
+      {
+          paginaActual = 4;
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Menu()));
+        }
     }
   }
 
@@ -690,7 +699,7 @@ class _EditarPerfilState extends State<EditarPerfil> {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          onPressed: () => _Subir());
+          onPressed: () => _Subir("si"));
     });
   }
 
@@ -780,18 +789,19 @@ class _EditarPerfilState extends State<EditarPerfil> {
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: Text("Descartar cambios"),
-          content: Text("¿Estas seguro de salir sin guardar los cambios?"),
+          title: Text("Guardar cambios"),
+          content: Text("¿Deseas guardar los cambios?"),
           actions: [
             CupertinoDialogAction(
                 child: Text("SI"),
                 onPressed: () {
-                  _Subir();
+                  _Subir("si");
                   Navigator.of(context).pop();
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
                 onPressed: () {
+                  _Subir("no");
                   Navigator.of(context).pop();
                 })
           ],
