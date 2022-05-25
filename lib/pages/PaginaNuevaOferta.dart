@@ -629,9 +629,12 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            _buttonSelect(),
             const SizedBox(
-              height: 10.0,
+              height: 15.0,
+            ),
+            Text("SELECCIONAR IMAGENES", style: TextStyle(color: Colors.white),),
+            const SizedBox(
+              height: 15.0,
             ),
             Row(children: [
               const SizedBox(
@@ -673,7 +676,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
         color: Colors.grey[300],
         child: _image != null
             ? Image.file(_image, fit: BoxFit.fill)
-            : Icon(Icons.no_photography),
+            : IconButton(icon: Icon(Icons.add_a_photo), onPressed: () {_openImagePicker();  },),
       ),
     ]);
   }
@@ -681,7 +684,7 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
   Widget _buttonSelect() {
     return Center(
       child: ElevatedButton(
-        child: const Text('Select An Image'),
+        child: const Text('Select An Image',),
         onPressed: _openImagePicker,
       ),
     );
@@ -690,7 +693,9 @@ class _OfertaPageState extends State<PaginaNuevaOferta> {
   Widget _buttonBorrar() {
     return Center(
       child: ElevatedButton(
-        child: const Text('Restablecer selección'),
+        child: const Text('Restablecer selección', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),),
+        style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 255, 255, 255),),
         onPressed: () {
           setState(() {
             _image = null;

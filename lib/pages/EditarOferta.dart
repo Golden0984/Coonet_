@@ -811,7 +811,7 @@ class _OfertaPageState extends State<EditarOferta> {
   Widget _buttonSelect() {
     return Center(
       child: ElevatedButton(
-        child: const Text('Select An Image'),
+        child: const Text('Seleccionar Imagen'),
         onPressed: _openImagePicker,
       ),
     );
@@ -992,11 +992,10 @@ class _OfertaPageState extends State<EditarOferta> {
             CupertinoDialogAction(
                 child: Text("SI"),
                 onPressed: () {
-                  paginaActual = 4;
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu()));
-                      Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => MisProyectos()));
+                   paginaActual = 4;
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Menu()));
+                      
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
