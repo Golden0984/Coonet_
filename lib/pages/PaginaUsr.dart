@@ -38,7 +38,7 @@ class _PaginaUsrState extends State<PaginaUsr> {
                 child: ListView(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 20, top: 30),
                       child: const Text('PERFIL',
                           textAlign: TextAlign.left,
                           style: TextStyle(
@@ -69,7 +69,13 @@ class _PaginaUsrState extends State<PaginaUsr> {
                           const SizedBox(
                             height: 40,
                           ),
-                          _botonOut()
+                          Row(
+                            children: [
+                              Spacer(),
+                              _botonOut(),
+                              Spacer(),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -452,10 +458,16 @@ class _PaginaUsrState extends State<PaginaUsr> {
     return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return ElevatedButton(
-          child: Icon(
-            Icons.logout,
-            size: 30.0,
-            color: Color.fromARGB(255, 255, 255, 255),
+          child: Row(
+            children: [
+              Icon(
+                Icons.logout,
+                size: 30.0,
+                color: Color.fromARGB(255, 255, 255, 255),
+              ),
+              SizedBox(width: 5,),
+              Text("Cerrar Sesion")
+            ],
           ),
           style: ElevatedButton.styleFrom(
             primary: Color.fromARGB(255, 255, 0, 0),

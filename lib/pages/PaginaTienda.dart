@@ -55,7 +55,7 @@ class _PaginaTiendaState extends State<PaginaTienda> {
         ),
         child: ListView(children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: 20),
+            padding: EdgeInsets.only(left: 20, top: 30),
             child: Text(
               "TIENDA",
               textAlign: TextAlign.left,
