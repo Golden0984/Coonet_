@@ -156,7 +156,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                 const Divider(
                   indent: 18,
                   endIndent: 285,
-                  color: Color.fromARGB(135, 255, 255, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 1, 0),
@@ -176,8 +176,8 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Container(
-                                width: 100,
-                                height: 100,
+                                width: 90,
+                                height: 90,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -187,7 +187,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                      width: 40,
+                                      width: 48,
                                       height: 48,
                                       decoration: const BoxDecoration(
                                         color: const Color(0xFFF1F4F8),
@@ -205,6 +205,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           0, 8, 0, 0),
                                       child: Text(
                                         'Todos',
+                                        style: TextStyle(fontSize: 13),
                                       ),
                                     ),
                                   ],
@@ -237,8 +238,8 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Container(
-                                width: 100,
-                                height: 100,
+                                width: 90,
+                                height: 90,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -266,6 +267,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           0, 8, 0, 0),
                                       child: Text(
                                         'Creación apps',
+                                        style: TextStyle(fontSize: 13),
                                       ),
                                     ),
                                   ],
@@ -296,8 +298,8 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Container(
-                                width: 100,
-                                height: 100,
+                                width: 90,
+                                height: 90,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -325,6 +327,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           0, 8, 0, 0),
                                       child: Text(
                                         'Programación',
+                                        style: TextStyle(fontSize: 13),
                                       ),
                                     ),
                                   ],
@@ -354,8 +357,8 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Container(
-                                width: 100,
-                                height: 100,
+                                width: 90,
+                                height: 90,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -383,6 +386,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           0, 8, 0, 0),
                                       child: Text(
                                         'Diseño web',
+                                        style: TextStyle(fontSize: 13),
                                       ),
                                     ),
                                   ],
@@ -413,8 +417,8 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Container(
-                                width: 100,
-                                height: 100,
+                                width: 90,
+                                height: 90,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -442,6 +446,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           0, 8, 0, 0),
                                       child: Text(
                                         'Edición video',
+                                        style: TextStyle(fontSize: 13),
                                       ),
                                     ),
                                   ],
@@ -472,8 +477,8 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Container(
-                                width: 100,
-                                height: 100,
+                                width: 90,
+                                height: 90,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -501,6 +506,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           0, 8, 0, 0),
                                       child: Text(
                                         'Edición Fotos',
+                                        style: TextStyle(fontSize: 13),
                                       ),
                                     ),
                                   ],
@@ -531,8 +537,8 @@ class _PaginaHomeState extends State<PaginaHome> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Container(
-                                width: 100,
-                                height: 100,
+                                width: 90,
+                                height: 90,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -560,6 +566,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                                           0, 8, 0, 0),
                                       child: Text(
                                         'Video Maker',
+                                        style: TextStyle(fontSize: 13),
                                       ),
                                     ),
                                   ],
@@ -600,7 +607,7 @@ class _PaginaHomeState extends State<PaginaHome> {
                 const Divider(
                   indent: 18,
                   endIndent: 230,
-                  color: Color.fromARGB(135, 255, 255, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
               ],
             ),
