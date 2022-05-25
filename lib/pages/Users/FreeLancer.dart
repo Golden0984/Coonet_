@@ -38,7 +38,7 @@ class FreeLan {
   }
 }
 
-String id = "";
+String id_perfil = "";
 String nombre = "";
 String apellido = "";
 String user = "";
