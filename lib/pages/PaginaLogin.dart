@@ -30,7 +30,7 @@ class _LoginPageState extends State<PaginaLogin> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/fondo.png'),
+            image: AssetImage('./images/fondo.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -49,7 +49,7 @@ class _LoginPageState extends State<PaginaLogin> {
             ),
             Flexible(
               child: Image.asset(
-                'images/logo.png',
+                './images/logo.png',
                 height: 100.0,
               ),
             ),
