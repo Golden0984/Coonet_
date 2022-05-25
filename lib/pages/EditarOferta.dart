@@ -107,144 +107,151 @@ class _OfertaPageState extends State<EditarOferta> {
 
   Dio dio = new Dio();
 
-  Future<void> _Subir() async {
-    if (tituloctrl.text.trim().isEmpty ||
-        descripcionctrl.text.trim().isEmpty ||
-        descripcion_Eco.text.trim().isEmpty ||
-        precio_Eco.text.trim().isEmpty ||
-        descripcion_Sta.text.trim().isEmpty ||
-        precio_Sta.text.trim().isEmpty ||
-        descripcion_Pre.text.trim().isEmpty ||
-        precio_Pre.text.trim().isEmpty) {
-      Fluttertoast.showToast(
-          msg: "Hay campos vacios.", toastLength: Toast.LENGTH_SHORT);
-    } else if (vactu == " ") {
-      Fluttertoast.showToast(
-          msg: "Debes selecionar una categoria",
-          toastLength: Toast.LENGTH_SHORT);
-    } else {
-      if (_image == null &&
-          _image2 == null &&
-          _image3 == null &&
-          _image4 == null) {
-        FormData formData = FormData.fromMap({
-          "id_anuncio": id_anuncio,
-          "titulo": tituloctrl.text,
-          "descripcion": descripcionctrl.text,
-          "categoria": vactu,
-          "descripcion_E": descripcion_Eco.text,
-          "precio_E": precio_Eco.text,
-          "descripcion_S": descripcion_Sta.text,
-          "precio_S": precio_Sta.text,
-          "descripcion_P": descripcion_Pre.text,
-          "precio_P": precio_Pre.text,
-          'foto1': "no",
-          'foto2': "no",
-          'foto3': "no",
-          'foto4': "no",
-        });
-
-        Update(formData);
-      } else if (_image != null &&
-          _image2 == null &&
-          _image3 == null &&
-          _image4 == null) {
-        String filename = _image!.path.split('/').last;
-
-        FormData formData = FormData.fromMap({
-          "id_anuncio": id_anuncio,
-          "titulo": tituloctrl.text,
-          "descripcion": descripcionctrl.text,
-          "categoria": vactu,
-          "descripcion_E": descripcion_Eco.text,
-          "precio_E": precio_Eco.text,
-          "descripcion_S": descripcion_Sta.text,
-          "precio_S": precio_Sta.text,
-          "descripcion_P": descripcion_Pre.text,
-          "precio_P": precio_Pre.text,
-          'foto1':
-              await MultipartFile.fromFile(_image!.path, filename: filename),
-          'foto2': "no",
-          'foto3': "no",
-          'foto4': "no",
-        });
-        Update(formData);
-      } else if (_image != null &&
-          _image2 != null &&
-          _image3 == null &&
-          _image4 == null) {
-        String filename = _image!.path.split('/').last;
-
-        FormData formData = FormData.fromMap({
-          "id_anuncio": id_anuncio,
-          "titulo": tituloctrl.text,
-          "descripcion": descripcionctrl.text,
-          "categoria": vactu,
-          "descripcion_E": descripcion_Eco.text,
-          "precio_E": precio_Eco.text,
-          "descripcion_S": descripcion_Sta.text,
-          "precio_S": precio_Sta.text,
-          "descripcion_P": descripcion_Pre.text,
-          "precio_P": precio_Pre.text,
-          'foto1':
-              await MultipartFile.fromFile(_image!.path, filename: filename),
-          'foto2':
-              await MultipartFile.fromFile(_image2!.path, filename: filename),
-          'foto3': "no",
-          'foto4': "no",
-        });
-        Update(formData);
-      } else if (_image != null &&
-          _image2 != null &&
-          _image3 != null &&
-          _image4 == null) {
-        String filename = _image!.path.split('/').last;
-
-        FormData formData = FormData.fromMap({
-          "id_anuncio": id_anuncio,
-          "titulo": tituloctrl.text,
-          "descripcion": descripcionctrl.text,
-          "categoria": vactu,
-          "descripcion_E": descripcion_Eco.text,
-          "precio_E": precio_Eco.text,
-          "descripcion_S": descripcion_Sta.text,
-          "precio_S": precio_Sta.text,
-          "descripcion_P": descripcion_Pre.text,
-          "precio_P": precio_Pre.text,
-          'foto1':
-              await MultipartFile.fromFile(_image!.path, filename: filename),
-          'foto2':
-              await MultipartFile.fromFile(_image2!.path, filename: filename),
-          'foto3':
-              await MultipartFile.fromFile(_image3!.path, filename: filename),
-          'foto4': "no",
-        });
-        Update(formData);
+  Future<void> _Subir(String validar) async {
+    if (validar == "si") {
+      if (tituloctrl.text.trim().isEmpty ||
+          descripcionctrl.text.trim().isEmpty ||
+          descripcion_Eco.text.trim().isEmpty ||
+          precio_Eco.text.trim().isEmpty ||
+          descripcion_Sta.text.trim().isEmpty ||
+          precio_Sta.text.trim().isEmpty ||
+          descripcion_Pre.text.trim().isEmpty ||
+          precio_Pre.text.trim().isEmpty) {
+        Fluttertoast.showToast(
+            msg: "Hay campos vacios.", toastLength: Toast.LENGTH_SHORT);
+      } else if (vactu == " ") {
+        Fluttertoast.showToast(
+            msg: "Debes selecionar una categoria",
+            toastLength: Toast.LENGTH_SHORT);
       } else {
-        String filename = _image!.path.split('/').last;
+        if (_image == null &&
+            _image2 == null &&
+            _image3 == null &&
+            _image4 == null) {
+          FormData formData = FormData.fromMap({
+            "id_anuncio": id_anuncio,
+            "titulo": tituloctrl.text,
+            "descripcion": descripcionctrl.text,
+            "categoria": vactu,
+            "descripcion_E": descripcion_Eco.text,
+            "precio_E": precio_Eco.text,
+            "descripcion_S": descripcion_Sta.text,
+            "precio_S": precio_Sta.text,
+            "descripcion_P": descripcion_Pre.text,
+            "precio_P": precio_Pre.text,
+            'foto1': "no",
+            'foto2': "no",
+            'foto3': "no",
+            'foto4': "no",
+          });
 
-        FormData formData = FormData.fromMap({
-          "id_anuncio": id_anuncio,
-          "titulo": tituloctrl.text,
-          "descripcion": descripcionctrl.text,
-          "categoria": vactu,
-          "descripcion_E": descripcion_Eco.text,
-          "precio_E": precio_Eco.text,
-          "descripcion_S": descripcion_Sta.text,
-          "precio_S": precio_Sta.text,
-          "descripcion_P": descripcion_Pre.text,
-          "precio_P": precio_Pre.text,
-          'foto1':
-              await MultipartFile.fromFile(_image!.path, filename: filename),
-          'foto2':
-              await MultipartFile.fromFile(_image2!.path, filename: filename),
-          'foto3':
-              await MultipartFile.fromFile(_image3!.path, filename: filename),
-          'foto4':
-              await MultipartFile.fromFile(_image4!.path, filename: filename)
-        });
-        Update(formData);
+          Update(formData);
+        } else if (_image != null &&
+            _image2 == null &&
+            _image3 == null &&
+            _image4 == null) {
+          String filename = _image!.path.split('/').last;
+
+          FormData formData = FormData.fromMap({
+            "id_anuncio": id_anuncio,
+            "titulo": tituloctrl.text,
+            "descripcion": descripcionctrl.text,
+            "categoria": vactu,
+            "descripcion_E": descripcion_Eco.text,
+            "precio_E": precio_Eco.text,
+            "descripcion_S": descripcion_Sta.text,
+            "precio_S": precio_Sta.text,
+            "descripcion_P": descripcion_Pre.text,
+            "precio_P": precio_Pre.text,
+            'foto1':
+                await MultipartFile.fromFile(_image!.path, filename: filename),
+            'foto2': "no",
+            'foto3': "no",
+            'foto4': "no",
+          });
+          Update(formData);
+        } else if (_image != null &&
+            _image2 != null &&
+            _image3 == null &&
+            _image4 == null) {
+          String filename = _image!.path.split('/').last;
+
+          FormData formData = FormData.fromMap({
+            "id_anuncio": id_anuncio,
+            "titulo": tituloctrl.text,
+            "descripcion": descripcionctrl.text,
+            "categoria": vactu,
+            "descripcion_E": descripcion_Eco.text,
+            "precio_E": precio_Eco.text,
+            "descripcion_S": descripcion_Sta.text,
+            "precio_S": precio_Sta.text,
+            "descripcion_P": descripcion_Pre.text,
+            "precio_P": precio_Pre.text,
+            'foto1':
+                await MultipartFile.fromFile(_image!.path, filename: filename),
+            'foto2':
+                await MultipartFile.fromFile(_image2!.path, filename: filename),
+            'foto3': "no",
+            'foto4': "no",
+          });
+          Update(formData);
+        } else if (_image != null &&
+            _image2 != null &&
+            _image3 != null &&
+            _image4 == null) {
+          String filename = _image!.path.split('/').last;
+
+          FormData formData = FormData.fromMap({
+            "id_anuncio": id_anuncio,
+            "titulo": tituloctrl.text,
+            "descripcion": descripcionctrl.text,
+            "categoria": vactu,
+            "descripcion_E": descripcion_Eco.text,
+            "precio_E": precio_Eco.text,
+            "descripcion_S": descripcion_Sta.text,
+            "precio_S": precio_Sta.text,
+            "descripcion_P": descripcion_Pre.text,
+            "precio_P": precio_Pre.text,
+            'foto1':
+                await MultipartFile.fromFile(_image!.path, filename: filename),
+            'foto2':
+                await MultipartFile.fromFile(_image2!.path, filename: filename),
+            'foto3':
+                await MultipartFile.fromFile(_image3!.path, filename: filename),
+            'foto4': "no",
+          });
+          Update(formData);
+        } else {
+          String filename = _image!.path.split('/').last;
+
+          FormData formData = FormData.fromMap({
+            "id_anuncio": id_anuncio,
+            "titulo": tituloctrl.text,
+            "descripcion": descripcionctrl.text,
+            "categoria": vactu,
+            "descripcion_E": descripcion_Eco.text,
+            "precio_E": precio_Eco.text,
+            "descripcion_S": descripcion_Sta.text,
+            "precio_S": precio_Sta.text,
+            "descripcion_P": descripcion_Pre.text,
+            "precio_P": precio_Pre.text,
+            'foto1':
+                await MultipartFile.fromFile(_image!.path, filename: filename),
+            'foto2':
+                await MultipartFile.fromFile(_image2!.path, filename: filename),
+            'foto3':
+                await MultipartFile.fromFile(_image3!.path, filename: filename),
+            'foto4':
+                await MultipartFile.fromFile(_image4!.path, filename: filename)
+          });
+          Update(formData);
+        }
       }
+    }else{
+      {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MisProyectos()));
+        }
     }
   }
 
@@ -860,7 +867,7 @@ class _OfertaPageState extends State<EditarOferta> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            onPressed: () => _Subir());
+            onPressed: () => _Subir("si"));
       }),
     );
   }
@@ -986,21 +993,19 @@ class _OfertaPageState extends State<EditarOferta> {
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: Text("Descartar cambios"),
-          content: Text("¿Estas seguro de salir sin guardar los cambios?"),
+          title: Text("Guardar cambios"),
+          content: Text("¿Deseas guardar los cambios?"),
           actions: [
             CupertinoDialogAction(
                 child: Text("SI"),
                 onPressed: () {
-                  paginaActual = 4;
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu()));
-                      Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => MisProyectos()));
+                  _Subir("si");
+                  Navigator.of(context).pop();
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
                 onPressed: () {
+                  _Subir("no");
                   Navigator.of(context).pop();
                 })
           ],
