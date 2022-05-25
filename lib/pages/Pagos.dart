@@ -38,13 +38,7 @@ class _PagoWidgetState extends State<PagoWidget> {
     }
 
     return registros;
-    /*if (response.statusCode == 200) {
-    // Si la llamada al servidor fue exitosa, analiza el JSON
-    
-  } else {
-    // Si la llamada no fue exitosa, lanza un error.
-    throw Exception('Failed to load post');
-  }*/
+
   }
 
   @override

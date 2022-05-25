@@ -4,6 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+
+import 'ComparAceptada.dart';
+import 'Pagos.dart';
+import 'data_utils.dart';
 
 class PaginaTienda extends StatefulWidget {
   const PaginaTienda({Key? key}) : super(key: key);
@@ -16,7 +21,7 @@ class _PaginaTiendaState extends State<PaginaTienda> {
   void initState() {
     prime();
   }
-
+  final _keyChannels = GlobalKey<ChannelsBlocState>();
   Dio dio = new Dio();
 
   Future<void> _Comprar(String plan, String titulo, String precio) async {
@@ -32,7 +37,10 @@ class _PaginaTiendaState extends State<PaginaTienda> {
             data: formData)
         .then((value) {
       if (value.toString() == 'hecho') {
-        acceptCompra();
+        
+                Navigator.push(
+            context, MaterialPageRoute(builder: (context) => C_aceptar()));
+        
       } else if (value.toString() == 'Error') {
         Fluttertoast.showToast(
             msg: "Error al realizar la compra",
@@ -360,6 +368,7 @@ class _PaginaTiendaState extends State<PaginaTienda> {
               CupertinoDialogAction(
                 child: Text("SI"),
                 onPressed: () {
+                  Navigator.of(context).pop();
                   _Comprar(plan, titulo, precio);
                 },
               ),
@@ -377,6 +386,7 @@ class _PaginaTiendaState extends State<PaginaTienda> {
   }
 
   void acceptCompra() {
+    print(user);
     showCupertinoDialog(
       context: context,
       builder: (context) {
@@ -389,9 +399,12 @@ class _PaginaTiendaState extends State<PaginaTienda> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
-                paginaActual = 4;
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Menu()));
+            context, MaterialPageRoute(builder: (context) => C_aceptar()));
+            paginaActual = 4;
+            Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Menu()));
+           
               },
             ),
           ],
