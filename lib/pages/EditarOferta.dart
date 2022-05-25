@@ -818,7 +818,7 @@ class _OfertaPageState extends State<EditarOferta> {
   Widget _buttonSelect() {
     return Center(
       child: ElevatedButton(
-        child: const Text('Select An Image'),
+        child: const Text('Seleccionar Imagen'),
         onPressed: _openImagePicker,
       ),
     );
