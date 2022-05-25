@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 import 'Users/FreeLancer.dart';
 import 'dart:io';
@@ -180,6 +181,34 @@ class _EditarPerfilState extends State<EditarPerfil> {
             toastLength: Toast.LENGTH_SHORT);
       } else {
         print(value.toString() + "safdas");
+      }
+    });
+  }
+
+  Future<void> _Eliminar() async {
+    FormData formData = FormData.fromMap({
+      "id_perfil": id_perfil,
+      "email": login,
+    });
+    await dio
+        .post('https://phpninjahosting.com/manish/Coonet/Php/EliminarUser.php',
+            data: formData)
+        .then((value) {
+      if (value.toString() == 'hecho') {
+        Fluttertoast.showToast(
+            msg: "Se ha eliminado el perfil correctamente",
+            toastLength: Toast.LENGTH_SHORT);
+        final client = StreamChat.of(context).client;
+        client.disconnectUser();
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => PaginaLogin()));
+      } else if (value.toString() == 'Error') {
+        Fluttertoast.showToast(
+            msg: "Ha habido un error al eliminar el perfil",
+            toastLength: Toast.LENGTH_SHORT);
+      } else {
+        print(value.toString());
       }
     });
   }
@@ -782,8 +811,8 @@ class _EditarPerfilState extends State<EditarPerfil> {
             CupertinoDialogAction(
                 child: Text("SI"),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => PaginaLogin()));
+                  Navigator.of(context).pop();
+                  _Eliminar();
                 }),
             CupertinoDialogAction(
                 child: Text("NO"),
