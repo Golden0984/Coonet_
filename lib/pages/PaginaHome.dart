@@ -75,13 +75,10 @@ class _PaginaHomeState extends State<PaginaHome> {
         ),
         child: Column(
           children: [
-            const SizedBox(
-              height: 30.0,
-            ),
             const Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: 20, top: 30),
                 child: Text('INICIO',
                     textAlign: TextAlign.left,
                     style: TextStyle(

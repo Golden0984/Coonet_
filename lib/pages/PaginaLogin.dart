@@ -40,7 +40,7 @@ class _LoginPageState extends State<PaginaLogin> {
             const SizedBox(height: 70.0),
             const Align(
               alignment: Alignment.topCenter,
-              child: Text('Login',
+              child: Text('LOG IN',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 40, color: Colors.white)),
             ),

@@ -27,6 +27,13 @@ class _RecuperarContraState extends State<RecuperarContra> {
 
   File? _image;
 
+  RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*\d)[a-zA-Z\d]{8,18}$');
+
+  bool _vacioContra = false;
+  bool _vacioRepetir = false;
+  bool _valContra = false;
+  bool _valRepetir = false;
+
   final _picker = ImagePicker();
   // Implementing the image picker
   Future<void> _openImagePicker() async {
@@ -123,7 +130,12 @@ class _RecuperarContraState extends State<RecuperarContra> {
           controller: nuevoctrl,
           obscureText: true,
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioContra
+                  ? 'No se puede dejar vacio'
+                  : _valContra
+                      ? 'Min. 8 caracteres(1 Mayus, 1 Minus & 1 Num)'
+                      : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -135,7 +147,16 @@ class _RecuperarContraState extends State<RecuperarContra> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              nuevoctrl.text.isEmpty
+                  ? _vacioContra = true
+                  : _vacioContra = false;
+              !regex.hasMatch(nuevoctrl.text)
+                  ? _valContra = true
+                  : _valContra = false;
+            });
+          },
         ),
       );
     });
@@ -151,7 +172,12 @@ class _RecuperarContraState extends State<RecuperarContra> {
           controller: repetirctrl,
           obscureText: true,
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            errorText: _vacioRepetir
+                  ? 'No se puede dejar vacio'
+                  : _valRepetir
+                      ? 'No coincide con la contraseña'
+                      : null,
               enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white)),
               icon: Icon(
@@ -163,7 +189,16 @@ class _RecuperarContraState extends State<RecuperarContra> {
               labelStyle: TextStyle(
                 color: Colors.white,
               )),
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              repetirctrl.text.isEmpty
+                  ? _vacioRepetir = true
+                  : _vacioRepetir = false;
+              !(nuevoctrl.text == repetirctrl.text)
+                  ? _valRepetir = true
+                  : _valRepetir = false;
+            });
+          },
         ),
       );
     });
