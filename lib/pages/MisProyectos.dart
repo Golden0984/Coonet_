@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:coonet/pages/Menu.dart';
 import 'package:coonet/pages/PreviewServicio.dart';
 import 'package:coonet/pages/Users/Anuncios.dart';
 import 'package:coonet/pages/Users/FreeLancer.dart';
@@ -90,7 +91,9 @@ class _PaginaHomeState extends State<MisProyectos> {
                           size: 35,
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
+                          paginaActual = 4;
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Menu()));
                         },
                       ),
                     ),
